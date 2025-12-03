@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import arrow_right from '@/public/arrow-right.svg';
+import arrow_right from '@/public/svgs/arrow-right.svg';
 
 export function Chip() {
   return (
