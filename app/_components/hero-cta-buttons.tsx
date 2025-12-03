@@ -3,14 +3,14 @@ export function HeroCTAButtons() {
     <div className="flex justify-center items-center gap-x-2 mt-8">
       <button
         type="button"
-        className="bg-talgach-green py-1.5 px-3 rounded text-sm font-medium text-white hover:cursor-pointer"
+        className="bg-talgach-green py-1.5 px-3 rounded text-sm font-medium text-white hover:cursor-pointer select-none"
       >
         Build My AI CV
       </button>
 
       <button
         type="button"
-        className="border border-talgach-green py-1.5 px-3 rounded text-sm font-medium hover:cursor-pointer"
+        className="border border-talgach-green py-1.5 px-3 rounded text-sm font-medium hover:cursor-pointer select-none"
       >
         Find Jobs
       </button>
