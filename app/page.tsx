@@ -1,9 +1,13 @@
+import { Chip } from './_components/chip';
+import HeroText from './_components/hero-text';
 import { MiniHeader } from './_components/mini-header';
 
 export default function Page() {
   return (
     <main>
       <MiniHeader />
+      <Chip />
+      <HeroText />
     </main>
   );
 }
