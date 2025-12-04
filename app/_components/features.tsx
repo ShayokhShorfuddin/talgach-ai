@@ -1,5 +1,7 @@
 import Image from 'next/image';
 import ats from '@/public/svgs/ats.svg';
+import bot_green from '@/public/svgs/bot-green.svg';
+import brain from '@/public/svgs/brain.svg';
 import briefcase from '@/public/svgs/briefcase.svg';
 import building from '@/public/svgs/building.svg';
 import file from '@/public/svgs/file.svg';
@@ -12,7 +14,7 @@ const features: {
 }[] = [
   {
     id: 1,
-    icon: file,
+    icon: bot_green,
     title: 'AI Evaluation',
     description:
       'Get instant feedback on your resumes and cover letters using advanced AI technology.',
@@ -47,7 +49,7 @@ const features: {
   },
   {
     id: 6,
-    icon: building,
+    icon: brain,
     title: 'Employer Insights',
     description:
       'Gain valuable insights into capable candidates and streamline your hiring process.',
@@ -69,7 +71,7 @@ export function Features() {
         gain confidence. Trusted by over 4,000 job seekers.
       </p>
 
-      <div className="grid grid-cols-2 grid-rows-2 gap-12 mt-14">
+      <div className="grid grid-cols-3 gap-12 mt-14">
         {features.map((feature) => (
           <div key={feature.id} className="flex flex-col items-center max-w-xs">
             <div className="bg-green-50 rounded-full p-1.5">
