@@ -1,4 +1,5 @@
 import { Chip } from './_components/chip';
+import { Features } from './_components/features';
 import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
 import { HeroImage } from './_components/hero-image';
@@ -14,6 +15,7 @@ export default function Page() {
       <HeroCTAButtons />
       <HeroImage />
       <HeroCompanies />
+      <Features />
     </main>
   );
 }

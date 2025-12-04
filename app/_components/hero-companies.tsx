@@ -12,7 +12,7 @@ export function HeroCompanies() {
         Join 4,000+ companies already growing.
       </p>
 
-      <div className="flex items-center gap-x-18 mt-5">
+      <div className="flex items-center gap-x-18 mt-5 border-b border-neutral-200 pb-8">
         <Image src={layers} alt="Layers logo" className="w-28" />
         <Image src={sisyphus} alt="Sisyphus logo" className="w-28" />
         <Image src={circooles} alt="Circooles logo" className="w-28" />
