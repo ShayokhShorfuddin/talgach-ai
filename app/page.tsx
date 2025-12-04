@@ -1,4 +1,5 @@
 import { Chip } from './_components/chip';
+import { CorporateTraining } from './_components/corporate-training';
 import { Features } from './_components/features';
 import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
@@ -24,6 +25,7 @@ export default function Page() {
       <JobsFeatured />
       <StudyAbroadPrograms />
       <Tests />
+      <CorporateTraining />
     </main>
   );
 }
