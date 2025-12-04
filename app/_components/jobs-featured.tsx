@@ -214,7 +214,7 @@ function JobsGrid() {
             </div>
           </div>
 
-          <div className="flex items-center gap-x-1">
+          <div className="flex items-center gap-x-1 mt-1">
             {job.tags.map((tag) => (
               <span
                 key={tag.id}
