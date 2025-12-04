@@ -8,6 +8,7 @@ import { JobCategories } from './_components/job-categories';
 import { JobsFeatured } from './_components/jobs-featured';
 import { MiniHeader } from './_components/mini-header';
 import { StudyAbroadPrograms } from './_components/study-abroad-programs';
+import { Tests } from './_components/tests';
 
 export default function Page() {
   return (
@@ -22,6 +23,7 @@ export default function Page() {
       <JobCategories />
       <JobsFeatured />
       <StudyAbroadPrograms />
+      <Tests />
     </main>
   );
 }

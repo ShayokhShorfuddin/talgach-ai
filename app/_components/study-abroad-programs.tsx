@@ -87,7 +87,10 @@ export function StudyAbroadPrograms() {
       <ProgramsGrid />
 
       <div className="flex flex-col">
-        <h2 className="text-3xl font-medium">Global Admission Programs</h2>
+        <h2 className="text-3xl font-medium">
+          Global Admission Programs
+          <span className="text-talgach-green">.</span>
+        </h2>
 
         <p className="mt-4 text-neutral-600 max-w-sm text-sm">
           Explore a curated list of job opportunities tailored to your skills
@@ -122,7 +125,7 @@ function ProgramsGrid() {
             <Image
               src={program.flagIcon}
               alt={`${program.universityName} logo`}
-              className="w-6 h-min rounded"
+              className="w-6 h-min"
             />
 
             <div className="ml-4">

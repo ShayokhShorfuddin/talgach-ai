@@ -46,13 +46,13 @@ export function Features() {
       <small className="text-xs font-medium text-talgach-green">Features</small>
 
       <h2 className="text-3xl mt-2 font-medium">
-        Designed to help you ace any challenge.
+        Designed to help you ace any challenge
+        <span className="text-talgach-green">.</span>
       </h2>
 
       <p className="mt-4 text-neutral-600 max-w-xl">
         Powerful, self-serve product and growth analytics to help you excel and
-        gain confidence. Trusted by over 4,000 job seekers
-        <span className="text-talgach-green">.</span>
+        gain confidence. Trusted by over 4,000 job seekers.
       </p>
 
       <div className="grid grid-cols-2 grid-rows-2 gap-12 mt-14">

@@ -159,7 +159,10 @@ export function JobsFeatured() {
   return (
     <section className="flex items-center justify-between px-10 mt-30 gap-x-12">
       <div className="flex flex-col">
-        <h2 className="text-3xl font-medium">Featured Jobs</h2>
+        <h2 className="text-3xl font-medium">
+          Featured Jobs
+          <span className="text-talgach-green">.</span>
+        </h2>
 
         <p className="mt-4 text-neutral-600 max-w-sm text-sm">
           Explore a curated list of job opportunities tailored to your skills

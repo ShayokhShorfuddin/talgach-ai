@@ -64,13 +64,13 @@ export function JobCategories() {
       <small className="text-xs font-medium text-talgach-green">Jobs</small>
 
       <h2 className="text-3xl mt-2 font-medium">
-        Diverse range of categories to choose from.
+        Diverse range of categories to choose from
+        <span className="text-talgach-green">.</span>
       </h2>
 
       <p className="mt-4 text-neutral-600 max-w-xl">
         Powerful, self-serve product and growth analytics to help you excel and
         gain confidence. Trusted by over 4,000 job seekers
-        <span className="text-talgach-green">.</span>
       </p>
 
       <div className="grid gap-x-10 gap-y-5 grid-cols-3 grid-rows-3 mt-12">
