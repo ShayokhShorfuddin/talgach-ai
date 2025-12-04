@@ -1,3 +1,4 @@
+import { Assistant } from './_components/assistant';
 import { Chip } from './_components/chip';
 import { CorporateTraining } from './_components/corporate-training';
 import { CTA } from './_components/cta';
@@ -19,6 +20,7 @@ export default function Page() {
   return (
     <main>
       <MiniHeader />
+      <Assistant />
       <Chip />
       <HeroText />
       <HeroCTAButtons />
