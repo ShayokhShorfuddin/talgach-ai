@@ -6,7 +6,7 @@ export function HeroImage() {
     <Image
       src={hero_laptop}
       alt="Laptop showing analytics of user."
-      className="w-full max-w-290 mx-auto mt-14"
+      className="w-full max-w-290 mx-auto mt-14 border-b border-gray-200"
     />
   );
 }
