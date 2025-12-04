@@ -1,7 +1,7 @@
 export default function HeroText() {
   return (
     <div className="flex flex-col items-center text-center mt-4">
-      <h1 className="text-5xl font-medium font-sans">
+      <h1 className="text-5xl font-medium">
         Accelerate your career with AI
         <span className="text-talgach-green">.</span>
       </h1>

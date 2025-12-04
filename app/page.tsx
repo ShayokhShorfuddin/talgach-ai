@@ -8,6 +8,7 @@ import HeroText from './_components/hero-text';
 import { JobCategories } from './_components/job-categories';
 import { JobsFeatured } from './_components/jobs-featured';
 import { MiniHeader } from './_components/mini-header';
+import { Stats } from './_components/stats';
 import { StudyAbroadPrograms } from './_components/study-abroad-programs';
 import { Tests } from './_components/tests';
 
@@ -26,6 +27,7 @@ export default function Page() {
       <StudyAbroadPrograms />
       <Tests />
       <CorporateTraining />
+      <Stats />
     </main>
   );
 }

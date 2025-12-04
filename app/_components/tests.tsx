@@ -51,7 +51,7 @@ const categories: { id: number; name: string; color: string }[] = [
 
 export function Tests() {
   return (
-    <section className="flex flex-col items-center mt-30 font-sans text-center">
+    <section className="flex flex-col items-center mt-30 text-center">
       <small className="text-xs font-medium text-talgach-green">Practice</small>
 
       <h2 className="text-3xl mt-2 font-medium">
