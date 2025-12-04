@@ -13,30 +13,44 @@ const features: {
   {
     id: 1,
     icon: file,
+    title: 'AI Evaluation',
+    description:
+      'Get instant feedback on your resumes and cover letters using advanced AI technology.',
+  },
+  {
+    id: 2,
+    icon: file,
     title: 'CV Builder',
     description:
       'Create professional CVs tailored to your experience and target roles.',
   },
   {
-    id: 2,
+    id: 3,
     icon: ats,
     title: 'Robust ATS',
     description:
       'Track and manage your applications with our comprehensive applicant tracking system.',
   },
   {
-    id: 3,
+    id: 4,
     icon: briefcase,
     title: 'Job Matching',
     description:
       'Find the perfect opportunities that align with your skills and career aspirations.',
   },
   {
-    id: 4,
+    id: 5,
     icon: building,
     title: 'Admission Eligibility',
     description:
       'Check your eligibility and get guidance for your desired academic programs.',
+  },
+  {
+    id: 6,
+    icon: building,
+    title: 'Employer Insights',
+    description:
+      'Gain valuable insights into capable candidates and streamline your hiring process.',
   },
 ];
 
