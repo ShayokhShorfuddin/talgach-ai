@@ -42,7 +42,7 @@ const features: {
 
 export function Features() {
   return (
-    <div className="flex flex-col items-center mt-20 font-sans text-center">
+    <section className="flex flex-col items-center mt-20 font-sans text-center">
       <small className="text-xs font-medium text-talgach-green">Features</small>
 
       <h2 className="text-3xl mt-2 font-medium">
@@ -75,6 +75,6 @@ export function Features() {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 }

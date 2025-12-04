@@ -7,7 +7,7 @@ import sisyphus from '@/public/images/sisyphus.png';
 
 export function HeroCompanies() {
   return (
-    <div className="flex flex-col items-center mt-14">
+    <section className="flex flex-col items-center mt-14">
       <p className="text-xs text-neutral-600">
         Join 4,000+ companies already growing.
       </p>
@@ -19,6 +19,6 @@ export function HeroCompanies() {
         <Image src={catalog} alt="Catalog logo" className="w-28" />
         <Image src={quotient} alt="Quotient logo" className="w-28" />
       </div>
-    </div>
+    </section>
   );
 }
