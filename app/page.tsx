@@ -10,6 +10,7 @@ import { JobsFeatured } from './_components/jobs-featured';
 import { MiniHeader } from './_components/mini-header';
 import { Stats } from './_components/stats';
 import { StudyAbroadPrograms } from './_components/study-abroad-programs';
+import { Testimonials } from './_components/testimonials';
 import { Tests } from './_components/tests';
 
 export default function Page() {
@@ -28,6 +29,7 @@ export default function Page() {
       <Tests />
       <CorporateTraining />
       <Stats />
+      <Testimonials />
     </main>
   );
 }

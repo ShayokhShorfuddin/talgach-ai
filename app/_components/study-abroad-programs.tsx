@@ -128,7 +128,7 @@ function ProgramsGrid() {
               className="w-6 h-min"
             />
 
-            <div className="ml-4">
+            <div className="ml-4 leading-none">
               <p className="text-sm font-medium">{program.programName}</p>
               <p className="text-xs text-neutral-700">
                 {program.universityName}

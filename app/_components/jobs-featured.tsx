@@ -212,7 +212,7 @@ function JobsGrid() {
             />
 
             <div className="ml-4">
-              <p className="text-sm font-medium">{job.role}</p>
+              <p className="text-sm font-medium leading-none">{job.role}</p>
               <p className="text-xs text-neutral-700">{job.hiring_company}</p>
             </div>
           </div>
