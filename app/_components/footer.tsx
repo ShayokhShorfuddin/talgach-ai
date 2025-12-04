@@ -2,6 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import Facebook from '@/public/svgs/facebook.svg';
 import LinkedIn from '@/public/svgs/linkedin.svg';
+import logo_gray from '@/public/svgs/logo-gray.svg';
 import X from '@/public/svgs/x.svg';
 
 export function Footer() {
@@ -10,6 +11,7 @@ export function Footer() {
       <div className="flex flex-col lg:flex-row gap-y-10 gap-x-2 justify-between pt-18">
         {/* Logo and subtext */}
         <div>
+          <Image src={logo_gray} alt="Talgach AI Logo" className="h-30" />
           <p className="text-neutral-500 mt-3 max-w-[20rem]">
             Empowering you to land that dream job at leading companies and
             beyond.

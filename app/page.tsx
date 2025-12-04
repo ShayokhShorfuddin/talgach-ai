@@ -11,6 +11,7 @@ import HeroText from './_components/hero-text';
 import { JobCategories } from './_components/job-categories';
 import { JobsFeatured } from './_components/jobs-featured';
 import { MiniHeader } from './_components/mini-header';
+import { Pricing } from './_components/pricing';
 import { Stats } from './_components/stats';
 import { StudyAbroadPrograms } from './_components/study-abroad-programs';
 import { Testimonials } from './_components/testimonials';
@@ -34,6 +35,7 @@ export default function Page() {
       <CorporateTraining />
       <Stats />
       <Testimonials />
+      <Pricing />
       <CTA />
       <Footer />
     </main>
