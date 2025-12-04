@@ -34,7 +34,7 @@ const categories: { id: number; icon: string; name: string }[] = [
   {
     id: 5,
     icon: coins,
-    name: 'Tri-suggester',
+    name: 'CV Scoring',
   },
   {
     id: 6,
