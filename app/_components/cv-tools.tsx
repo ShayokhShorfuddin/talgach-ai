@@ -1,11 +1,11 @@
 import Image from 'next/image';
 import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
+import arrows_crossed from '@/public/svgs/arrows-crossed.svg';
 import beaker from '@/public/svgs/beaker.svg';
 import chart from '@/public/svgs/chart.svg';
 import code from '@/public/svgs/code.svg';
 import coins from '@/public/svgs/coins.svg';
 import delta from '@/public/svgs/delta.svg';
-import droplet from '@/public/svgs/droplet.svg';
 import head from '@/public/svgs/head.svg';
 import trending from '@/public/svgs/trending.svg';
 import wrench from '@/public/svgs/wrench.svg';
@@ -14,66 +14,69 @@ const categories: { id: number; icon: string; name: string }[] = [
   {
     id: 1,
     icon: delta,
-    name: 'Engineering',
+    name: 'Templates',
   },
   {
     id: 2,
     icon: code,
-    name: 'Software',
+    name: 'Keyword Scanner',
   },
   {
     id: 3,
-    icon: chart,
-    name: 'Marketing',
+    icon: wrench,
+    name: 'CV Builder',
   },
   {
     id: 4,
-    icon: coins,
-    name: 'Finance',
+    icon: chart,
+    name: 'Word Analysis',
   },
   {
     id: 5,
-    icon: trending,
-    name: 'Sales',
+    icon: coins,
+    name: 'Tri-suggester',
   },
   {
     id: 6,
-    icon: head,
-    name: 'HR',
+    icon: trending,
+    name: 'ATS Optimizer',
   },
   {
     id: 7,
-    icon: beaker,
-    name: 'Healthcare',
+    icon: head,
+    name: 'Simulationist',
   },
   {
     id: 8,
-    icon: droplet,
-    name: 'Creative',
+    icon: beaker,
+    name: 'CV Health',
   },
+
   {
     id: 9,
-    icon: wrench,
-    name: 'Operations',
+    icon: arrows_crossed,
+    name: 'A/B Testing',
   },
 ];
 
-export function JobCategories() {
+export function CVTools() {
   return (
     <section className="flex flex-col items-center mt-30 text-center">
-      <small className="text-xs font-medium text-talgach-green">Jobs</small>
+      <small className="text-sm font-medium text-talgach-green">
+        Fine-tune
+      </small>
 
       <h2 className="text-3xl mt-2 font-medium">
-        Diverse range of categories to choose from
+        Extensive range of tools to supercharge your CV
         <span className="text-talgach-green">.</span>
       </h2>
 
       <p className="mt-4 text-neutral-600 max-w-xl">
         Powerful, self-serve product and growth analytics to help you excel and
-        gain confidence. Trusted by over 4,000 job seekers
+        gain confidence. Trusted by over 4,000 job seekers.
       </p>
 
-      <div className="grid gap-x-10 gap-y-5 grid-cols-3 grid-rows-3 mt-12">
+      <div className="grid gap-5 grid-cols-3 grid-rows-3 mt-12">
         {categories.map((category) => (
           <div
             key={category.id}

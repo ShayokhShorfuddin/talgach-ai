@@ -59,7 +59,7 @@ const features: {
 export function Features() {
   return (
     <section className="flex flex-col items-center mt-20 text-center">
-      <small className="text-xs font-medium text-talgach-green">Features</small>
+      <small className="text-sm font-medium text-talgach-green">Features</small>
 
       <h2 className="text-3xl mt-2 font-medium">
         Designed to help you ace any challenge

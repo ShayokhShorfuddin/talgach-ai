@@ -44,7 +44,7 @@ const skills: {
 export function CorporateTraining() {
   return (
     <section className="flex flex-col items-center mt-30 text-center">
-      <small className="text-xs font-medium text-talgach-green">
+      <small className="text-sm font-medium text-talgach-green">
         Corporate
       </small>
 

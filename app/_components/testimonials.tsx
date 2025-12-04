@@ -49,7 +49,7 @@ const testimonials: {
 export function Testimonials() {
   return (
     <section className="flex flex-col items-center mt-30 text-center">
-      <small className="text-xs font-medium text-talgach-green">Trust</small>
+      <small className="text-sm font-medium text-talgach-green">Trust</small>
 
       <h2 className="text-3xl mt-2 font-medium">
         Our users speak for us

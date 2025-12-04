@@ -2,13 +2,13 @@ import { Assistant } from './_components/assistant';
 import { Chip } from './_components/chip';
 import { CorporateTraining } from './_components/corporate-training';
 import { CTA } from './_components/cta';
+import { CVTools } from './_components/cv-tools';
 import { Features } from './_components/features';
 import { Footer } from './_components/footer';
 import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
 import { HeroImage } from './_components/hero-image';
 import HeroText from './_components/hero-text';
-import { JobCategories } from './_components/job-categories';
 import { JobsFeatured } from './_components/jobs-featured';
 import { MiniHeader } from './_components/mini-header';
 import { Pricing } from './_components/pricing';
@@ -28,7 +28,7 @@ export default function Page() {
       <HeroImage />
       <HeroCompanies />
       <Features />
-      <JobCategories />
+      <CVTools />
       <JobsFeatured />
       <StudyAbroadPrograms />
       <Tests />
