@@ -1,6 +1,8 @@
 import { Chip } from './_components/chip';
 import { CorporateTraining } from './_components/corporate-training';
+import { CTA } from './_components/cta';
 import { Features } from './_components/features';
+import { Footer } from './_components/footer';
 import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
 import { HeroImage } from './_components/hero-image';
@@ -30,6 +32,8 @@ export default function Page() {
       <CorporateTraining />
       <Stats />
       <Testimonials />
+      <CTA />
+      <Footer />
     </main>
   );
 }

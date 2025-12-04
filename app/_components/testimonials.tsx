@@ -93,7 +93,7 @@ export function Testimonials() {
 
       <button
         type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-6 w-fit"
+        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit"
       >
         <span>See more</span>
         <Image
