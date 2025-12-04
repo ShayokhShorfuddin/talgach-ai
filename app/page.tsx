@@ -4,6 +4,7 @@ import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
 import { HeroImage } from './_components/hero-image';
 import HeroText from './_components/hero-text';
+import { JobCategories } from './_components/job-categories';
 import { MiniHeader } from './_components/mini-header';
 
 export default function Page() {
@@ -16,6 +17,7 @@ export default function Page() {
       <HeroImage />
       <HeroCompanies />
       <Features />
+      <JobCategories />
     </main>
   );
 }
