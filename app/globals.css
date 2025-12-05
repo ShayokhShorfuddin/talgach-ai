@@ -9,3 +9,11 @@
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
+
+@theme {
+  /* Extra small breakpoint */
+  --breakpoint-xs: 30rem;
+
+  /* Custom theme color */
+  --color-talgach-green: #0a8a55;
+}
