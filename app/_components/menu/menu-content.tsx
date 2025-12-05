@@ -47,9 +47,9 @@ export function MenuContent({ children }: { children: React.ReactNode }) {
         <div className="absolute w-full h-2 -bottom-2" />
       )}
       <div
-        className="fixed flex flex-col gap-y-2 bg-white border border-neutral-200 shadow-sm z-20"
+        className="fixed flex flex-col gap-y-2 bg-white border border-neutral-200 shadow-sm z-20 rounded"
         style={{
-          top: isNested ? position.y : position.y + 10,
+          top: isNested ? position.y : position.y,
           left: isNested ? position.x + 10 : position.x,
         }}
       >

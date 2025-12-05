@@ -40,7 +40,7 @@ export function Pricing() {
   >('yearly');
 
   return (
-    <section className="mt-30 px-10">
+    <section id="pricing" className="mt-30 px-10">
       <IndividualPricing
         selectedIndividualPlan={selectedIndividualPlan}
         setSelectedIndividualPlan={setSelectedIndividualPlan}
@@ -225,7 +225,7 @@ function PlanCard({
         Get Started
       </button>
 
-      <hr className="mt-6" />
+      <hr className="mt-6 border-neutral-200" />
 
       <FeaturesList features={features} />
     </div>

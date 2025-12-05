@@ -12,7 +12,7 @@ export function HeroCTAButtons() {
         type="button"
         className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
       >
-        Find Jobs
+        Test My Skills
       </button>
     </div>
   );
