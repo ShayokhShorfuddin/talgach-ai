@@ -10,29 +10,38 @@ export function MenuContent({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     function updatePosition() {
       if (triggerRef.current) {
-        const rect = triggerRef.current.getBoundingClientRect();
+        const triggerRect = triggerRef.current.getBoundingClientRect();
+
+        // Find the nearest positioned ancestor (the relative wrapper)
+        const offsetParent = triggerRef.current.offsetParent as HTMLElement;
+        const parentRect = offsetParent?.getBoundingClientRect() || {
+          left: 0,
+          top: 0,
+        };
 
         if (isNested) {
           // Submenu: position to the right
           setPosition({
-            x: rect.right,
-            y: rect.top,
+            x: triggerRect.right - parentRect.left,
+            y: triggerRect.top - parentRect.top,
           });
         } else {
           // Top-level menu: position below
           setPosition({
-            x: rect.left,
-            y: rect.bottom,
+            x: triggerRect.left - parentRect.left,
+            y: triggerRect.bottom - parentRect.top,
           });
         }
       }
     }
 
     window.addEventListener('resize', updatePosition);
+    window.addEventListener('scroll', updatePosition, true);
     updatePosition();
 
     return () => {
       window.removeEventListener('resize', updatePosition);
+      window.removeEventListener('scroll', updatePosition, true);
     };
   }, [triggerRef, isNested]);
 
@@ -47,10 +56,10 @@ export function MenuContent({ children }: { children: React.ReactNode }) {
         <div className="absolute w-full h-2 -bottom-2" />
       )}
       <div
-        className="fixed flex flex-col gap-y-2 bg-white border border-neutral-200 shadow-sm z-20 rounded"
+        className="absolute text-nowrap flex flex-col gap-y-2 bg-white border border-neutral-200 shadow-sm z-20 rounded"
         style={{
-          top: isNested ? position.y : position.y,
-          left: isNested ? position.x + 10 : position.x,
+          top: position.y,
+          left: position.x,
         }}
       >
         {children}

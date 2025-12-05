@@ -40,7 +40,7 @@ export function Pricing() {
   >('yearly');
 
   return (
-    <section id="pricing" className="mt-30 px-10">
+    <section id="pricing" className="mt-30 px-6 md:px-10">
       <IndividualPricing
         selectedIndividualPlan={selectedIndividualPlan}
         setSelectedIndividualPlan={setSelectedIndividualPlan}
@@ -107,7 +107,7 @@ function IndividualPricing({
         </button>
       </div>
 
-      <div className="flex gap-x-4 mt-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
         {individualPlans.map((plan) => (
           <PlanCard
             key={plan.id}
@@ -176,7 +176,7 @@ function CorporatePricing({
         </button>
       </div>
 
-      <div className="flex gap-x-4 mt-8">
+      <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
         {individualPlans.map((plan) => (
           <PlanCard
             key={plan.id}

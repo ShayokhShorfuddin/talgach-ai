@@ -58,10 +58,10 @@ const features: {
 
 export function Features() {
   return (
-    <section className="flex flex-col items-center mt-20 text-center">
+    <section className="flex flex-col sm:items-center sm:text-center mt-20 px-6">
       <small className="text-sm font-medium text-talgach-green">Features</small>
 
-      <h2 className="text-3xl mt-2 font-medium">
+      <h2 className="text-3xl sm:text-4xl mt-2 font-medium">
         Designed to help you ace any challenge
         <span className="text-talgach-green">.</span>
       </h2>
@@ -71,9 +71,12 @@ export function Features() {
         gain confidence. Trusted by over 4,000 job seekers.
       </p>
 
-      <div className="grid grid-cols-3 gap-12 mt-14">
+      <div className="grid grid-cols-1 gap-12 mt-14 xs:grid-cols-2 sm:grid-cols-3">
         {features.map((feature) => (
-          <div key={feature.id} className="flex flex-col items-center max-w-xs">
+          <div
+            key={feature.id}
+            className="flex flex-col items-center max-w-xs text-center"
+          >
             <div className="bg-green-50 rounded-full p-1.5">
               <div className="rounded-full bg-green-100">
                 <Image

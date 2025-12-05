@@ -43,12 +43,12 @@ const skills: {
 
 export function CorporateTraining() {
   return (
-    <section className="flex flex-col items-center mt-30 text-center">
+    <section className="flex flex-col sm:items-center sm:text-center mt-30 px-6">
       <small className="text-sm font-medium text-talgach-green">
         Corporate
       </small>
 
-      <h2 className="text-3xl mt-2 font-medium">
+      <h2 className="text-3xl sm:text-4xl mt-2 font-medium">
         Powerful features for corporations and institutions
         <span className="text-talgach-green">.</span>
       </h2>
@@ -58,7 +58,7 @@ export function CorporateTraining() {
         gain confidence. Trusted by over 4,000 organizations.
       </p>
 
-      <div className="grid grid-cols-2 grid-rows-2 gap-4 mt-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 gap-4 mt-14">
         {skills.map((skill) => (
           <div
             key={skill.id}

@@ -131,7 +131,7 @@ const tracked_jobs: {
 
 export function JobTracker() {
   return (
-    <section className="flex items-center justify-between px-10 mt-30 gap-x-12">
+    <section className="flex flex-col lg:flex-row lg:items-center justify-between mt-30 gap-12 px-6 md:px-10">
       <div className="flex flex-col">
         <h2 className="text-3xl font-medium max-w-sm">
           Track your job applications with ease
@@ -163,7 +163,7 @@ export function JobTracker() {
 
 function JobsGrid() {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
       {tracked_jobs.map((job) => (
         <div
           key={job.id}

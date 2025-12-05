@@ -48,10 +48,10 @@ const testimonials: {
 
 export function Testimonials() {
   return (
-    <section className="flex flex-col items-center mt-30 text-center">
+    <section className="flex flex-col sm:items-center sm:text-center mt-30 px-6">
       <small className="text-sm font-medium text-talgach-green">Trust</small>
 
-      <h2 className="text-3xl mt-2 font-medium">
+      <h2 className="text-3xl sm:text-4xl mt-2 font-medium">
         Our users speak for us
         <span className="text-talgach-green">.</span>
       </h2>
@@ -61,7 +61,7 @@ export function Testimonials() {
         Talgach. Hear what they have to say about their learning journey.
       </p>
 
-      <div className="grid grid-cols-2 grid-rows-2 gap-4 mt-14">
+      <div className="grid grid-cols-1 sm:grid-cols-2 grid-rows-2 gap-4 mt-14">
         {testimonials.map((testimonial) => (
           <div
             key={testimonial.id}

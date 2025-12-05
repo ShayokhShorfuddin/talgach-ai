@@ -51,10 +51,10 @@ const categories: { id: number; name: string; color: string }[] = [
 
 export function Tests() {
   return (
-    <section className="flex flex-col items-center mt-30 text-center">
+    <section className="flex flex-col sm:items-center sm:text-center mt-30 px-6">
       <small className="text-sm font-medium text-talgach-green">Practice</small>
 
-      <h2 className="text-3xl mt-2 font-medium">
+      <h2 className="text-3xl sm:text-4xl mt-2 font-medium">
         Find the right tests for you
         <span className="text-talgach-green">.</span>
       </h2>
@@ -64,7 +64,7 @@ export function Tests() {
         gain confidence. Trusted by over 4,000 language test takers
       </p>
 
-      <div className="grid gap-x-10 gap-y-5 grid-cols-3 grid-rows-3 mt-12">
+      <div className="grid gap-x-3 xs:gap-x-10 gap-y-3 xs:gap-y-5 grid-cols-3 grid-rows-3 mt-12">
         {categories.map((category) => (
           <div
             key={category.id}
@@ -81,7 +81,7 @@ export function Tests() {
 
       <button
         type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8"
+        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit self-center"
       >
         <span>See all tests</span>
         <Image

@@ -83,7 +83,7 @@ const programs: {
 
 export function StudyAbroadPrograms() {
   return (
-    <section className="flex items-center justify-between px-10 mt-30 gap-x-12">
+    <section className="flex flex-col-reverse lg:flex-row lg:items-center justify-between mt-30 gap-12 px-6 md:px-10">
       <ProgramsGrid />
 
       <div className="flex flex-col">
@@ -115,7 +115,7 @@ export function StudyAbroadPrograms() {
 
 function ProgramsGrid() {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4">
       {programs.map((program) => (
         <div
           key={program.id}

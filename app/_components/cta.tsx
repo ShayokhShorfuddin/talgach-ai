@@ -1,8 +1,8 @@
 export function CTA() {
   return (
-    <section className="mt-30 bg-talgach-green py-6 px-10">
-      <div className="flex items-center justify-between">
-        <p className="text-3xl font-medium text-white text-center italic">
+    <section className="mt-30 bg-talgach-green py-6 px-6 md:px-10">
+      <div className="flex items-center justify-between gap-x-5">
+        <p className="hidden sm:block text-3xl font-medium text-white text-center italic">
           Ready, Set, Ace!
         </p>
 

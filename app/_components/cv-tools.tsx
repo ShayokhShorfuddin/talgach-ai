@@ -61,13 +61,13 @@ const categories: { id: number; icon: string; name: string }[] = [
 
 export function CVTools() {
   return (
-    <section className="flex flex-col items-center mt-30 text-center">
+    <section className="flex flex-col sm:items-center sm:text-center mt-30 px-6">
       <small className="text-sm font-medium text-talgach-green">
         Fine-tune
       </small>
 
-      <h2 className="text-3xl mt-2 font-medium">
-        Extensive range of tools to supercharge your CV
+      <h2 className="text-3xl sm:text-4xl mt-2 font-medium">
+        Cutting-edge tools to sharpen your CV
         <span className="text-talgach-green">.</span>
       </h2>
 
@@ -76,16 +76,16 @@ export function CVTools() {
         gain confidence. Trusted by over 4,000 job seekers.
       </p>
 
-      <div className="grid gap-5 grid-cols-3 grid-rows-3 mt-12">
+      <div className="grid gap-5 grid-cols-2 grid-rows-3 mt-12 sm:grid-cols-3">
         {categories.map((category) => (
           <div
             key={category.id}
-            className="flex items-center border border-neutral-200 rounded py-2.5 px-5 hover:border-talgach-green hover:bg-green-50 cursor-pointer transition duration-300"
+            className="flex justify-center gap-x-2 items-center border border-neutral-200 rounded py-2.5 px-2 hover:border-talgach-green hover:bg-green-50 cursor-pointer transition duration-300"
           >
             <Image
               src={category.icon}
               alt={`${category.name} icon`}
-              className="size-3 mr-2.5"
+              className="size-3"
             />
             <p className="text-xs font-mono">{category.name}</p>
           </div>
@@ -94,7 +94,7 @@ export function CVTools() {
 
       <button
         type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8"
+        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit self-center"
       >
         <span>See all tools</span>
         <Image

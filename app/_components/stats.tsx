@@ -30,10 +30,10 @@ const stats = [
 
 export function Stats() {
   return (
-    <section className="mt-30 px-10">
+    <section className="mt-30 px-6 md:px-10">
       <p className="text-xs font-medium text-talgach-green">Accelerate</p>
 
-      <p className="text-2xl mt-2 font-medium">
+      <p className="text-2xl sm:text-4xl mt-2 font-medium">
         Achieve something great
         <span className="text-talgach-green">.</span>
       </p>
@@ -43,10 +43,14 @@ export function Stats() {
         you need to make informed decisions and drive growth.
       </p>
 
-      <div className="flex items-center justify-between mt-10 gap-10">
+      <div className="flex items-center justify-center lg:justify-between mt-14 lg:mt-10 gap-10">
         <StatGrid />
 
-        <Image src={whiteboard} alt="Whiteboard" className="w-120" />
+        <Image
+          src={whiteboard}
+          alt="Whiteboard"
+          className="hidden lg:block w-120"
+        />
       </div>
     </section>
   );
@@ -54,7 +58,7 @@ export function Stats() {
 
 function StatGrid() {
   return (
-    <div className="grid grid-cols-2 grid-rows-2 gap-10">
+    <div className="grid grid-cols-1 xs:grid-cols-2 gap-10">
       {stats.map((stat) => (
         <StatCard key={stat.id} {...stat} />
       ))}
@@ -73,7 +77,9 @@ function StatCard({
 }) {
   return (
     <div className="flex flex-col items-center text-center">
-      <p className="text-4xl font-medium text-talgach-green">{value}</p>
+      <p className="text-3xl xs:text-4xl font-medium text-talgach-green">
+        {value}
+      </p>
       <p className="mt-1 font-medium">{description}</p>
       <p className="text-xs text-neutral-500 mt-1 max-w-xs">{subtitle}</p>
     </div>
