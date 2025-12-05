@@ -1,3 +1,5 @@
+'use client';
+
 import Image from 'next/image';
 import Link from 'next/link';
 import chevron_down from '@/public/svgs/chevron-down.svg';
@@ -10,47 +12,78 @@ export default function Navbar() {
   return (
     <header>
       <nav>
-        <div className="flex justify-between items-start w-full mt-4 px-10">
-          <div className="flex gap-x-2">
-            <Image src={logo_green} alt="Logo" className="h-16 w-min mr-5" />
-
-            <Link
-              href="/"
-              className="text-sm font-medium h-min p-2 border-talgach-green hover:border-b-2"
-            >
-              Home
-            </Link>
-
-            <ProductsMenu />
-
-            <AboutMenu />
-
-            <Link
-              href="#pricing"
-              className="text-sm font-medium h-min p-2 border-talgach-green hover:border-b-2"
-            >
-              Pricing
-            </Link>
-          </div>
-
-          <div className="flex items-center gap-x-2">
-            <button
-              type="button"
-              className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
-            >
-              Sign In
-            </button>
-
-            <button
-              type="button"
-              className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            >
-              Get Started
-            </button>
-          </div>
-        </div>
+        <DesktopNavbar />
+        <MobileNavbar />
       </nav>
     </header>
+  );
+}
+
+function MobileNavbar() {
+  return (
+    <div className="flex sm:hidden justify-between items-start w-full mt-4 px-4 md:px-10">
+      <Image src={logo_green} alt="Logo" className="h-16 w-min mr-5" />
+
+      <div className="flex items-center gap-x-2">
+        <button
+          type="button"
+          className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+        >
+          Sign In
+        </button>
+
+        <button
+          type="button"
+          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
+  );
+}
+
+function DesktopNavbar() {
+  return (
+    <div className="hidden sm:flex justify-between items-start w-full mt-4 px-4 md:px-10">
+      <div className="flex gap-x-2">
+        <Image src={logo_green} alt="Logo" className="h-16 w-min mr-5" />
+
+        <Link
+          href="/"
+          className="text-sm font-medium h-min p-2 border-talgach-green hover:border-b-2"
+        >
+          Home
+        </Link>
+
+        <ProductsMenu />
+
+        <AboutMenu />
+
+        <Link
+          href="#pricing"
+          className="text-sm font-medium h-min p-2 border-talgach-green hover:border-b-2"
+        >
+          Pricing
+        </Link>
+      </div>
+
+      <div className="flex items-center gap-x-2">
+        <button
+          type="button"
+          className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+        >
+          Sign In
+        </button>
+
+        <button
+          type="button"
+          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        >
+          Get Started
+        </button>
+      </div>
+    </div>
   );
 }
 
