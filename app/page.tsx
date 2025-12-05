@@ -9,7 +9,7 @@ import { HeroCompanies } from './_components/hero-companies';
 import { HeroCTAButtons } from './_components/hero-cta-buttons';
 import { HeroImage } from './_components/hero-image';
 import HeroText from './_components/hero-text';
-import { JobsFeatured } from './_components/jobs-featured';
+import { JobTracker } from './_components/job-tracker';
 import { MiniHeader } from './_components/mini-header';
 import { Pricing } from './_components/pricing';
 import { Stats } from './_components/stats';
@@ -29,7 +29,7 @@ export default function Page() {
       <HeroCompanies />
       <Features />
       <CVTools />
-      <JobsFeatured />
+      <JobTracker />
       <StudyAbroadPrograms />
       <Tests />
       <CorporateTraining />
