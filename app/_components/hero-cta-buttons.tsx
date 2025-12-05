@@ -5,14 +5,14 @@ export function HeroCTAButtons() {
         type="button"
         className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
       >
-        Build My AI CV
+        Test My Skills
       </button>
 
       <button
         type="button"
         className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
       >
-        Find Jobs
+        Build My AI CV
       </button>
     </div>
   );
