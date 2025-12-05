@@ -11,6 +11,7 @@ import { HeroImage } from './_components/hero-image';
 import HeroText from './_components/hero-text';
 import { JobTracker } from './_components/job-tracker';
 import { MiniHeader } from './_components/mini-header';
+import Navbar from './_components/navbar';
 import { Pricing } from './_components/pricing';
 import { Stats } from './_components/stats';
 import { StudyAbroadPrograms } from './_components/study-abroad-programs';
@@ -20,8 +21,9 @@ import { Tests } from './_components/tests';
 export default function Page() {
   return (
     <main>
-      <MiniHeader />
       <Assistant />
+      <MiniHeader />
+      <Navbar />
       <Chip />
       <HeroText />
       <HeroCTAButtons />
