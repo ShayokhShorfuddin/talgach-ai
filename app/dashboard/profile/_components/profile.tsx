@@ -12,8 +12,7 @@ export async function Profile() {
 
       <p className="mt-10">Personal details</p>
 
-      <p>⚠️ Work In Progress</p>
-      {/* <InformationForm /> */}
+      <InformationForm />
     </div>
   );
 }
