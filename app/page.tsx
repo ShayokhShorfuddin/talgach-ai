@@ -1,3 +1,4 @@
+import { LenisScrollContextProvider } from '@/lib/lenis-scroll-context';
 import { Assistant } from './_components/assistant';
 import { Chip } from './_components/chip';
 import { CorporateTraining } from './_components/corporate-training';
@@ -20,26 +21,28 @@ import { Tests } from './_components/tests';
 
 export default function Page() {
   return (
-    <main>
-      <Assistant />
-      <MiniHeader />
-      <Navbar />
-      <Chip />
-      <HeroText />
-      <HeroCTAButtons />
-      <HeroImage />
-      <HeroCompanies />
-      <Features />
-      <CVTools />
-      <JobTracker />
-      <StudyAbroadPrograms />
-      <Tests />
-      <CorporateTraining />
-      <Stats />
-      <Testimonials />
-      <Pricing />
-      <CTA />
-      <Footer />
-    </main>
+    <LenisScrollContextProvider>
+      <main>
+        <Assistant />
+        <MiniHeader />
+        <Navbar />
+        <Chip />
+        <HeroText />
+        <HeroCTAButtons />
+        <HeroImage />
+        <HeroCompanies />
+        <Features />
+        <CVTools />
+        <JobTracker />
+        <StudyAbroadPrograms />
+        <Tests />
+        <CorporateTraining />
+        <Stats />
+        <Testimonials />
+        <Pricing />
+        <CTA />
+        <Footer />
+      </main>
+    </LenisScrollContextProvider>
   );
 }

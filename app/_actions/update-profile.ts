@@ -23,8 +23,7 @@ export async function updateProfile({
   try {
     await db.update(profile).set(updatedData).where(eq(profile.id, id));
     return true;
-  } catch (e) {
-    console.log(e);
+  } catch {
     return false;
   }
 }

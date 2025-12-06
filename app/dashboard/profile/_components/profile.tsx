@@ -20,11 +20,9 @@ export async function Profile() {
   const profileData = await getProfile({ id: userId });
 
   return (
-    <div className="px-5 mt-5 font-sans">
-      <p className="text-2xl font-medium">Profile</p>
-
+    <div className="px-5 mt-5">
+      <p className="text-2xl font-medium">Profile</p>g
       <p className="mt-10">Personal details</p>
-
       <InformationForm profileData={profileData} userId={userId} />
     </div>
   );

@@ -54,7 +54,7 @@ export function InformationForm({
   });
   return (
     <form
-      className="flex flex-col w-full gap-y-2 mt-3 text-sm font-sans"
+      className="flex flex-col w-full gap-y-2 mt-3 text-sm"
       onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();

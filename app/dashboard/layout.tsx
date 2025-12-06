@@ -27,13 +27,7 @@ export default function RootLayout({
         <Sidebar />
       </SidebarContext.Provider>
 
-      <main>
-        <div className="h-svh py-2 pr-2">
-          <div className="h-full border border-neutral-200 rounded-xl overflow-y-scroll">
-            {children}
-          </div>
-        </div>
-      </main>
+      <main className="overflow-y-scroll scroll">{children}</main>
     </div>
   );
 }

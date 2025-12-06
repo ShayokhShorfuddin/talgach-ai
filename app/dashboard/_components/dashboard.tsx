@@ -10,7 +10,7 @@ import { TakeMockInterview } from './take-mock-interview';
 
 export function Dashboard() {
   return (
-    <section className="px-5 font-sans">
+    <section className="px-5">
       <Heading />
 
       <div className="grid grid-cols-4 mt-10 gap-4">

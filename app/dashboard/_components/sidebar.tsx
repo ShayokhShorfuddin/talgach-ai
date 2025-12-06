@@ -8,6 +8,7 @@ import { useContext } from 'react';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
 import file_black from '@/public/svgs/file-black.svg';
+import profile from '@/public/svgs/head-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
 import { SidebarContext } from '../layout';
@@ -27,8 +28,14 @@ const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
   },
   {
     name: 'CV Scanner',
-    href: '/home/cv-scanner',
+    href: '/dashboard/cv-scanner',
     icon: <Image src={file_black} alt="CV Scanner" className="size-4" />,
+  },
+
+  {
+    name: 'Simulations',
+    href: '/dashboard/simulations',
+    icon: <Image src={profile} alt="Simulations" className="size-4" />,
   },
 ];
 
@@ -43,7 +50,7 @@ export default function Sidebar() {
 
   return (
     <aside>
-      <nav className="flex flex-col justify-between h-full px-2 py-2 font-sans">
+      <nav className="flex flex-col justify-between h-full px-2 py-2 border-r border-neutral-200">
         {/* Top logo and retract button */}
         <div>
           <div className="flex justify-between items-center">
