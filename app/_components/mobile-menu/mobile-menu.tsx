@@ -37,5 +37,3 @@ export function MobileMenu({ children }: { children: React.ReactNode }) {
     </MobileMenuContext.Provider>
   );
 }
-
-export default MobileMenu;

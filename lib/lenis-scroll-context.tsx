@@ -2,11 +2,9 @@
 
 import Lenis from 'lenis';
 import 'lenis/dist/lenis.css';
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 
 const LenisScrollContext = createContext<Lenis | null>(null);
-
-export const useLenisScroll = () => useContext(LenisScrollContext);
 
 export function LenisScrollContextProvider({
   children,
