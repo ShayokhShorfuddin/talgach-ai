@@ -1,6 +1,6 @@
 'use client';
 
-export function AICVScore() {
+export function AICVScoreCard() {
   return (
     <div className="border border-neutral-200 p-4 rounded hover:border-talgach-green hover:bg-green-50 transition duration-300">
       <p className="text-sm">AI CV Score</p>
