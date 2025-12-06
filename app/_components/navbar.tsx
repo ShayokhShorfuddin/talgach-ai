@@ -1,7 +1,15 @@
 'use client';
 
+import {
+  SignedIn,
+  SignedOut,
+  SignInButton,
+  SignUpButton,
+  UserButton,
+} from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
 import chevron_down from '@/public/svgs/chevron-down.svg';
 import close from '@/public/svgs/close.svg';
@@ -15,8 +23,8 @@ import { MobileMenuContent } from './mobile-menu/mobile-menu-content';
 import { MobileMenuTrigger } from './mobile-menu/mobile-menu-trigger';
 
 export default function Navbar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const dropdownRef = useRef<HTMLElement>(null);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <header>
@@ -37,17 +45,35 @@ function MobileNavbar(sidebarState: {
   sidebarRef: React.RefObject<HTMLElement | null> | null;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
+  const router = useRouter();
+
   return (
     <div className="relative flex sm:hidden justify-between items-start w-full mt-4 px-4 md:px-10">
       <Image src={logo_green} alt="Logo" className="h-14 w-min mr-5" />
 
       <div className="flex items-center gap-x-1">
-        <button
-          type="button"
-          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-        >
-          Get Started
-        </button>
+        <SignedOut>
+          <SignUpButton>
+            <button
+              type="button"
+              className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            >
+              Get Started
+            </button>
+          </SignUpButton>
+        </SignedOut>
+
+        <SignedIn>
+          <button
+            type="button"
+            className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            onClick={() => {
+              router.push('/dashboard');
+            }}
+          >
+            Go To Dashboard
+          </button>
+        </SignedIn>
 
         <button
           type="button"
@@ -70,6 +96,8 @@ function MobileNavbar(sidebarState: {
 }
 
 function DesktopNavbar() {
+  const router = useRouter();
+
   return (
     <div className="hidden sm:flex justify-between items-start w-full mt-4 px-4 md:px-10">
       <div className="flex gap-x-2">
@@ -95,20 +123,42 @@ function DesktopNavbar() {
       </div>
 
       <div className="flex items-center gap-x-2">
-        <button
-          type="button"
-          className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
-        >
-          Sign In
-        </button>
+        <SignedOut>
+          <SignInButton>
+            <button
+              type="button"
+              className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+            >
+              Sign In
+            </button>
+          </SignInButton>
 
-        <button
-          type="button"
-          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-        >
-          Get Started
-        </button>
+          <SignUpButton>
+            <button
+              type="button"
+              className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            >
+              Get Started
+            </button>
+          </SignUpButton>
+        </SignedOut>
       </div>
+
+      <SignedIn>
+        <div className="flex items-center gap-x-2">
+          <button
+            type="button"
+            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            onClick={() => {
+              router.push('/dashboard');
+            }}
+          >
+            Go To Dashboard
+          </button>
+
+          <UserButton />
+        </div>
+      </SignedIn>
     </div>
   );
 }
