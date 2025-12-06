@@ -11,7 +11,7 @@ export function AppliedJobsCard() {
       <div className="flex items-center">
         <p className="mt-1 text-3xl font-medium text-talgach-green">7</p>
 
-        <div className="flex items-center gap-x-1 ml-4">
+        <div className="flex items-center gap-x-1 ml-3">
           <Image
             className="size-5 rounded-full border border-talgach-green object-cover z-20"
             src={coinbase}
