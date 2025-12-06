@@ -22,7 +22,7 @@ type SidebarProps = {
 const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
   {
     name: 'Home',
-    href: '/home',
+    href: '/dashboard',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
   {
@@ -84,7 +84,7 @@ export default function Sidebar() {
         <button
           type="button"
           onClick={() => {
-            router.push('/home/profile');
+            router.push('/dashboard/profile');
           }}
         >
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">
