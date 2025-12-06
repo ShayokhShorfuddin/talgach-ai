@@ -3,6 +3,8 @@
 
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
 import { z } from 'zod';
+import type { getProfile } from '@/app/_actions/get-profile';
+import { updateProfile } from '@/app/_actions/update-profile';
 
 const signUpSchema = z.object({
   gender: z.string().nonempty({ message: 'Please select your gender.' }),
@@ -20,9 +22,11 @@ const signUpSchema = z.object({
 });
 
 export function InformationForm({
+  userId,
   profileData,
 }: {
-  profileData: Awaited<ReturnType<typeof getUser>>;
+  userId: string;
+  profileData: Awaited<ReturnType<typeof getProfile>>;
 }) {
   const form = useForm({
     defaultValues: {
@@ -41,19 +45,16 @@ export function InformationForm({
     },
 
     onSubmit: async ({ value }) => {
-      // Get the id of currently logged in user
-      const userID = (await authClient.getSession()).data?.user.id;
-
       // TODO: We might fail to save the data. Handle it later
-      await saveProfileData({
-        id: userID as string,
+      await updateProfile({
+        id: userId,
         updatedData: value,
       });
     },
   });
   return (
     <form
-      className="flex flex-col w-full gap-y-2 mt-3 text-sm font-sans px-2"
+      className="flex flex-col w-full gap-y-2 mt-3 text-sm font-sans"
       onSubmit={(e) => {
         e.preventDefault();
         e.stopPropagation();
@@ -204,7 +205,7 @@ export function InformationForm({
           <button
             type="submit"
             disabled={!canSubmit || isSubmitting}
-            className="px-3 py-2 hover:cursor-pointer bg-neutral-800 rounded-lg text-sm text-neutral-200 font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:bg-neutral-900"
+            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:cursor-not-allowed disabled:bg-neutral-900"
           >
             {isSubmitting ? 'Saving...' : 'Save Information'}
           </button>
