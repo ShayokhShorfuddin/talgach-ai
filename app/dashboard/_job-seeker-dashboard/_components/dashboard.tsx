@@ -8,7 +8,7 @@ import { Heading } from './heading';
 import { Simulationist } from './simulationist';
 import { TakeMockInterview } from './take-mock-interview';
 
-export function Dashboard() {
+export function JobSeekerDashboard() {
   return (
     <section className="px-5">
       <Heading />

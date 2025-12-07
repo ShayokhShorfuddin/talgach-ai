@@ -1,8 +1,11 @@
 'use client';
 
 import '@/app/globals.css';
-import { createContext, useState } from 'react';
-import Sidebar from './_components/sidebar';
+import { useUser } from '@clerk/nextjs';
+import { createContext, useEffect, useState } from 'react';
+import { getRoleOfUser } from '../_actions/get-role-of-user';
+import { JobSeekerSidebar } from './_job-seeker-dashboard/_components/sidebar';
+import { StudentSidebar } from './_student-dashboard/_components/sidebar';
 
 export const SidebarContext = createContext<{
   expanded: boolean;
@@ -15,6 +18,19 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [expanded, setExpanded] = useState(true);
+  const [role, setRole] = useState<string | null>(null);
+  const userId = useUser().user?.id as string;
+
+  useEffect(() => {
+    async function getUserRole() {
+      const userRole = await getRoleOfUser({ id: userId });
+      setRole(userRole);
+    }
+
+    if (userId) {
+      getUserRole();
+    }
+  }, [userId]);
 
   return (
     <div
@@ -24,7 +40,8 @@ export default function RootLayout({
       <SidebarContext.Provider
         value={{ expanded, toggle: () => setExpanded((s) => !s) }}
       >
-        <Sidebar />
+        {role === 'student' && <StudentSidebar />}
+        {role === 'job-seeker' && <JobSeekerSidebar />}
       </SidebarContext.Provider>
 
       <main className="overflow-y-scroll scroll">{children}</main>

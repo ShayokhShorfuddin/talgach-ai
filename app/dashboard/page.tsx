@@ -1,5 +1,29 @@
-import { Dashboard } from './_components/dashboard';
+import { currentUser } from '@clerk/nextjs/server';
+import { getRoleOfUser } from '../_actions/get-role-of-user';
+import { JobSeekerDashboard } from './_job-seeker-dashboard/_components/dashboard';
+import { StudentDashboard } from './_student-dashboard/_components/dashboard';
 
 export default async function Page() {
-  return <Dashboard />;
+  // Since we have 4 types of users (student, job seekers, hr and organizations), we will first need to see the role of the logged in user and then render the appropriate dashboard.
+
+  const userId = await currentUser().then((user) => user?.id as string);
+
+  const userRole: 'student' | 'job-seeker' | 'human-resource' | 'organization' =
+    await getRoleOfUser({ id: userId });
+
+  if (userRole === 'job-seeker') {
+    return <JobSeekerDashboard />;
+  }
+
+  if (userRole === 'student') {
+    return <StudentDashboard />;
+  }
+
+  if (userRole === 'human-resource') {
+    return <div>Human Resource Dashboard - Coming Soon</div>;
+  }
+
+  if (userRole === 'organization') {
+    return <div>Organization Dashboard - Coming Soon</div>;
+  }
 }
