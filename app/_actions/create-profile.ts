@@ -3,11 +3,21 @@
 import { db } from '@/lib/db';
 import { profile } from '@/schemas/profile-schema';
 
-export async function setProfile({ id, name }: { id: string; name: string }) {
+export async function createProfile({
+  id,
+  firstName,
+  lastName,
+}: {
+  id: string;
+  firstName: string;
+  lastName: string;
+}) {
   const time = new Date();
   await db.insert(profile).values({
     id: id,
-    name: name,
+    firstName: firstName,
+    lastName: lastName,
+    role: '',
     gender: '',
     education: '',
     experience: '',

@@ -7,7 +7,8 @@ import { profile } from '@/schemas/profile-schema';
 export async function getProfile({ id }: { id: string }) {
   const targetUser = await db
     .select({
-      name: profile.name,
+      firstName: profile.firstName,
+      lastName: profile.lastName,
       gender: profile.gender,
       education: profile.education,
       experience: profile.experience,

@@ -2,8 +2,9 @@ import { pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const profile = pgTable('profile', {
   id: text('id').primaryKey(),
-
-  name: text('name').notNull(),
+  role: text('role').notNull(),
+  firstName: text('first_name').notNull(),
+  lastName: text('last_name').notNull(),
   gender: text('gender'),
   education: text('education'),
   experience: text('experience'),
