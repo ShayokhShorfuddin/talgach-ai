@@ -10,6 +10,7 @@ import chevron_right from '@/public/svgs/chevron-right.svg';
 import file_black from '@/public/svgs/file-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
+import pen from '@/public/svgs/pen.svg';
 import { SidebarContext } from '../../layout';
 
 type SidebarProps = {
@@ -29,6 +30,11 @@ const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
     name: 'Programs',
     href: '/dashboard/programs',
     icon: <Image src={file_black} alt="Programs" className="size-4" />,
+  },
+  {
+    name: 'Writing Assistant',
+    href: '/dashboard/writing-assistant',
+    icon: <Image src={pen} alt="Writing Assistant" className="size-4" />,
   },
 ];
 
