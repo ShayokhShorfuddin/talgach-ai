@@ -1,6 +1,8 @@
 import { currentUser } from '@clerk/nextjs/server';
 import { getRoleOfUser } from '../_actions/get-role-of-user';
+import { HRDashboard } from './_hr-dashboard/_components/dashboard';
 import { JobSeekerDashboard } from './_job-seeker-dashboard/_components/dashboard';
+import { OrganizationDashboard } from './_organization-dashboard/_components/dashboard';
 import { StudentDashboard } from './_student-dashboard/_components/dashboard';
 
 export default async function Page() {
@@ -20,10 +22,10 @@ export default async function Page() {
   }
 
   if (userRole === 'human-resource') {
-    return <div>Human Resource Dashboard - Coming Soon</div>;
+    return <HRDashboard />;
   }
 
   if (userRole === 'organization') {
-    return <div>Organization Dashboard - Coming Soon</div>;
+    return <OrganizationDashboard />;
   }
 }

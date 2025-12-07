@@ -4,7 +4,9 @@ import '@/app/globals.css';
 import { useUser } from '@clerk/nextjs';
 import { createContext, useEffect, useState } from 'react';
 import { getRoleOfUser } from '../_actions/get-role-of-user';
+import { HRSidebar } from './_hr-dashboard/_components/sidebar';
 import { JobSeekerSidebar } from './_job-seeker-dashboard/_components/sidebar';
+import { OrganizationSidebar } from './_organization-dashboard/_components/sidebar';
 import { StudentSidebar } from './_student-dashboard/_components/sidebar';
 
 export const SidebarContext = createContext<{
@@ -42,6 +44,8 @@ export default function RootLayout({
       >
         {role === 'student' && <StudentSidebar />}
         {role === 'job-seeker' && <JobSeekerSidebar />}
+        {role === 'human-resource' && <HRSidebar />}
+        {role === 'organization' && <OrganizationSidebar />}
       </SidebarContext.Provider>
 
       <main className="overflow-y-scroll scroll">{children}</main>
