@@ -1,18 +1,33 @@
 'use client';
 
-import { useState } from 'react';
-import china from '@/public/svgs/flags/china.svg';
-import germany from '@/public/svgs/flags/germany.svg';
-import japan from '@/public/svgs/flags/japan.svg';
-import switzerland from '@/public/svgs/flags/switzerland.svg';
-import turkey from '@/public/svgs/flags/turkey.svg';
-import uk from '@/public/svgs/flags/uk.svg';
-import usa from '@/public/svgs/flags/usa.svg';
-import { ProgramCard } from './program-card';
+import { useRouter } from 'next/navigation';
+import { useEffect, useState } from 'react';
+import { getListOfPrograms } from '@/app/_actions/get-list-of-programs';
 import { SearchBar } from './search-bar';
 
 export default function Programs() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
+  const [programsList, setProgramsList] = useState<
+    {
+      id: string;
+      createdAt: Date;
+      universityName: string;
+      programName: string;
+      startedApplication: boolean;
+      submittedApplication: boolean;
+      madePayment: boolean;
+      approved: boolean;
+    }[]
+  >([]);
+
+  useEffect(() => {
+    async function getProgramsList() {
+      const programsList = await getListOfPrograms();
+      setProgramsList(programsList);
+    }
+    getProgramsList();
+  }, []);
 
   return (
     <section>
@@ -21,160 +36,121 @@ export default function Programs() {
         <p className="text-sm text-neutral-500">Find programs by their name.</p>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-        <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
-          {programs
-            .filter((program) =>
-              program.programName
-                .toLowerCase()
-                .includes(searchQuery.toLowerCase()),
-            )
-            .map((program) => (
-              <ProgramCard key={program.id} {...program} />
-            ))}
-        </div>
+        {programsList.length === 0 ? (
+          <NoPrograms />
+        ) : (
+          <ProgramsList programs={programsList} searchQuery={searchQuery} />
+        )}
       </div>
     </section>
   );
 }
 
-const programs: {
-  id: number;
-  flagIcon: string;
-  programName: string;
+function NoPrograms() {
+  const router = useRouter();
+
+  return (
+    <>
+      <p className="mt-10">No programs added yet.</p>
+
+      <button
+        type="button"
+        onClick={() => {
+          router.push('/dashboard/programs/add');
+        }}
+        className="bg-talgach-green py-1 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-4"
+      >
+        Add Program
+      </button>
+    </>
+  );
+}
+
+function ProgramsList({
+  programs,
+  searchQuery,
+}: {
+  programs: {
+    id: string;
+    createdAt: Date;
+    universityName: string;
+    programName: string;
+    startedApplication: boolean;
+    submittedApplication: boolean;
+    madePayment: boolean;
+    approved: boolean;
+  }[];
+  searchQuery: string;
+}) {
+  return (
+    <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-3 gap-4 mt-10">
+      {programs
+        .filter((program) =>
+          program.programName.toLowerCase().includes(searchQuery.toLowerCase()),
+        )
+        .map((program) => (
+          <ProgramCard key={program.id} {...program} />
+        ))}
+    </div>
+  );
+}
+
+function ProgramCard({
+  id,
+  createdAt,
+  universityName,
+  programName,
+  startedApplication,
+  submittedApplication,
+  madePayment,
+  approved,
+}: {
+  id: string;
+  createdAt: Date;
   universityName: string;
-  eligibilityTags: string[];
-}[] = [
-  {
-    id: 1,
-    flagIcon: uk,
-    programName: 'Master of Science in AI',
-    universityName: 'University of Oxford',
-    eligibilityTags: ['Minimum 3.5 GPA', 'IELTS 7.0'],
-  },
-  {
-    id: 2,
-    flagIcon: germany,
-    programName: 'Bachelors in Business Admin.',
-    universityName: 'Technical University of Munich',
-    eligibilityTags: ['Abitur equivalent', 'German B2'],
-  },
-  {
-    id: 3,
-    flagIcon: usa,
-    programName: 'MBA in Finance',
-    universityName: 'Harvard University',
-    eligibilityTags: ['GMAT score', 'Work Experience'],
-  },
-  {
-    id: 4,
-    flagIcon: japan,
-    programName: 'Exchange Program in Robotics',
-    universityName: 'University of Tokyo',
-    eligibilityTags: ['Junior standing', 'JLPT N3'],
-  },
-  {
-    id: 5,
-    flagIcon: china,
-    programName: 'Masters in Computer Science',
-    universityName: 'Tsinghua University',
-    eligibilityTags: ['Bachelor Degree', 'HSK Level 5'],
-  },
-  {
-    id: 6,
-    flagIcon: switzerland,
-    programName: 'MSc in Mechanical Engineering',
-    universityName: 'ETH Zurich',
-    eligibilityTags: ['GRE Score', 'German C1'],
-  },
-  {
-    id: 7,
-    flagIcon: turkey,
-    programName: 'Bachelors in Architecture',
-    universityName: 'Istanbul Technical University',
-    eligibilityTags: ['High School Diploma', 'Portfolio'],
-  },
-  {
-    id: 8,
-    flagIcon: uk,
-    programName: 'LLM in International Law',
-    universityName: 'University of Cambridge',
-    eligibilityTags: ['Law Degree', 'IELTS 7.5'],
-  },
-  {
-    id: 9,
-    flagIcon: usa,
-    programName: 'MS in Data Science',
-    universityName: 'Columbia University',
-    eligibilityTags: ['GRE Quantitative', 'Python Skills'],
-  },
-  {
-    id: 10,
-    flagIcon: germany,
-    programName: 'PhD in Physics',
-    universityName: 'Ludwig Maximilian University',
-    eligibilityTags: ['Masters Degree', 'Research Proposal'],
-  },
-  {
-    id: 11,
-    flagIcon: switzerland,
-    programName: 'Bachelors in Economics',
-    universityName: 'University of Zurich',
-    eligibilityTags: ['Matura equivalent', 'German B2'],
-  },
-  {
-    id: 12,
-    flagIcon: japan,
-    programName: 'Masters in Environmental Science',
-    universityName: 'Kyoto University',
-    eligibilityTags: ['Bachelor Degree', 'TOEFL 90'],
-  },
-  {
-    id: 13,
-    flagIcon: usa,
-    programName: 'Bachelors in Computer Engineering',
-    universityName: 'MIT',
-    eligibilityTags: ['SAT Score', 'AP Calculus'],
-  },
-  {
-    id: 14,
-    flagIcon: uk,
-    programName: 'MA in International Relations',
-    universityName: 'London School of Economics',
-    eligibilityTags: ['Political Science Degree', 'IELTS 7.0'],
-  },
-  {
-    id: 15,
-    flagIcon: china,
-    programName: 'Bachelors in Medicine',
-    universityName: 'Peking University',
-    eligibilityTags: ['Science Background', 'HSK Level 6'],
-  },
-  {
-    id: 16,
-    flagIcon: turkey,
-    programName: 'Masters in Civil Engineering',
-    universityName: 'Middle East Technical University',
-    eligibilityTags: ['Engineering Degree', 'GRE Score'],
-  },
-  {
-    id: 17,
-    flagIcon: germany,
-    programName: 'MSc in Biotechnology',
-    universityName: 'Heidelberg University',
-    eligibilityTags: ['Biology Degree', 'English C1'],
-  },
-  {
-    id: 18,
-    flagIcon: usa,
-    programName: 'JD Law Program',
-    universityName: 'Yale University',
-    eligibilityTags: ['LSAT Score', 'Bachelor Degree'],
-  },
-  {
-    id: 19,
-    flagIcon: japan,
-    programName: 'Bachelors in Animation',
-    universityName: 'Tokyo University of the Arts',
-    eligibilityTags: ['Portfolio', 'Japanese N2'],
-  },
-];
+  programName: string;
+  startedApplication: boolean;
+  submittedApplication: boolean;
+  madePayment: boolean;
+  approved: boolean;
+}) {
+  const router = useRouter();
+  return (
+    <button
+      type="button"
+      key={id}
+      className="border border-neutral-200 rounded p-4 hover:border-talgach-green hover:bg-green-50 transition duration-300 cursor-pointer text-left"
+      onClick={() => {
+        router.push(`/dashboard/programs/${id}`);
+      }}
+    >
+      <p className="font-medium">{programName}</p>
+      <p className="text-sm">{universityName}</p>
+
+      <p className="text-xs font-medium mt-2">
+        Created at: {createdAt.toLocaleDateString()}
+      </p>
+
+      <div className="flex flex-wrap items-center gap-2 mt-2">
+        <Tag text="Application Started" done={startedApplication} />
+        <Tag text="Application Submitted" done={submittedApplication} />
+        <Tag text="Payment Made" done={madePayment} />
+        <Tag text="Approved" done={approved} />
+      </div>
+    </button>
+  );
+}
+
+function Tag({ text, done }: { text: string; done: boolean }) {
+  return (
+    <div
+      className="py-0.5 px-2 rounded-full"
+      style={{
+        backgroundColor: done ? '#D1FAE5' : '#FEE2E2',
+        color: done ? '#065F46' : '#B91C1C',
+      }}
+    >
+      <p className="text-[10px]">{text}</p>
+    </div>
+  );
+}
