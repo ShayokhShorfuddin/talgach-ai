@@ -57,7 +57,6 @@ function MobileNavbar({
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleGetStarted: () => Promise<void>;
 }) {
-  const router = useRouter();
   const { data: session } = authClient.useSession();
 
   return (

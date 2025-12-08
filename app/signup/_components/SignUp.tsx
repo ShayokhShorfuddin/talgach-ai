@@ -6,8 +6,6 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { z } from 'zod';
 import { authClient } from '@/lib/auth-client';
-
-import google from '@/public/svgs/google.svg';
 import logo from '@/public/svgs/logo-green.svg';
 
 const signUpSchema = z
@@ -74,14 +72,13 @@ export function SignUp() {
   return (
     <section className="flex flex-col items-center justify-center h-svh font-sans">
       <div className="flex flex-col items-center max-w-60">
-        <Image src={logo} alt="icon" className="w-20 xs:w-25 md:w-30" />
+        <Image src={logo} alt="icon" className="h-20 xs:h-25 md:h-30" />
 
-        <p className="text-sm sm:text-base text-neutral-800 mt-2">
+        <p className="text-sm sm:text-base text-neutral-800 mt-3">
           Let's create your account.
         </p>
-
+        {/* 
         <form className="w-full">
-          {/* TODO: Implement Google Sign-In */}
           <button
             type="button"
             className="flex gap-x-3 justify-center items-center text-nowrap w-full border border-preply-green text-neutral-800 font-medium mt-6 py-2 rounded-sm hover:cursor-pointer select-none"
@@ -95,7 +92,7 @@ export function SignUp() {
           <div className="h-[0.5px] w-full bg-neutral-200" />
           <p className="text-neutral-800 text-sm text-nowrap">or use email</p>
           <div className="h-[0.5px] w-full bg-neutral-200" />
-        </div>
+        </div> */}
 
         <form
           className="flex flex-col w-full gap-y-2 mt-3 text-sm"

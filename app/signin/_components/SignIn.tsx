@@ -12,8 +12,8 @@ import { authClient } from '@/lib/auth-client';
 // import { signInUser } from "@/app/actions/signin";
 import eye from '@/public/svgs/eye.svg';
 import eye_closed from '@/public/svgs/eye-closed.svg';
-import Google from '@/public/svgs/google.svg';
 import logo from '@/public/svgs/logo-green.svg';
+import getAuthErrorMessage from '@/utils/auth-error-messages';
 
 const signInSchema = z.object({
   email: z
@@ -28,6 +28,8 @@ const signInSchema = z.object({
 });
 
 export default function SignIn() {
+  const [authErrorMessage, setAuthErrorMessage] = useState<string>('');
+
   const form = useForm({
     defaultValues: {
       email: '',
@@ -44,9 +46,19 @@ export default function SignIn() {
         password: value.password,
       });
 
-      // TODO: Add proper auth errors later
       if (error) {
-        throw new Error('Failed to sign in.');
+        if (error?.code) {
+          setAuthErrorMessage(getAuthErrorMessage(error?.code));
+          return;
+        }
+
+        // An error occurred but there is no code? This could be due to change in better-auth library. For this situation, we will be returning a generic error message and call sentry
+
+        // TODO: call sentry
+        setAuthErrorMessage(
+          'We have encountered a strange error. Please try again later.',
+        );
+        return;
       }
 
       redirect('/dashboard');
@@ -56,13 +68,13 @@ export default function SignIn() {
   return (
     <section className="flex flex-col items-center justify-center h-svh font-sans">
       <div className="flex flex-col items-center max-w-[15rem]">
-        <Image src={logo} alt="icon" className="w-20 xs:w-25 md:w-30" />
+        <Image src={logo} alt="icon" className="h-20 xs:h-25 md:h-30" />
 
-        <p className="text-sm sm:text-base text-neutral-800 mt-2">
+        <p className="text-sm sm:text-base text-neutral-800 mt-3">
           Log into your account.
         </p>
 
-        <form className="w-full">
+        {/* <form className="w-full">
           <button
             type="button"
             className="flex gap-x-3 justify-center items-center text-nowrap w-full border border-preply-green text-neutral-800 font-medium mt-6 py-2 rounded-sm hover:cursor-pointer select-none"
@@ -76,7 +88,7 @@ export default function SignIn() {
           <div className="h-[0.5px] w-full bg-neutral-200" />
           <p className="text-neutral-800 text-sm text-nowrap">or use email</p>
           <div className="h-[0.5px] w-full bg-neutral-200" />
-        </div>
+        </div> */}
 
         <form
           className="flex flex-col w-full gap-y-2 mt-3 text-sm"
