@@ -6,8 +6,6 @@ import { JobSeekerDashboard } from './_job-seeker-dashboard/_components/dashboar
 import { OrganizationDashboard } from './_organization-dashboard/_components/dashboard';
 import { StudentDashboard } from './_student-dashboard/_components/dashboard';
 
-export const dynamic = 'force-dynamic';
-
 export default async function Page() {
   // Since we have 4 types of users (student, job seekers, hr and organizations), we will first need to see the role of the logged in user and then render the appropriate dashboard.
 
@@ -17,7 +15,7 @@ export default async function Page() {
   const userRole: 'student' | 'job-seeker' | 'human-resource' | 'organization' =
     await getRoleOfUser({ id: userId });
 
-    console.log(userRole);
+  console.log(userRole);
 
   if (userRole === 'job-seeker') {
     return <JobSeekerDashboard />;
@@ -35,5 +33,5 @@ export default async function Page() {
     return <OrganizationDashboard />;
   }
 
-  return <p>Failed to get user role</p>
+  return <p>Failed to get user role</p>;
 }
