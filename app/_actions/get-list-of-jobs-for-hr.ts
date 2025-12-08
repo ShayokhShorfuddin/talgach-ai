@@ -7,6 +7,7 @@ export async function getListOJobsForHR() {
     columns: {
       id: true,
       position: true,
+      responsibilities: true,
       deadline: true,
       skills: true,
       createdAt: true,

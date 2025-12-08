@@ -12,6 +12,7 @@ export default function Jobs() {
       id: string;
       createdAt: Date;
       position: string;
+      responsibilities: string;
       deadline: Date;
       skills: {
         name: string;
@@ -28,7 +29,7 @@ export default function Jobs() {
   }, []);
 
   return (
-    <section>
+    <section className="px-5">
       <div className="flex flex-col items-center justify-center">
         <p className="mt-10 font-medium text-xl">Search Jobs</p>
         <p className="text-sm text-neutral-500">Find jobs by their position.</p>
@@ -72,10 +73,8 @@ function JobsList({
     id: string;
     createdAt: Date;
     position: string;
+    responsibilities: string;
     deadline: Date;
-    skills: {
-      name: string;
-    }[];
   }[];
   searchQuery: string;
 }) {
@@ -97,13 +96,13 @@ function JobCard({
   createdAt,
   position,
   deadline,
-  skills,
+  responsibilities,
 }: {
   id: string;
   createdAt: Date;
   position: string;
   deadline: Date;
-  skills: { name: string }[];
+  responsibilities: string;
 }) {
   const router = useRouter();
   return (
@@ -118,12 +117,9 @@ function JobCard({
       <p className="font-medium">{position}</p>
       <p className="text-sm">{deadline.toLocaleDateString()}</p>
 
-      {/* <div className="flex flex-wrap items-center gap-2 mt-2">
-        <Tag text="Application Started" />
-        <Tag text="Application Submitted" />
-        <Tag text="Payment Made" />
-        <Tag text="Approved" />
-      </div> */}
+      <p className="text-sm text-neutral-700 line-clamp-3 mt-2">
+        {responsibilities}
+      </p>
 
       <p className="text-xs font-medium mt-2">
         Created at: {createdAt.toLocaleDateString()}
