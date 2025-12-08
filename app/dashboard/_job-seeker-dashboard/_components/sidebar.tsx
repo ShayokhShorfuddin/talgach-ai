@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import briefcase from '@/public/svgs/briefcase-black.svg';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
 import file_black from '@/public/svgs/file-black.svg';
@@ -20,22 +21,35 @@ type SidebarProps = {
 };
 
 // Array of navigation links for easier mapping
-const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
+const navLinks: Array<{
+  id: number;
+  name: string;
+  href: string;
+  icon: React.ReactNode;
+}> = [
   {
+    id: 1,
     name: 'Home',
     href: '/dashboard',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
   {
-    name: 'CV Scanner',
-    href: '/dashboard/cv-scanner',
-    icon: <Image src={file_black} alt="CV Scanner" className="size-4" />,
+    id: 2,
+    name: 'Jobs',
+    href: '/dashboard/jobs',
+    icon: <Image src={briefcase} alt="Jobs" className="size-4" />,
   },
-
   {
+    id: 3,
     name: 'Simulations',
     href: '/dashboard/simulations',
     icon: <Image src={profile} alt="Simulations" className="size-4" />,
+  },
+  {
+    id: 4,
+    name: 'CV Scanner',
+    href: '/dashboard/cv-scanner',
+    icon: <Image src={file_black} alt="CV Scanner" className="size-4" />,
   },
 ];
 
@@ -76,7 +90,7 @@ export function JobSeekerSidebar() {
           {/* Navigation links */}
           <ul className="flex-1 flex flex-col gap-y-1 mt-2">
             {navLinks.map((data) => (
-              <li key={data.name}>
+              <li key={data.id}>
                 <SidebarLink
                   expanded={expanded}
                   pathName={pathName}

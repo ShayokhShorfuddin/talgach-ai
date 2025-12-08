@@ -2,7 +2,7 @@
 
 import { db } from '@/lib/db';
 
-export async function getListOJobsForHR() {
+export async function getListOfJobsForHR() {
   const JobsForHRData = await db.query.hrJob.findMany({
     columns: {
       id: true,

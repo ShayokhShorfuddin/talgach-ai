@@ -1,11 +1,26 @@
 'use client';
 
+import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getListOJobsForHR } from '@/app/_actions/get-list-of-jobs-for-hr';
+import { getListOfJobsForHR } from '@/app/_actions/get-list-of-jobs-for-hr';
+import { getRoleOfUser } from '@/app/_actions/get-role-of-user';
 import { SearchBar } from './search-bar';
 
 export default function Jobs() {
+  const userId = useUser().user?.id as string;
+
+  // TODO: At the moment, /job page can be visited by both job seekers and HR, we need to first determine the user type and then fetch data accordingly
+
+  // TODO: We to restructure our routes to be like this -
+  // /dashboard/job-seeker/jobs
+  // /dashboard/hr/jobs
+
+  // ⚠️ NOT LIKE THIS ANYMORE -
+  // /dashboard/jobs (for both job seekers and HRs)
+
+  // TODO: Temporary state to identify user type
+  const [isHR, setIsHR] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [jobsForHRList, setJobsForHRList] = useState<
     {
@@ -22,25 +37,41 @@ export default function Jobs() {
 
   useEffect(() => {
     async function getJobsForHRList() {
-      const jobsForHRList = await getListOJobsForHR();
+      const userRole = await getRoleOfUser({ id: userId });
+
+      if (userRole !== 'human-resource') {
+        setIsHR(false);
+        return;
+      }
+
+      const jobsForHRList = await getListOfJobsForHR();
       setJobsForHRList(jobsForHRList);
     }
     getJobsForHRList();
-  }, []);
+  }, [userId]);
 
   return (
     <section className="px-5">
-      <div className="flex flex-col items-center justify-center">
-        <p className="mt-10 font-medium text-xl">Search Jobs</p>
-        <p className="text-sm text-neutral-500">Find jobs by their position.</p>
-        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
+      {isHR ? (
+        <div className="flex flex-col items-center justify-center">
+          <p className="mt-10 font-medium text-xl">Search Jobs</p>
+          <p className="text-sm text-neutral-500">
+            Find jobs by their position.
+          </p>
+          <SearchBar
+            searchQuery={searchQuery}
+            setSearchQuery={setSearchQuery}
+          />
 
-        {jobsForHRList.length === 0 ? (
-          <NoJobs />
-        ) : (
-          <JobsList jobs={jobsForHRList} searchQuery={searchQuery} />
-        )}
-      </div>
+          {jobsForHRList.length === 0 ? (
+            <NoJobs />
+          ) : (
+            <JobsList jobs={jobsForHRList} searchQuery={searchQuery} />
+          )}
+        </div>
+      ) : (
+        <p className="text-center mt-20">🚧 Work in progress.</p>
+      )}
     </section>
   );
 }
