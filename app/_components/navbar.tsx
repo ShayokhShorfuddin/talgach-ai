@@ -40,12 +40,14 @@ function MobileNavbar(sidebarState: {
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const router = useRouter();
+  const session = authClient.useSession();
+
   async function handleGetStarted() {
     const { data: session } = await authClient.getSession();
     if (!session) {
       router.push('/signin');
     } else {
-      router.push('/dashboard');
+      router.push('/role');
     }
   }
 
@@ -54,23 +56,27 @@ function MobileNavbar(sidebarState: {
       <Image src={logo_green} alt="Logo" className="h-14 w-min mr-5" />
 
       <div className="flex items-center gap-x-1">
-        <button
-          type="button"
-          onClick={handleGetStarted}
-          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-        >
-          Get Started
-        </button>
+        {!session && (
+          <button
+            type="button"
+            onClick={handleGetStarted}
+            className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+          >
+            Get Started
+          </button>
+        )}
 
-        <button
-          type="button"
-          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-          onClick={() => {
-            router.push('/dashboard');
-          }}
-        >
-          Go To Dashboard
-        </button>
+        {session && (
+          <button
+            type="button"
+            className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            onClick={() => {
+              router.push('/dashboard');
+            }}
+          >
+            Go To Dashboard
+          </button>
+        )}
 
         <button
           type="button"
@@ -94,6 +100,7 @@ function MobileNavbar(sidebarState: {
 
 function DesktopNavbar() {
   const router = useRouter();
+  const session = authClient.useSession();
 
   async function handleGetStarted() {
     const { data: session } = await authClient.getSession();
@@ -128,33 +135,37 @@ function DesktopNavbar() {
         </Link>
       </div>
 
-      <div className="flex items-center gap-x-2">
-        <button
-          type="button"
-          className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
-        >
-          Sign In
-        </button>
-        <button
-          type="button"
-          onClick={handleGetStarted}
-          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-        >
-          Get Started
-        </button>
-      </div>
+      {!session && (
+        <div className="flex items-center gap-x-2">
+          <button
+            type="button"
+            className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+          >
+            Sign In
+          </button>
+          <button
+            type="button"
+            onClick={handleGetStarted}
+            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+          >
+            Get Started
+          </button>
+        </div>
+      )}
 
-      <div className="flex items-center gap-x-2">
-        <button
-          type="button"
-          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-          onClick={() => {
-            router.push('/dashboard');
-          }}
-        >
-          Go To Dashboard
-        </button>
-      </div>
+      {session && (
+        <div className="flex items-center gap-x-2">
+          <button
+            type="button"
+            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            onClick={() => {
+              router.push('/dashboard');
+            }}
+          >
+            Go To Dashboard
+          </button>
+        </div>
+      )}
     </div>
   );
 }

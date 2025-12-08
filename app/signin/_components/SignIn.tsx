@@ -1,36 +1,37 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: <needed for Tanstack form> */
-"use client";
+'use client';
 
-import { type AnyFieldApi, useForm } from "@tanstack/react-form";
-import Image from "next/image";
-import Link from "next/link";
-import { redirect } from "next/navigation";
-import { useState } from "react";
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
+import { type AnyFieldApi, useForm } from '@tanstack/react-form';
+import Image from 'next/image';
+import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useState } from 'react';
+import { z } from 'zod';
+import { authClient } from '@/lib/auth-client';
+
 // import { signInUser } from "@/app/actions/signin";
-import eye from "@/public/eye.svg";
-import eye_closed from "@/public/eye-closed.svg";
-import Google from "@/public/google.svg";
-import logo from "@/public/logo.svg";
+import eye from '@/public/svgs/eye.svg';
+import eye_closed from '@/public/svgs/eye-closed.svg';
+import Google from '@/public/svgs/google.svg';
+import logo from '@/public/svgs/logo-green.svg';
 
 const signInSchema = z.object({
   email: z
-    .email({ message: "Please enter a valid email address." })
-    .max(40, { message: "Email cannot be longer than 40 characters." })
-    .nonempty({ message: "Please enter your email address." }),
+    .email({ message: 'Please enter a valid email address.' })
+    .max(40, { message: 'Email cannot be longer than 40 characters.' })
+    .nonempty({ message: 'Please enter your email address.' }),
   password: z
     .string()
-    .min(8, { message: "Password must be at least 8 characters long." })
-    .max(30, { message: "Password should not be longer than 30 characters." })
-    .nonempty({ message: "Please enter a password." }),
+    .min(8, { message: 'Password must be at least 8 characters long.' })
+    .max(30, { message: 'Password should not be longer than 30 characters.' })
+    .nonempty({ message: 'Please enter a password.' }),
 });
 
 export default function SignIn() {
   const form = useForm({
     defaultValues: {
-      email: "",
-      password: "",
+      email: '',
+      password: '',
     },
 
     validators: {
@@ -45,10 +46,10 @@ export default function SignIn() {
 
       // TODO: Add proper auth errors later
       if (error) {
-        throw new Error("Failed to sign in.");
+        throw new Error('Failed to sign in.');
       }
 
-      redirect("/home");
+      redirect('/dashboard');
     },
   });
 
@@ -118,14 +119,14 @@ export default function SignIn() {
                 disabled={!canSubmit || isSubmitting}
                 className="px-3 py-2 hover:cursor-pointer bg-neutral-800 rounded-lg text-sm text-neutral-200 font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:bg-neutral-900"
               >
-                {isSubmitting ? "Hashing..." : "Sign in"}
+                {isSubmitting ? 'Hashing...' : 'Sign in'}
               </button>
             )}
           />
         </form>
 
         <p className="text-sm text-nowrap mt-4">
-          Don't have an account?{" "}
+          Don't have an account?{' '}
           <Link href="/signup" className="underline">
             Sign up
           </Link>
@@ -144,7 +145,7 @@ function PasswordField({ field }: { field: AnyFieldApi }) {
         <input
           autoComplete="off"
           placeholder="Enter your password"
-          type={showPassword ? "text" : "password"}
+          type={showPassword ? 'text' : 'password'}
           value={field.state.value}
           onChange={(e) => field.handleChange(e.target.value)}
           className="px-4 py-2 rounded-l-lg border border-neutral-300 focus:outline-none focus:border-preply-green w-full"
@@ -184,7 +185,7 @@ function ErrorInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors[0].message}
         </p>
       ) : null}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? 'Validating...' : null}
     </>
   );
 }

@@ -4,10 +4,10 @@
 
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
 import { z } from 'zod';
 import { createJobForHR } from '@/app/_actions/create-job-for-hr';
+import { authClient } from '@/lib/auth-client';
 
 const jobSchema = z.object({
   position: z.string().min(1, 'Position is required'),
@@ -32,7 +32,7 @@ const jobSchema = z.object({
 });
 
 export default function Add() {
-  const userId = useUser().user?.id as string;
+  const userId = authClient.useSession().data?.user.id as string;
 
   const form = useForm({
     defaultValues: {

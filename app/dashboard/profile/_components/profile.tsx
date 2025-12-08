@@ -1,11 +1,12 @@
-import { currentUser } from '@clerk/nextjs/server';
+import { headers } from 'next/headers';
 import { getProfile } from '@/app/_actions/get-profile';
+import { auth } from '@/lib/auth';
 import { InformationForm } from './information-form';
 
 export async function Profile() {
-  // Get the id and first name of currently logged in user
-  const user = await currentUser();
-  const userId = user?.id as string;
+  // Get the id of currently logged in user (server-side)
+  const session = await auth.api.getSession({ headers: await headers() });
+  const userId = session?.user?.id as string;
 
   // Get the profile data of the user from Neon
   const profileData = await getProfile({ id: userId });

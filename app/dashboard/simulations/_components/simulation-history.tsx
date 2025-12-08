@@ -1,12 +1,12 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getSimulations } from '@/app/_actions/get-simulations';
+import { authClient } from '@/lib/auth-client';
 
 export function SimulationHistory() {
-  const userId = useUser().user?.id as string;
+  const userId = authClient.useSession().data?.user.id as string;
   const router = useRouter();
   const [simulations, setSimulations] = useState<
     Awaited<ReturnType<typeof getSimulations>>

@@ -1,10 +1,10 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import { authClient } from '@/lib/auth-client';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
 import file_black from '@/public/svgs/file-black.svg';
@@ -44,8 +44,8 @@ export function StudentSidebar() {
   const { expanded, toggle } = useContext(SidebarContext);
 
   // Get user's first name
-  const { user, isLoaded } = useUser();
-  const firstName = user?.firstName || 'User';
+  const { data, isPending } = authClient.useSession();
+  const firstName = data?.user.name.split(' ')[0] || 'User';
 
   return (
     <aside>
@@ -96,7 +96,7 @@ export function StudentSidebar() {
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">
             <div className="size-6 bg-talgach-green rounded-full flex items-center justify-center">
               <p className="text-sm font-medium text-white">
-                {isLoaded ? firstName.charAt(0).toUpperCase() : 'G'}
+                {isPending ? firstName.charAt(0).toUpperCase() : 'G'}
               </p>
             </div>
 
@@ -104,7 +104,7 @@ export function StudentSidebar() {
               className={`overflow-hidden transition-all duration-500 ${expanded ? 'block' : 'hidden'}`}
             >
               <p className="text-neutral-800 text-sm font-semibold">
-                {isLoaded ? firstName : 'Guest'}
+                {isPending ? 'Guest' : firstName}
               </p>
             </div>
           </div>

@@ -1,11 +1,15 @@
-import { currentUser } from '@clerk/nextjs/server';
+import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { auth } from '@/lib/auth';
 import { checkIfUserRoleAssigned } from '../_actions/check-if-user-role-assigned';
 import { Choice } from './_components/Choice';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Page() {
   // First, check if the user already has a role or not
-  const userId = await currentUser().then((user) => user?.id as string);
+  const session = await auth.api.getSession({ headers: await headers() });
+  const userId = session?.user?.id as string;
   const userHasRole = await checkIfUserRoleAssigned({ userId });
 
   if (userHasRole) {

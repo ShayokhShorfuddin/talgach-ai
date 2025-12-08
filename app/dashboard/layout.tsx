@@ -1,8 +1,8 @@
 'use client';
 
 import '@/app/globals.css';
-import { useUser } from '@clerk/nextjs';
 import { createContext, useEffect, useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 import { getRoleOfUser } from '../_actions/get-role-of-user';
 import { HRSidebar } from './_hr-dashboard/_components/sidebar';
 import { JobSeekerSidebar } from './_job-seeker-dashboard/_components/sidebar';
@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   const [expanded, setExpanded] = useState(true);
   const [role, setRole] = useState<string | null>(null);
-  const userId = useUser().user?.id as string;
+  const userId = authClient.useSession().data?.user.id as string;
 
   useEffect(() => {
     async function getUserRole() {

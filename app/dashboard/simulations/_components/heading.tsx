@@ -1,12 +1,12 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { createSimulation } from '@/app/_actions/create-simulation';
+import { authClient } from '@/lib/auth-client';
 import { generateUniqueId } from '@/utils/generate-unique-id';
 
 export function Heading() {
-  const userId = useUser().user?.id as string;
+  const userId = authClient.useSession().data?.user.id as string;
   const router = useRouter();
 
   async function handleBeginSession() {

@@ -1,58 +1,59 @@
 /** biome-ignore-all lint/correctness/noChildrenProp: <required for Tanstack form> */
-"use client";
+'use client';
 
-import { type AnyFieldApi, useForm } from "@tanstack/react-form";
-import Image from "next/image";
-import Link from "next/link";
-import { z } from "zod";
-import { authClient } from "@/lib/auth-client";
-import google from "@/public/google.svg";
-import logo from "@/public/logo.svg";
+import { type AnyFieldApi, useForm } from '@tanstack/react-form';
+import Image from 'next/image';
+import Link from 'next/link';
+import { z } from 'zod';
+import { authClient } from '@/lib/auth-client';
+
+import google from '@/public/svgs/google.svg';
+import logo from '@/public/svgs/logo-green.svg';
 
 const signUpSchema = z
   .object({
     first_name: z
       .string()
-      .max(40, { message: "Name cannot be longer than 40 characters." })
-      .nonempty({ message: "Please enter your name." }),
+      .max(40, { message: 'Name cannot be longer than 40 characters.' })
+      .nonempty({ message: 'Please enter your name.' }),
     last_name: z
       .string()
-      .max(40, { message: "Name cannot be longer than 40 characters." })
-      .nonempty({ message: "Please enter your name." }),
+      .max(40, { message: 'Name cannot be longer than 40 characters.' })
+      .nonempty({ message: 'Please enter your name.' }),
     email: z
-      .email({ message: "Please enter a valid email address." })
-      .max(40, { message: "Email cannot be longer than 40 characters." })
-      .nonempty({ message: "Please enter your email address." }),
+      .email({ message: 'Please enter a valid email address.' })
+      .max(40, { message: 'Email cannot be longer than 40 characters.' })
+      .nonempty({ message: 'Please enter your email address.' }),
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters long." })
-      .max(30, { message: "Password should not be longer than 30 characters." })
-      .nonempty({ message: "Please enter a password." })
+      .min(8, { message: 'Password must be at least 8 characters long.' })
+      .max(30, { message: 'Password should not be longer than 30 characters.' })
+      .nonempty({ message: 'Please enter a password.' })
       .regex(
         /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).+$/,
-        "Ensure at least one uppercase letter, one lowercase letter, and a number in your password.",
+        'Ensure at least one uppercase letter, one lowercase letter, and a number in your password.',
       ),
     confirmPassword: z
       .string()
-      .min(8, { message: "Please confirm your password." })
+      .min(8, { message: 'Please confirm your password.' })
       .max(30, {
-        message: "Confirmation password cannot be longer than 30 characters.",
+        message: 'Confirmation password cannot be longer than 30 characters.',
       })
-      .nonempty({ message: "Please confirm your password." }),
+      .nonempty({ message: 'Please confirm your password.' }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords don't match.",
-    path: ["confirmPassword"],
+    path: ['confirmPassword'],
   });
 
 export function SignUp() {
   const form = useForm({
     defaultValues: {
-      first_name: "",
-      last_name: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      confirmPassword: '',
     },
 
     validators: {
@@ -203,14 +204,14 @@ export function SignUp() {
                 disabled={!canSubmit || isValidating}
                 className="px-3 py-2 hover:cursor-pointer bg-neutral-800 rounded-lg text-sm text-neutral-200 font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:bg-neutral-900"
               >
-                {isValidating ? "Hashing..." : "Sign up"}
+                {isValidating ? 'Hashing...' : 'Sign up'}
               </button>
             )}
           </form.Subscribe>
         </form>
 
         <p className="text-sm text-nowrap mt-4">
-          Already have an account?{" "}
+          Already have an account?{' '}
           <Link href="/signin" className="underline">
             Sign in
           </Link>
@@ -230,7 +231,7 @@ function ErrorInfo({ field }: { field: AnyFieldApi }) {
           {field.state.meta.errors[0].message}
         </p>
       ) : null}
-      {field.state.meta.isValidating ? "Validating..." : null}
+      {field.state.meta.isValidating ? 'Validating...' : null}
     </>
   );
 }

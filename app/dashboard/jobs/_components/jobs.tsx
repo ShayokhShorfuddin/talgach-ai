@@ -1,14 +1,14 @@
 'use client';
 
-import { useUser } from '@clerk/nextjs';
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getListOfJobsForHR } from '@/app/_actions/get-list-of-jobs-for-hr';
 import { getRoleOfUser } from '@/app/_actions/get-role-of-user';
+import { authClient } from '@/lib/auth-client';
 import { SearchBar } from './search-bar';
 
 export default function Jobs() {
-  const userId = useUser().user?.id as string;
+  const userId = authClient.useSession().data?.user.id as string;
 
   // TODO: At the moment, /job page can be visited by both job seekers and HR, we need to first determine the user type and then fetch data accordingly
 
