@@ -1,16 +1,10 @@
 'use client';
 
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  SignUpButton,
-  UserButton,
-} from '@clerk/nextjs';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
+import { authClient } from '@/lib/auth-client';
 import chevron_down from '@/public/svgs/chevron-down.svg';
 import close from '@/public/svgs/close.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
@@ -46,34 +40,37 @@ function MobileNavbar(sidebarState: {
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) {
   const router = useRouter();
+  async function handleGetStarted() {
+    const { data: session } = await authClient.getSession();
+    if (!session) {
+      router.push('/signin');
+    } else {
+      router.push('/dashboard');
+    }
+  }
 
   return (
     <div className="relative flex sm:hidden justify-between items-start w-full mt-4 px-4 md:px-10">
       <Image src={logo_green} alt="Logo" className="h-14 w-min mr-5" />
 
       <div className="flex items-center gap-x-1">
-        <SignedOut>
-          <SignUpButton>
-            <button
-              type="button"
-              className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            >
-              Get Started
-            </button>
-          </SignUpButton>
-        </SignedOut>
+        <button
+          type="button"
+          onClick={handleGetStarted}
+          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        >
+          Get Started
+        </button>
 
-        <SignedIn>
-          <button
-            type="button"
-            className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            onClick={() => {
-              router.push('/dashboard');
-            }}
-          >
-            Go To Dashboard
-          </button>
-        </SignedIn>
+        <button
+          type="button"
+          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+          onClick={() => {
+            router.push('/dashboard');
+          }}
+        >
+          Go To Dashboard
+        </button>
 
         <button
           type="button"
@@ -97,6 +94,15 @@ function MobileNavbar(sidebarState: {
 
 function DesktopNavbar() {
   const router = useRouter();
+
+  async function handleGetStarted() {
+    const { data: session } = await authClient.getSession();
+    if (!session) {
+      router.push('/signin');
+    } else {
+      router.push('/dashboard');
+    }
+  }
 
   return (
     <div className="hidden sm:flex justify-between items-start w-full mt-4 px-4 md:px-10">
@@ -123,42 +129,32 @@ function DesktopNavbar() {
       </div>
 
       <div className="flex items-center gap-x-2">
-        <SignedOut>
-          <SignInButton>
-            <button
-              type="button"
-              className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
-            >
-              Sign In
-            </button>
-          </SignInButton>
-
-          <SignUpButton>
-            <button
-              type="button"
-              className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            >
-              Get Started
-            </button>
-          </SignUpButton>
-        </SignedOut>
+        <button
+          type="button"
+          className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+        >
+          Sign In
+        </button>
+        <button
+          type="button"
+          onClick={handleGetStarted}
+          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        >
+          Get Started
+        </button>
       </div>
 
-      <SignedIn>
-        <div className="flex items-center gap-x-2">
-          <button
-            type="button"
-            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            onClick={() => {
-              router.push('/dashboard');
-            }}
-          >
-            Go To Dashboard
-          </button>
-
-          <UserButton />
-        </div>
-      </SignedIn>
+      <div className="flex items-center gap-x-2">
+        <button
+          type="button"
+          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+          onClick={() => {
+            router.push('/dashboard');
+          }}
+        >
+          Go To Dashboard
+        </button>
+      </div>
     </div>
   );
 }
