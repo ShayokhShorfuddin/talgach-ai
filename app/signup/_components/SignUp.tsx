@@ -4,9 +4,12 @@
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
 import Image from 'next/image';
 import Link from 'next/link';
+import { redirect } from 'next/navigation';
+import { useState } from 'react';
 import { z } from 'zod';
 import { authClient } from '@/lib/auth-client';
 import logo from '@/public/svgs/logo-green.svg';
+import getAuthErrorMessage from '@/utils/auth-error-messages';
 
 const signUpSchema = z
   .object({
@@ -45,6 +48,7 @@ const signUpSchema = z
   });
 
 export function SignUp() {
+  const [authErrorMessage, setAuthErrorMessage] = useState<string>('');
   const form = useForm({
     defaultValues: {
       first_name: '',
@@ -59,14 +63,30 @@ export function SignUp() {
     },
 
     onSubmit: async ({ value }) => {
-      try {
-        await authClient.signUp.email({
-          name: `${value.first_name} ${value.last_name}`,
-          email: value.email,
-          password: value.password,
-        });
-      } catch (error) {}
-      // TODO: Catch errors from better-auth
+      const { error } = await authClient.signUp.email({
+        name: `${value.first_name} ${value.last_name}`,
+        email: value.email,
+        password: value.password,
+      });
+
+      // If there was an error
+      if (error) {
+        if (error?.code) {
+          setAuthErrorMessage(getAuthErrorMessage(error?.code));
+          return;
+        }
+
+        // An error occurred but there is no code? This could be due to change in better-auth library. For this situation, we will be returning a generic error message and call sentry
+
+        // TODO: call sentry
+        setAuthErrorMessage(
+          'We have encountered a strange error. Please try again later.',
+        );
+        return;
+      }
+
+      // If no error, redirect to dashboard
+      redirect('/dashboard');
     },
   });
   return (
@@ -188,6 +208,11 @@ export function SignUp() {
                 />
 
                 <ErrorInfo field={field} />
+
+                {/* Auth error */}
+                {authErrorMessage !== '' ? (
+                  <p className="text-red-500 text-sm">{authErrorMessage}</p>
+                ) : null}
               </>
             )}
           />

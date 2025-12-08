@@ -119,7 +119,13 @@ export default function SignIn() {
           <form.Field
             name="password"
             children={(field) => {
-              return <PasswordField field={field} />;
+              return (
+                <PasswordField
+                  field={field}
+                  authErrorMessage={authErrorMessage}
+                  setAuthErrorMessage={setAuthErrorMessage}
+                />
+              );
             }}
           />
 
@@ -148,7 +154,15 @@ export default function SignIn() {
   );
 }
 
-function PasswordField({ field }: { field: AnyFieldApi }) {
+function PasswordField({
+  field,
+  authErrorMessage,
+  setAuthErrorMessage,
+}: {
+  field: AnyFieldApi;
+  authErrorMessage: string;
+  setAuthErrorMessage: React.Dispatch<React.SetStateAction<string>>;
+}) {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
@@ -159,7 +173,13 @@ function PasswordField({ field }: { field: AnyFieldApi }) {
           placeholder="Enter your password"
           type={showPassword ? 'text' : 'password'}
           value={field.state.value}
-          onChange={(e) => field.handleChange(e.target.value)}
+          onChange={(e) => {
+            // Reset auth error message on change
+            setAuthErrorMessage('');
+
+            // Let Tanstack form handle the change
+            field.handleChange(e.target.value);
+          }}
           className="px-4 py-2 rounded-l-lg border border-neutral-300 focus:outline-none focus:border-preply-green w-full"
         />
 
@@ -183,6 +203,11 @@ function PasswordField({ field }: { field: AnyFieldApi }) {
       </div>
 
       <ErrorInfo field={field} />
+
+      {/* Auth error */}
+      {authErrorMessage !== '' ? (
+        <p className="text-red-500 text-sm">{authErrorMessage}</p>
+      ) : null}
     </>
   );
 }
