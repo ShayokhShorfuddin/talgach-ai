@@ -17,39 +17,48 @@ import { MobileMenuContent } from './mobile-menu/mobile-menu-content';
 import { MobileMenuTrigger } from './mobile-menu/mobile-menu-trigger';
 
 export default function Navbar() {
+  const router = useRouter();
   const dropdownRef = useRef<HTMLElement>(null);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  async function handleGetStarted() {
+    const { data: session } = await authClient.getSession();
+
+    if (!session) {
+      router.push('/signin');
+    } else {
+      router.push('/dashboard');
+    }
+  }
 
   return (
     <header>
       <nav>
-        <DesktopNavbar />
+        <DesktopNavbar handleGetStarted={handleGetStarted} />
         <MobileNavbar
           isSidebarOpen={isSidebarOpen}
           setIsSidebarOpen={setIsSidebarOpen}
           sidebarRef={dropdownRef}
+          handleGetStarted={handleGetStarted}
         />
       </nav>
     </header>
   );
 }
 
-function MobileNavbar(sidebarState: {
+function MobileNavbar({
+  sidebarRef,
+  isSidebarOpen,
+  setIsSidebarOpen,
+  handleGetStarted,
+}: {
   isSidebarOpen: boolean;
   sidebarRef: React.RefObject<HTMLElement | null> | null;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  handleGetStarted: () => Promise<void>;
 }) {
   const router = useRouter();
-  const session = authClient.useSession();
-
-  async function handleGetStarted() {
-    const { data: session } = await authClient.getSession();
-    if (!session) {
-      router.push('/signin');
-    } else {
-      router.push('/role');
-    }
-  }
+  const { data: session } = authClient.useSession();
 
   return (
     <div className="relative flex sm:hidden justify-between items-start w-full mt-4 px-4 md:px-10">
@@ -70,9 +79,6 @@ function MobileNavbar(sidebarState: {
           <button
             type="button"
             className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            onClick={() => {
-              router.push('/dashboard');
-            }}
           >
             Go To Dashboard
           </button>
@@ -82,7 +88,7 @@ function MobileNavbar(sidebarState: {
           type="button"
           className="cursor-pointer pl-2 py-2"
           onClick={() => {
-            sidebarState.setIsSidebarOpen(!sidebarState.isSidebarOpen);
+            setIsSidebarOpen(!isSidebarOpen);
           }}
         >
           <Image src={menu_icon} alt="Menu" className="size-4" />
@@ -90,26 +96,21 @@ function MobileNavbar(sidebarState: {
       </div>
 
       <MobileDropdown
-        isSidebarOpen={sidebarState.isSidebarOpen}
-        setIsSidebarOpen={sidebarState.setIsSidebarOpen}
-        sidebarRef={sidebarState.sidebarRef}
+        isSidebarOpen={isSidebarOpen}
+        setIsSidebarOpen={setIsSidebarOpen}
+        sidebarRef={sidebarRef}
       />
     </div>
   );
 }
 
-function DesktopNavbar() {
+function DesktopNavbar({
+  handleGetStarted,
+}: {
+  handleGetStarted: () => Promise<void>;
+}) {
   const router = useRouter();
-  const session = authClient.useSession();
-
-  async function handleGetStarted() {
-    const { data: session } = await authClient.getSession();
-    if (!session) {
-      router.push('/signin');
-    } else {
-      router.push('/dashboard');
-    }
-  }
+  const { data: session } = authClient.useSession();
 
   return (
     <div className="hidden sm:flex justify-between items-start w-full mt-4 px-4 md:px-10">
@@ -140,6 +141,7 @@ function DesktopNavbar() {
           <button
             type="button"
             className="border border-talgach-green py-1.5 px-3 rounded text-xs font-medium hover:cursor-pointer select-none"
+            onClick={() => router.push('/signin')}
           >
             Sign In
           </button>
@@ -154,17 +156,12 @@ function DesktopNavbar() {
       )}
 
       {session && (
-        <div className="flex items-center gap-x-2">
-          <button
-            type="button"
-            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-            onClick={() => {
-              router.push('/dashboard');
-            }}
-          >
-            Go To Dashboard
-          </button>
-        </div>
+        <button
+          type="button"
+          className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        >
+          Go To Dashboard
+        </button>
       )}
     </div>
   );
@@ -249,9 +246,9 @@ function AboutMenu() {
 }
 
 function MobileDropdown({
+  sidebarRef,
   isSidebarOpen,
   setIsSidebarOpen,
-  sidebarRef,
 }: {
   isSidebarOpen: boolean;
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
