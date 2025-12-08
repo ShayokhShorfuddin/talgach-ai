@@ -5,8 +5,10 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
+import briefcase from '@/public/svgs/briefcase-black.svg';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
+import head from '@/public/svgs/head-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
 import { SidebarContext } from '../../layout';
@@ -23,6 +25,18 @@ const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
     name: 'Home',
     href: '/dashboard',
     icon: <Image src={home} alt="Home" className="size-4" />,
+  },
+
+  {
+    name: 'Jobs',
+    href: '/dashboard/jobs',
+    icon: <Image src={briefcase} alt="Jobs" className="size-4" />,
+  },
+
+  {
+    name: 'Candidates',
+    href: '/dashboard/candidates',
+    icon: <Image src={head} alt="Candidates" className="size-4" />,
   },
 ];
 

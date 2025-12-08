@@ -1,13 +1,7 @@
-import { AIReadinessScore } from './cards/ai-readiness-score';
-import { ApplicationsSubmitted } from './cards/application-submitted';
-import { ApprovedApplications } from './cards/approved-applications';
-import { BookConsultationCard } from './cards/book-consultation-card';
-import { BrowseProgramsCard } from './cards/browse-programs-card';
-import { CheckEligibilityCard } from './cards/check-eligibility-card';
-import { EligibleProgramsCount } from './cards/eligible-programs-count';
-import { PendingApplications } from './cards/pending-applications';
-import { TotalProgramsCard } from './cards/total-programs-card';
-import { UploadDocumentsCard } from './cards/upload-documents-card';
+import { CreateJobAdCard } from './cards/create-job-ad-card';
+import { JobsCreatedCard } from './cards/jobs-created-card';
+import { TotalHiredCard } from './cards/total-hired-card';
+import { TotalInterviewedCard } from './cards/total-interviewed-card';
 import { Heading } from './heading';
 
 export function HRDashboard() {
@@ -16,20 +10,14 @@ export function HRDashboard() {
       <Heading />
 
       <div className="grid grid-cols-3 mt-10 gap-4">
-        <TotalProgramsCard />
-        <EligibleProgramsCount />
-        <ApplicationsSubmitted />
-        <PendingApplications />
-        <ApprovedApplications />
-        <AIReadinessScore />
+        <JobsCreatedCard />
+        <TotalInterviewedCard />
+        <TotalHiredCard />
       </div>
 
       <p className="mt-14 font-medium text-lg">Quick Actions</p>
       <div className="grid grid-cols-4 mt-2 gap-4">
-        <CheckEligibilityCard />
-        <BrowseProgramsCard />
-        <UploadDocumentsCard />
-        <BookConsultationCard />
+        <CreateJobAdCard />
       </div>
     </section>
   );
