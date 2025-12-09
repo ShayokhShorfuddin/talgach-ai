@@ -11,7 +11,7 @@ import chevron_right from '@/public/svgs/chevron-right.svg';
 import head from '@/public/svgs/head-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
-import { SidebarContext } from '../../layout';
+import { SidebarContext } from '../layout';
 
 type SidebarProps = {
   name: string;
@@ -23,19 +23,19 @@ type SidebarProps = {
 const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
   {
     name: 'Home',
-    href: '/dashboard',
+    href: '/dashboard/hr',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
 
   {
     name: 'Jobs',
-    href: '/dashboard/jobs',
+    href: '/dashboard/hr/jobs',
     icon: <Image src={briefcase} alt="Jobs" className="size-4" />,
   },
 
   {
     name: 'Candidates',
-    href: '/dashboard/candidates',
+    href: '/dashboard/hr/candidates',
     icon: <Image src={head} alt="Candidates" className="size-4" />,
   },
 ];
@@ -95,7 +95,7 @@ export function HRSidebar() {
         <button
           type="button"
           onClick={() => {
-            router.push('/dashboard/profile');
+            router.push('/dashboard/hr/profile');
           }}
         >
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">

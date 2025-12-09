@@ -90,7 +90,7 @@ export function StudentSidebar() {
         <button
           type="button"
           onClick={() => {
-            router.push('/dashboard/profile');
+            router.push('/dashboard/student/profile');
           }}
         >
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">
