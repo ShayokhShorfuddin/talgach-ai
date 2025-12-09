@@ -1,4 +1,21 @@
+'use client';
+
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
+
 export function CTA() {
+  const router = useRouter();
+
+  async function handleGetStarted() {
+    const { data: session } = await authClient.getSession();
+
+    if (!session) {
+      router.push('/signin');
+    } else {
+      router.push('/dashboard');
+    }
+  }
+
   return (
     <section className="mt-30 bg-talgach-green py-6 px-6 md:px-10">
       <div className="flex items-center justify-between gap-x-5">
@@ -15,6 +32,7 @@ export function CTA() {
 
           <button
             type="button"
+            onClick={handleGetStarted}
             className="bg-white py-1.5 px-3 rounded text-xs font-medium text-talgach-green hover:cursor-pointer select-none mt-3"
           >
             Get Started

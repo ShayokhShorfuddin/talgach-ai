@@ -1,37 +1,45 @@
 import { headers } from 'next/headers';
+import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
 import { getRoleOfUser } from '../_actions/get-role-of-user';
-import { HRDashboard } from './_hr-dashboard/_components/dashboard';
-import { JobSeekerDashboard } from './_job-seeker-dashboard/_components/dashboard';
-import { OrganizationDashboard } from './_organization-dashboard/_components/dashboard';
-import { StudentDashboard } from './_student-dashboard/_components/dashboard';
 
 export default async function Page() {
-  // Since we have 4 types of users (student, job seekers, hr and organizations), we will first need to see the role of the logged in user and then render the appropriate dashboard.
-
+  // First, check if user is authenticated or not
   const session = await auth.api.getSession({ headers: await headers() });
-  const userId = session?.user?.id as string;
 
-  const userRole: 'student' | 'job-seeker' | 'human-resource' | 'organization' =
-    await getRoleOfUser({ id: userId });
-
-  console.log(userRole);
-
-  if (userRole === 'job-seeker') {
-    return <JobSeekerDashboard />;
+  if (!session) {
+    redirect('/signin');
   }
+
+  // Since user is authenticated, we can get their role now.
+  const userId = session?.user.id as string;
+  const userRole = await getRoleOfUser({ id: userId });
+
+  // If its null or undefined, its a new user, so we can redirect them to role selection page.
+
+  // TODO: Check if /role is okay or not
+  if (!userRole) {
+    redirect('/role');
+  }
+
+  // If userRole is defined, we can render the appropriate dashboard.
+
+  // TODO: Uncomment these when the new routes are ready.
+  // if (userRole === 'job-seeker') {
+  //   return <JobSeekerDashboard />;
+  // }
 
   if (userRole === 'student') {
-    return <StudentDashboard />;
+    return redirect('/dashboard/student');
   }
 
-  if (userRole === 'human-resource') {
-    return <HRDashboard />;
-  }
+  // if (userRole === 'human-resource') {
+  //   return <HRDashboard />;
+  // }
 
-  if (userRole === 'organization') {
-    return <OrganizationDashboard />;
-  }
+  // if (userRole === 'organization') {
+  //   return <OrganizationDashboard />;
+  // }
 
-  return <p>Failed to get user role</p>;
+  return <p className="text-red-500">Failed to get user role</p>;
 }

@@ -10,8 +10,8 @@ import building from '@/public/svgs/building-black.svg';
 import head from '@/public/svgs/head-black.svg';
 
 export function Choice({ userId }: { userId: string }) {
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
   const router = useRouter();
+  const [selectedRole, setSelectedRole] = useState<string | null>(null);
 
   async function handleRoleSelect(role: string) {
     setSelectedRole(role);

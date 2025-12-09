@@ -57,6 +57,7 @@ function MobileNavbar({
   setIsSidebarOpen: React.Dispatch<React.SetStateAction<boolean>>;
   handleGetStarted: () => Promise<void>;
 }) {
+  const router = useRouter();
   const { data: session } = authClient.useSession();
 
   return (
@@ -78,6 +79,7 @@ function MobileNavbar({
           <button
             type="button"
             className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+            onClick={() => router.push('/dashboard')}
           >
             Go To Dashboard
           </button>
@@ -158,6 +160,7 @@ function DesktopNavbar({
         <button
           type="button"
           className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+          onClick={() => router.push('/dashboard')}
         >
           Go To Dashboard
         </button>

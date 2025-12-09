@@ -8,14 +8,10 @@ export async function getRoleOfUser({
   id,
 }: {
   id: string;
-}): Promise<'student' | 'job-seeker' | 'human-resource' | 'organization'> {
+}): Promise<string | null | undefined> {
   const user = await db.query.profile.findFirst({
     where: eq(profile.id, id),
   });
 
-  return user?.role as
-    | 'student'
-    | 'job-seeker'
-    | 'human-resource'
-    | 'organization';
+  return user?.role;
 }

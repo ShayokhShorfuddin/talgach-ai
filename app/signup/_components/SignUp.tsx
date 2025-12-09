@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { redirect } from 'next/navigation';
 import { useState } from 'react';
 import { z } from 'zod';
+import { createProfile } from '@/app/_actions/create-profile';
 import { authClient } from '@/lib/auth-client';
 import logo from '@/public/svgs/logo-green.svg';
 import getAuthErrorMessage from '@/utils/auth-error-messages';
@@ -63,7 +64,7 @@ export function SignUp() {
     },
 
     onSubmit: async ({ value }) => {
-      const { error } = await authClient.signUp.email({
+      const { data, error } = await authClient.signUp.email({
         name: `${value.first_name} ${value.last_name}`,
         email: value.email,
         password: value.password,
@@ -78,12 +79,18 @@ export function SignUp() {
 
         // An error occurred but there is no code? This could be due to change in better-auth library. For this situation, we will be returning a generic error message and call sentry
 
-        // TODO: call sentry
         setAuthErrorMessage(
           'We have encountered a strange error. Please try again later.',
         );
         return;
       }
+
+      // User has been signed up and now we create their default profile, which they later edit from their profile form.
+      await createProfile({
+        id: data.user.id,
+        firstName: value.first_name,
+        lastName: value.last_name,
+      });
 
       // If no error, redirect to dashboard
       redirect('/dashboard');

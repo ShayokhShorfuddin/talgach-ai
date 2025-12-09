@@ -1,5 +1,9 @@
+'use client';
+
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import { authClient } from '@/lib/auth-client';
 import aws from '@/public/images/aws.jpeg';
 import binance from '@/public/images/binance.jpeg';
 import coinbase from '@/public/images/coinbase.png';
@@ -130,6 +134,18 @@ const tracked_jobs: {
 ];
 
 export function JobTracker() {
+  const router = useRouter();
+
+  async function handleGetStarted() {
+    const { data: session } = await authClient.getSession();
+
+    if (!session) {
+      router.push('/signin');
+    } else {
+      router.push('/dashboard');
+    }
+  }
+
   return (
     <section className="flex flex-col lg:flex-row lg:items-center justify-between mt-30 gap-12 px-6 md:px-10">
       <div className="flex flex-col">
@@ -145,9 +161,10 @@ export function JobTracker() {
 
         <button
           type="button"
+          onClick={handleGetStarted}
           className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none w-fit mt-6"
         >
-          <span>Get started</span>
+          Get started
           <Image
             src={arrow_right_white}
             alt="Arrow right icon"
