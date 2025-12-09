@@ -2,7 +2,7 @@ import { boolean, jsonb, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const program = pgTable('program', {
   id: text('id').primaryKey(),
-  userId: text('user_id').notNull(),
+  studentId: text('student_id').notNull(),
   universityName: text('university_name').notNull(),
   programLink: text('program_link'),
   country: text('country').notNull(),

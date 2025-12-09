@@ -2,7 +2,7 @@ import { integer, jsonb, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const hrJob = pgTable('hr_job', {
   id: text('id').primaryKey(),
-  userId: text('user_id').notNull(),
+  hrId: text('hr_id').notNull(),
   position: text('position').notNull(),
   deadline: timestamp('deadline').notNull(),
   ageLimit: integer('age_limit').notNull(),

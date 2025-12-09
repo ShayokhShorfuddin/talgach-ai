@@ -5,6 +5,7 @@
 'use client';
 
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { createJobForHR } from '@/app/_actions/create-job-for-hr';
 import { authClient } from '@/lib/auth-client';
@@ -32,7 +33,7 @@ const jobSchema = z.object({
 });
 
 export default function Add() {
-  const userId = authClient.useSession().data?.user.id as string;
+  const hrId = authClient.useSession().data?.user.id as string;
 
   const form = useForm({
     defaultValues: {
@@ -51,8 +52,8 @@ export default function Add() {
       onChange: jobSchema,
     },
     onSubmit: async ({ value }) => {
-      console.log('Job data:', value);
-      await createJobForHR({ userId, jobData: value });
+      await createJobForHR({ hrId, jobData: value });
+      redirect('/dashboard/hr/jobs');
     },
   });
 

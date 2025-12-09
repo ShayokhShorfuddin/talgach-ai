@@ -33,9 +33,9 @@ export default async function Page() {
     return redirect('/dashboard/student');
   }
 
-  // if (userRole === 'human-resource') {
-  //   return <HRDashboard />;
-  // }
+  if (userRole === 'human-resource') {
+    return redirect('/dashboard/hr');
+  }
 
   // if (userRole === 'organization') {
   //   return <OrganizationDashboard />;

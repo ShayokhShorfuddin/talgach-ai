@@ -20,10 +20,10 @@ type Type_CreateJobForHRData = {
 };
 
 export async function createJobForHR({
-  userId,
+  hrId,
   jobData,
 }: {
-  userId: string;
+  hrId: string;
   jobData: Type_CreateJobForHRData;
 }) {
   const id = generateUniqueId();
@@ -31,7 +31,7 @@ export async function createJobForHR({
 
   await db.insert(hrJob).values({
     id,
-    userId,
+    hrId,
     position: jobData.position,
     deadline: new Date(jobData.deadline),
     ageLimit: jobData.ageLimit,

@@ -3,24 +3,12 @@
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { getListOfJobsForHR } from '@/app/_actions/get-list-of-jobs-for-hr';
-import { getRoleOfUser } from '@/app/_actions/get-role-of-user';
 import { authClient } from '@/lib/auth-client';
 import { SearchBar } from './search-bar';
 
 export default function Jobs() {
-  const userId = authClient.useSession().data?.user.id as string;
+  const hrId = authClient.useSession().data?.user.id as string;
 
-  // TODO: At the moment, /job page can be visited by both job seekers and HR, we need to first determine the user type and then fetch data accordingly
-
-  // TODO: We to restructure our routes to be like this -
-  // /dashboard/job-seeker/jobs
-  // /dashboard/hr/jobs
-
-  // ⚠️ NOT LIKE THIS ANYMORE -
-  // /dashboard/jobs (for both job seekers and HRs)
-
-  // TODO: Temporary state to identify user type
-  const [isHR, setIsHR] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
   const [jobsForHRList, setJobsForHRList] = useState<
     {
@@ -37,41 +25,27 @@ export default function Jobs() {
 
   useEffect(() => {
     async function getJobsForHRList() {
-      const userRole = await getRoleOfUser({ id: userId });
-
-      if (userRole !== 'human-resource') {
-        setIsHR(false);
-        return;
-      }
-
-      const jobsForHRList = await getListOfJobsForHR();
+      const jobsForHRList = await getListOfJobsForHR({
+        hrId,
+      });
       setJobsForHRList(jobsForHRList);
     }
     getJobsForHRList();
-  }, [userId]);
+  }, [hrId]);
 
   return (
     <section className="px-5">
-      {isHR ? (
-        <div className="flex flex-col items-center justify-center">
-          <p className="mt-10 font-medium text-xl">Search Jobs</p>
-          <p className="text-sm text-neutral-500">
-            Find jobs by their position.
-          </p>
-          <SearchBar
-            searchQuery={searchQuery}
-            setSearchQuery={setSearchQuery}
-          />
+      <div className="flex flex-col items-center justify-center">
+        <p className="mt-10 font-medium text-xl">Search Jobs</p>
+        <p className="text-sm text-neutral-500">Find jobs by their position.</p>
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
-          {jobsForHRList.length === 0 ? (
-            <NoJobs />
-          ) : (
-            <JobsList jobs={jobsForHRList} searchQuery={searchQuery} />
-          )}
-        </div>
-      ) : (
-        <p className="text-center mt-20">🚧 Work in progress.</p>
-      )}
+        {jobsForHRList.length === 0 ? (
+          <NoJobs />
+        ) : (
+          <JobsList jobs={jobsForHRList} searchQuery={searchQuery} />
+        )}
+      </div>
     </section>
   );
 }
@@ -86,7 +60,7 @@ function NoJobs() {
       <button
         type="button"
         onClick={() => {
-          router.push('/dashboard/jobs/add');
+          router.push('/dashboard/hr/jobs/add');
         }}
         className="bg-talgach-green py-1 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-4"
       >
