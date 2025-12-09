@@ -7,10 +7,9 @@ import { useContext } from 'react';
 import { authClient } from '@/lib/auth-client';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
-import file_black from '@/public/svgs/file-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
-import { SidebarContext } from '../../layout';
+import { SidebarContext } from '../layout';
 
 type SidebarProps = {
   name: string;
@@ -24,11 +23,6 @@ const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
     name: 'Home',
     href: '/dashboard',
     icon: <Image src={home} alt="Home" className="size-4" />,
-  },
-  {
-    name: 'Programs',
-    href: '/dashboard/programs',
-    icon: <Image src={file_black} alt="Programs" className="size-4" />,
   },
 ];
 
@@ -84,7 +78,7 @@ export function OrganizationSidebar() {
         <button
           type="button"
           onClick={() => {
-            router.push('/dashboard/profile');
+            router.push('/dashboard/organization/profile');
           }}
         >
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">

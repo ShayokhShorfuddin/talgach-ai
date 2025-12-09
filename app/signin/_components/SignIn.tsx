@@ -67,7 +67,7 @@ export default function SignIn() {
 
   return (
     <section className="flex flex-col items-center justify-center h-svh font-sans">
-      <div className="flex flex-col items-center max-w-[15rem]">
+      <div className="flex flex-col items-center max-w-60">
         <Image src={logo} alt="icon" className="h-20 xs:h-25 md:h-30" />
 
         <p className="text-sm sm:text-base text-neutral-800 mt-3">

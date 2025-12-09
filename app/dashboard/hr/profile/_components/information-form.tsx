@@ -4,6 +4,7 @@
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
 import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import { deleteProfile } from '@/app/_actions/delete-profile';
 import type { getProfile } from '@/app/_actions/get-profile';
 import { updateProfile } from '@/app/_actions/update-profile';
 import { authClient } from '@/lib/auth-client';
@@ -218,8 +219,11 @@ export function InformationForm({
         {/* Delete user button */}
         <button
           type="button"
-          onClick={() => {
+          onClick={async () => {
             authClient.deleteUser();
+            await deleteProfile({
+              id: userId,
+            });
             redirect('/');
           }}
           className="bg-red-600 py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:cursor-not-allowed disabled:bg-neutral-900"

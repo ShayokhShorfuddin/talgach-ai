@@ -16,8 +16,6 @@ export default async function Page() {
   const userRole = await getRoleOfUser({ id: userId });
 
   // If its null or undefined, its a new user, so we can redirect them to role selection page.
-
-  // TODO: Check if /role is okay or not
   if (!userRole) {
     redirect('/role');
   }
@@ -36,9 +34,9 @@ export default async function Page() {
     return redirect('/dashboard/hr');
   }
 
-  // if (userRole === 'organization') {
-  //   return <OrganizationDashboard />;
-  // }
+  if (userRole === 'organization') {
+    return redirect('/dashboard/organization');
+  }
 
   return <p className="text-red-500">Failed to get user role</p>;
 }

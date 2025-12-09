@@ -2,9 +2,12 @@
 'use client';
 
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
+import { deleteProfile } from '@/app/_actions/delete-profile';
 import type { getProfile } from '@/app/_actions/get-profile';
 import { updateProfile } from '@/app/_actions/update-profile';
+import { authClient } from '@/lib/auth-client';
 
 const signUpSchema = z.object({
   gender: z.string().nonempty({ message: 'Please select your gender.' }),
@@ -45,7 +48,6 @@ export function InformationForm({
     },
 
     onSubmit: async ({ value }) => {
-      // TODO: We might fail to save the data. Handle it later
       await updateProfile({
         id: userId,
         updatedData: value,
@@ -198,19 +200,36 @@ export function InformationForm({
         )}
       />
 
-      <form.Subscribe
-        selector={(state) => [state.canSubmit, state.isSubmitting]}
-      >
-        {([canSubmit, isSubmitting]) => (
-          <button
-            type="submit"
-            disabled={!canSubmit || isSubmitting}
-            className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:cursor-not-allowed disabled:bg-neutral-900"
-          >
-            {isSubmitting ? 'Saving...' : 'Save Information'}
-          </button>
-        )}
-      </form.Subscribe>
+      <div className="flex items-center gap-x-1.5">
+        <form.Subscribe
+          selector={(state) => [state.canSubmit, state.isSubmitting]}
+        >
+          {([canSubmit, isSubmitting]) => (
+            <button
+              type="submit"
+              disabled={!canSubmit || isSubmitting}
+              className="bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:cursor-not-allowed disabled:bg-neutral-900"
+            >
+              {isSubmitting ? 'Saving...' : 'Save Information'}
+            </button>
+          )}
+        </form.Subscribe>
+
+        {/* Delete user button */}
+        <button
+          type="button"
+          onClick={async () => {
+            authClient.deleteUser();
+            await deleteProfile({
+              id: userId,
+            });
+            redirect('/');
+          }}
+          className="bg-red-600 py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:cursor-not-allowed disabled:bg-neutral-900"
+        >
+          Delete Account
+        </button>
+      </div>
     </form>
   );
 }

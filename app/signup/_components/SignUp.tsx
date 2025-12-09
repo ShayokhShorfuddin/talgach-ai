@@ -225,15 +225,15 @@ export function SignUp() {
           />
 
           <form.Subscribe
-            selector={(state) => [state.canSubmit, state.isValidating]}
+            selector={(state) => [state.canSubmit, state.isSubmitting]}
           >
-            {([canSubmit, isValidating]) => (
+            {([canSubmit, isSubmitting]) => (
               <button
                 type="submit"
-                disabled={!canSubmit || isValidating}
+                disabled={!canSubmit || isSubmitting}
                 className="px-3 py-2 hover:cursor-pointer bg-neutral-800 rounded-lg text-sm text-neutral-200 font-medium transition-colors duration-150 disabled:cursor-not-allowed disabled:bg-neutral-900"
               >
-                {isValidating ? 'Hashing...' : 'Sign up'}
+                {isSubmitting ? 'Hashing...' : 'Sign up'}
               </button>
             )}
           </form.Subscribe>
