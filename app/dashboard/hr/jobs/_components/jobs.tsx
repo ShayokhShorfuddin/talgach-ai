@@ -116,7 +116,7 @@ function JobCard({
       key={id}
       className="border border-neutral-200 rounded p-4 hover:border-talgach-green hover:bg-green-50 transition duration-300 cursor-pointer text-left"
       onClick={() => {
-        router.push(`/dashboard/jobs/${id}`);
+        router.push(`/dashboard/hr/jobs/${id}`);
       }}
     >
       <p className="font-medium">{position}</p>
@@ -132,11 +132,3 @@ function JobCard({
     </button>
   );
 }
-
-// function Tag({ text }: { text: string }) {
-//   return (
-//     <div className="py-0.5 px-2 rounded-full border border-neutral-200">
-//       <p className="text-[10px]">{text}</p>
-//     </div>
-//   );
-// }
