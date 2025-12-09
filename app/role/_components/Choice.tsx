@@ -1,6 +1,6 @@
 'use client';
 
-import Image from 'next/image';
+import Image, { type StaticImageData } from 'next/image';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setUserRole } from '@/app/_actions/set-user-role';
@@ -11,9 +11,13 @@ import head from '@/public/svgs/head-black.svg';
 
 export function Choice({ userId }: { userId: string }) {
   const router = useRouter();
-  const [selectedRole, setSelectedRole] = useState<string | null>(null);
+  const [selectedRole, setSelectedRole] = useState<
+    'student' | 'job-seeker' | 'human-resource' | 'organization' | null
+  >(null);
 
-  async function handleRoleSelect(role: string) {
+  async function handleRoleSelect(
+    role: 'student' | 'job-seeker' | 'human-resource' | 'organization',
+  ) {
     setSelectedRole(role);
 
     try {
@@ -24,7 +28,11 @@ export function Choice({ userId }: { userId: string }) {
     }
   }
 
-  const roles = [
+  const roles: {
+    id: 'student' | 'job-seeker' | 'human-resource' | 'organization';
+    label: string;
+    icon: StaticImageData;
+  }[] = [
     { id: 'student', label: 'Student', icon: book },
     { id: 'job-seeker', label: 'Job Seeker', icon: briefcase },
     { id: 'human-resource', label: 'Human Resource (HR)', icon: head },

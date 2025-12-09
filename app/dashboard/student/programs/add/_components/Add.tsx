@@ -70,7 +70,7 @@ const programSchema = z.object({
 });
 
 export default function Add() {
-  const userId = authClient.useSession().data?.user.id as string;
+  const studentId = authClient.useSession().data?.user.id as string;
 
   const form = useForm({
     defaultValues: {
@@ -116,7 +116,7 @@ export default function Add() {
       onChange: programSchema,
     },
     onSubmit: async ({ value }) => {
-      await createProgram({ userId, programData: value });
+      await createProgram({ studentId, programData: value });
       redirect('/dashboard/student/programs');
     },
   });

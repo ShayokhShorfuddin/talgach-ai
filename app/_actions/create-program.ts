@@ -49,10 +49,10 @@ type Type_CreateProgramData = {
 };
 
 export async function createProgram({
-  userId,
+  studentId,
   programData,
 }: {
-  userId: string;
+  studentId: string;
   programData: Type_CreateProgramData;
 }) {
   const id = generateUniqueId();
@@ -60,7 +60,7 @@ export async function createProgram({
 
   await db.insert(program).values({
     id,
-    userId,
+    studentId,
     universityName: programData.universityName,
     programLink: programData.programLink || '',
     country: programData.country,
