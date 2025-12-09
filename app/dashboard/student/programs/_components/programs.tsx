@@ -6,7 +6,6 @@ import { getListOfPrograms } from '@/app/_actions/get-list-of-programs';
 import { SearchBar } from './search-bar';
 
 export default function Programs() {
-  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
   const [programsList, setProgramsList] = useState<
     {
@@ -56,7 +55,7 @@ function NoPrograms() {
       <button
         type="button"
         onClick={() => {
-          router.push('/dashboard/programs/add');
+          router.push('/dashboard/student/programs/add');
         }}
         className="bg-talgach-green py-1 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-4"
       >
@@ -121,7 +120,7 @@ function ProgramCard({
       key={id}
       className="border border-neutral-200 rounded p-4 hover:border-talgach-green hover:bg-green-50 transition duration-300 cursor-pointer text-left"
       onClick={() => {
-        router.push(`/dashboard/programs/${id}`);
+        router.push(`/dashboard/student/programs/${id}`);
       }}
     >
       <p className="font-medium">{programName}</p>

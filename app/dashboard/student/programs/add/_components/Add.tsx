@@ -5,6 +5,7 @@
 'use client';
 
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
+import { redirect } from 'next/navigation';
 import { z } from 'zod';
 import { createProgram } from '@/app/_actions/create-program';
 import { authClient } from '@/lib/auth-client';
@@ -116,6 +117,7 @@ export default function Add() {
     },
     onSubmit: async ({ value }) => {
       await createProgram({ userId, programData: value });
+      redirect('/dashboard/student/programs');
     },
   });
 

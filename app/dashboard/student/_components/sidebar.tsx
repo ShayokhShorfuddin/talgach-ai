@@ -23,17 +23,17 @@ type SidebarProps = {
 const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
   {
     name: 'Home',
-    href: '/dashboard',
+    href: '/dashboard/student',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
   {
     name: 'Programs',
-    href: '/dashboard/programs',
+    href: '/dashboard/student/programs',
     icon: <Image src={file_black} alt="Programs" className="size-4" />,
   },
   {
     name: 'Writing Assistant',
-    href: '/dashboard/writing-assistant',
+    href: '/dashboard/student/writing-assistant',
     icon: <Image src={pen} alt="Writing Assistant" className="size-4" />,
   },
 ];

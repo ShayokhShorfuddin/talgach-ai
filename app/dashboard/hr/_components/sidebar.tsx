@@ -5,12 +5,12 @@ import Link from 'next/link';
 import { usePathname, useRouter } from 'next/navigation';
 import { useContext } from 'react';
 import { authClient } from '@/lib/auth-client';
+import briefcase from '@/public/svgs/briefcase-black.svg';
 import chevron_left from '@/public/svgs/chevron-left.svg';
 import chevron_right from '@/public/svgs/chevron-right.svg';
-import file_black from '@/public/svgs/file-black.svg';
+import head from '@/public/svgs/head-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
-import pen from '@/public/svgs/pen.svg';
 import { SidebarContext } from '../../layout';
 
 type SidebarProps = {
@@ -26,26 +26,31 @@ const navLinks: Array<{ name: string; href: string; icon: React.ReactNode }> = [
     href: '/dashboard',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
+
   {
-    name: 'Programs',
-    href: '/dashboard/programs',
-    icon: <Image src={file_black} alt="Programs" className="size-4" />,
+    name: 'Jobs',
+    href: '/dashboard/jobs',
+    icon: <Image src={briefcase} alt="Jobs" className="size-4" />,
   },
+
   {
-    name: 'Writing Assistant',
-    href: '/dashboard/writing-assistant',
-    icon: <Image src={pen} alt="Writing Assistant" className="size-4" />,
+    name: 'Candidates',
+    href: '/dashboard/candidates',
+    icon: <Image src={head} alt="Candidates" className="size-4" />,
   },
 ];
 
-export function StudentSidebar() {
+export function HRSidebar() {
   const pathName = usePathname();
   const router = useRouter();
   const { expanded, toggle } = useContext(SidebarContext);
 
   // Get user's first name
-  const { data, isPending } = authClient.useSession();
-  const firstName = data?.user.name.split(' ')[0] || 'User';
+  const {
+    data: session,
+    isPending, //loading state
+  } = authClient.useSession();
+  const firstName = session?.user.name.split(' ')[0] || 'Guest';
 
   return (
     <aside>
@@ -96,7 +101,7 @@ export function StudentSidebar() {
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">
             <div className="size-6 bg-talgach-green rounded-full flex items-center justify-center">
               <p className="text-sm font-medium text-white">
-                {isPending ? firstName.charAt(0).toUpperCase() : 'G'}
+                {isPending ? 'G' : firstName.charAt(0).toUpperCase()}
               </p>
             </div>
 

@@ -1,9 +1,9 @@
 'use client';
 
-export function ApplicationsSubmitted() {
+export function TotalShortlistedCandidatesCard() {
   return (
     <div className="border border-neutral-200 p-4 rounded hover:border-talgach-green hover:bg-green-50 transition duration-300">
-      <p className="text-sm">Applications Submitted</p>
+      <p className="text-sm">Total Shortlisted Candidates</p>
       <p className="mt-1 text-3xl font-medium text-talgach-green">8</p>
 
       <div className="flex items-end justify-between mt-1">
@@ -13,7 +13,7 @@ export function ApplicationsSubmitted() {
           type="button"
           className="bg-talgach-green py-0.5 px-2 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
         >
-          Update Profile
+          Refresh
         </button>
       </div>
     </div>

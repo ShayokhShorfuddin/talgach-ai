@@ -9,7 +9,7 @@ export async function setUserRole({
   role,
 }: {
   userId: string;
-  role: string;
+  role: 'student' | 'job-seeker' | 'human-resource' | 'organization' | null;
 }) {
   await db.update(profile).set({ role }).where(eq(profile.id, userId));
 }
