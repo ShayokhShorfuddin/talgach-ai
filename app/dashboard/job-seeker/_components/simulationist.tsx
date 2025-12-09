@@ -7,19 +7,19 @@ import { generateUniqueId } from '@/utils/generate-unique-id';
 
 export function Simulationist() {
   const router = useRouter();
-  const userId = authClient.useSession().data?.user.id as string;
+  const jobSeekerId = authClient.useSession().data?.user.id as string;
 
   async function handleBeginSession() {
     const uniqueId = generateUniqueId();
 
     await createSimulation({
       id: uniqueId,
-      userId,
+      jobSeekerId,
       thought: '',
       isApproved: false,
     });
 
-    router.push(`/dashboard/simulations/${uniqueId}`);
+    router.push(`/dashboard/job-seeker/simulations/${uniqueId}`);
   }
 
   return (

@@ -1,10 +1,11 @@
 'use server';
 
 import { db } from '@/lib/db';
-import { hrJob } from '@/schemas/hr-job-schema';
+import { jobSeekerJob } from '@/schemas/schema';
 import { generateUniqueId } from '@/utils/generate-unique-id';
 
-type Type_CreateJobForHRData = {
+type Type_CreateJobForJobSeekerData = {
+  companyName: string;
   position: string;
   deadline: string;
   ageLimit: number;
@@ -17,19 +18,20 @@ type Type_CreateJobForHRData = {
   salaryAndBenefits: string;
 };
 
-export async function createJobForHR({
-  hrId,
+export async function createJobForJobSeeker({
+  jobSeekerId,
   jobData,
 }: {
-  hrId: string;
-  jobData: Type_CreateJobForHRData;
+  jobSeekerId: string;
+  jobData: Type_CreateJobForJobSeekerData;
 }) {
   const id = generateUniqueId();
   const time = new Date();
 
-  await db.insert(hrJob).values({
+  await db.insert(jobSeekerJob).values({
     id,
-    hrId,
+    jobSeekerId,
+    companyName: jobData.companyName,
     position: jobData.position,
     deadline: new Date(jobData.deadline),
     ageLimit: jobData.ageLimit,

@@ -6,7 +6,7 @@ import { getSimulations } from '@/app/_actions/get-simulations';
 import { authClient } from '@/lib/auth-client';
 
 export function SimulationHistory() {
-  const userId = authClient.useSession().data?.user.id as string;
+  const jobSeekerId = authClient.useSession().data?.user.id as string;
   const router = useRouter();
   const [simulations, setSimulations] = useState<
     Awaited<ReturnType<typeof getSimulations>>
@@ -14,12 +14,12 @@ export function SimulationHistory() {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    if (!userId) return;
+    if (!jobSeekerId) return;
 
     const fetchSimulations = async () => {
       try {
         setIsLoading(true);
-        const data = await getSimulations({ userId });
+        const data = await getSimulations({ jobSeekerId });
         setSimulations(data);
       } catch (error) {
         console.error('Failed to fetch simulations:', error);
@@ -29,7 +29,7 @@ export function SimulationHistory() {
     };
 
     fetchSimulations();
-  }, [userId]);
+  }, [jobSeekerId]);
 
   if (isLoading) {
     return <p className="mt-20 text-center">Loading…</p>;
@@ -66,7 +66,9 @@ export function SimulationHistory() {
               type="button"
               className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
               onClick={() => {
-                router.push(`/dashboard/simulations/${simulation.id}`);
+                router.push(
+                  `/dashboard/job-seeker/simulations/${simulation.id}`,
+                );
               }}
             >
               Review

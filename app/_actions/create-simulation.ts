@@ -5,12 +5,12 @@ import { simulation } from '@/schemas/simulation-schema';
 
 export async function createSimulation({
   id,
-  userId,
+  jobSeekerId,
   thought,
   isApproved,
 }: {
   id: string;
-  userId: string;
+  jobSeekerId: string;
   thought: string;
   isApproved: boolean;
 }) {
@@ -18,7 +18,7 @@ export async function createSimulation({
 
   await db.insert(simulation).values({
     id: id,
-    userId: userId,
+    jobSeekerId,
     thought: thought,
     isApproved: isApproved,
     createdAt: time,

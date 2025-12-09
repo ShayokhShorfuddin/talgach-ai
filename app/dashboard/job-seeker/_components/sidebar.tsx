@@ -12,7 +12,7 @@ import file_black from '@/public/svgs/file-black.svg';
 import profile from '@/public/svgs/head-black.svg';
 import home from '@/public/svgs/home.svg';
 import logo_green from '@/public/svgs/logo-green.svg';
-import { SidebarContext } from '../../layout';
+import { SidebarContext } from '../layout';
 
 type SidebarProps = {
   name: string;
@@ -30,25 +30,25 @@ const navLinks: Array<{
   {
     id: 1,
     name: 'Home',
-    href: '/dashboard',
+    href: '/dashboard/job-seeker',
     icon: <Image src={home} alt="Home" className="size-4" />,
   },
   {
     id: 2,
     name: 'Jobs',
-    href: '/dashboard/jobs',
+    href: '/dashboard/job-seeker/jobs',
     icon: <Image src={briefcase} alt="Jobs" className="size-4" />,
   },
   {
     id: 3,
     name: 'Simulations',
-    href: '/dashboard/simulations',
+    href: '/dashboard/job-seeker/simulations',
     icon: <Image src={profile} alt="Simulations" className="size-4" />,
   },
   {
     id: 4,
     name: 'CV Scanner',
-    href: '/dashboard/cv-scanner',
+    href: '/dashboard/job-seeker/cv-scanner',
     icon: <Image src={file_black} alt="CV Scanner" className="size-4" />,
   },
 ];
@@ -105,7 +105,7 @@ export function JobSeekerSidebar() {
         <button
           type="button"
           onClick={() => {
-            router.push('/dashboard/profile');
+            router.push('/dashboard/job-seeker/profile');
           }}
         >
           <div className="flex items-center gap-x-2 mt-auto hover:cursor-pointer">

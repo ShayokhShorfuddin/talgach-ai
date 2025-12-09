@@ -22,12 +22,11 @@ export default async function Page() {
     redirect('/role');
   }
 
-  // If userRole is defined, we can render the appropriate dashboard.
+  // If userRole is defined, we can redirect them to their respective dashboards
 
-  // TODO: Uncomment these when the new routes are ready.
-  // if (userRole === 'job-seeker') {
-  //   return <JobSeekerDashboard />;
-  // }
+  if (userRole === 'job-seeker') {
+    return redirect('/dashboard/job-seeker');
+  }
 
   if (userRole === 'student') {
     return redirect('/dashboard/student');
