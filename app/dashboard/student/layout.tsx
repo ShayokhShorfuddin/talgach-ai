@@ -1,7 +1,8 @@
 'use client';
 
 import { createContext, useState } from 'react';
-import { StudentSidebar } from './_components/sidebar';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { DashboardSidebar } from './_components/dashboard-sidebar';
 
 export const SidebarContext = createContext<{
   expanded: boolean;
@@ -16,16 +17,20 @@ export default function StudentLayout({
   const [expanded, setExpanded] = useState(true);
 
   return (
-    <SidebarContext.Provider
-      value={{ expanded, toggle: () => setExpanded((s) => !s) }}
-    >
-      <div
-        className="grid grid-cols-[max-content_1fr] h-svh overflow-hidden"
-        suppressHydrationWarning
-      >
-        <StudentSidebar />
-        <main className="overflow-y-scroll scroll">{children}</main>
-      </div>
-    </SidebarContext.Provider>
+    <SidebarProvider defaultOpen={true}>
+      <DashboardSidebar />
+      <SidebarInset>{<main>{children}</main>}</SidebarInset>
+    </SidebarProvider>
+    // <SidebarContext.Provider
+    //   value={{ expanded, toggle: () => setExpanded((s) => !s) }}
+    // >
+    //   <div
+    //     className="grid grid-cols-[max-content_1fr] h-svh overflow-hidden"
+    //     suppressHydrationWarning
+    //   >
+    //     <StudentSidebar />
+    //     <main className="overflow-y-scroll scroll">{children}</main>
+    //   </div>
+    // </SidebarContext.Provider>
   );
 }

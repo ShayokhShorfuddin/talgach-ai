@@ -28,7 +28,5 @@ export default async function Page() {
   }
 
   // We will initially redirect a user to a dashboard corresponding to the first role in their roles array.
-  const firstUserRole = userRoles[0];
-
-  redirect(dashboardRoutesForRoles[firstUserRole]);
+  redirect(dashboardRoutesForRoles[userRoles[0]]);
 }
