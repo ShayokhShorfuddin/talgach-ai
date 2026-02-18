@@ -2,6 +2,7 @@
 
 import { Check } from 'lucide-react';
 import { useState } from 'react';
+import { Button } from '@/components/ui/button';
 import type { Type_PricingInformation } from '@/types/pricing';
 
 const individualPlans: Type_PricingInformation = [
@@ -75,9 +76,9 @@ function IndividualPricing({
       </p>
 
       <div className="flex items-center gap-x-3 mt-5">
-        <button
-          type="button"
-          className="py-1 px-1.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        <Button
+          size={'xs'}
+          className="rounded text-xs font-medium cursor-pointer"
           style={{
             backgroundColor:
               selectedIndividualPlan === 'yearly' ? '#0a8a55' : 'transparent',
@@ -89,11 +90,11 @@ function IndividualPricing({
           onClick={() => setSelectedIndividualPlan('yearly')}
         >
           Billed yearly
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          className="py-1 px-1.5 rounded text-xs font-medium hover:cursor-pointer select-none"
+        <Button
+          size={'xs'}
+          className="rounded text-xs font-medium cursor-pointer"
           style={{
             backgroundColor:
               selectedIndividualPlan === 'monthly' ? '#0a8a55' : 'transparent',
@@ -105,7 +106,7 @@ function IndividualPricing({
           onClick={() => setSelectedIndividualPlan('monthly')}
         >
           Billed monthly
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
@@ -144,9 +145,9 @@ function CorporatePricing({
       </p>
 
       <div className="flex items-center gap-x-3 mt-5">
-        <button
-          type="button"
-          className="py-1 px-1.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
+        <Button
+          size={'xs'}
+          className="rounded text-xs font-medium cursor-pointer"
           style={{
             backgroundColor:
               selectedCorporatePlan === 'yearly' ? '#0a8a55' : 'transparent',
@@ -158,11 +159,11 @@ function CorporatePricing({
           onClick={() => setSelectedCorporatePlan('yearly')}
         >
           Billed yearly
-        </button>
+        </Button>
 
-        <button
-          type="button"
-          className="py-1 px-1.5 rounded text-xs font-medium hover:cursor-pointer select-none"
+        <Button
+          size={'xs'}
+          className="rounded text-xs font-medium cursor-pointer"
           style={{
             backgroundColor:
               selectedCorporatePlan === 'monthly' ? '#0a8a55' : 'transparent',
@@ -174,7 +175,7 @@ function CorporatePricing({
           onClick={() => setSelectedCorporatePlan('monthly')}
         >
           Billed monthly
-        </button>
+        </Button>
       </div>
 
       <div className="grid grid-cols-1 xs:grid-cols-2 md:grid-cols-4 gap-4 mt-8">
@@ -219,12 +220,12 @@ function PlanCard({
         </span>
       </p>
 
-      <button
-        type="button"
-        className="bg-talgach-green py-0.5 px-2 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-3"
+      <Button
+        size={'xs'}
+        className="bg-talgach-green  rounded text-xs font-medium cursor-pointer mt-3"
       >
         Get Started
-      </button>
+      </Button>
 
       <hr className="mt-6 border-neutral-200" />
 
@@ -261,12 +262,12 @@ function CustomPlanCard({
           : 'Bespoke solutions for corporate requirements.'}
       </p>
 
-      <button
-        type="button"
-        className="bg-talgach-green py-0.5 px-2 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-3 w-fit"
+      <Button
+        size={'xs'}
+        className="bg-talgach-green rounded text-xs font-medium cursor-pointer mt-3 w-fit"
       >
         Contact Us
-      </button>
+      </Button>
     </div>
   );
 }

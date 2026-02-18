@@ -1,4 +1,5 @@
 import { ArrowRight } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const categories: { id: number; name: string; color: string }[] = [
   {
@@ -78,18 +79,14 @@ export function Tests() {
         ))}
       </div>
 
-      <button
-        type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit self-center"
+      <Button
+        className={
+          'bg-talgach-green rounded text-xs font-medium cursor-pointer mt-8 w-fit'
+        }
       >
-        <span>See all tests</span>
-        <ArrowRight
-          color="#ffffff"
-          strokeWidth={1.5}
-          size={15}
-          className="ml-1"
-        />
-      </button>
+        <span>See All Tests</span>
+        <ArrowRight color="#ffffff" strokeWidth={1.5} />
+      </Button>
     </section>
   );
 }

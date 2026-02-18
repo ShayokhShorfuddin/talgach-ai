@@ -5,6 +5,7 @@ import {
   MessageSquareMore,
   User2,
 } from 'lucide-react';
+import { Button } from '@/components/ui/button';
 
 const skills: {
   id: number;
@@ -77,18 +78,14 @@ export function CorporateTraining() {
         ))}
       </div>
 
-      <button
-        type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit"
+      <Button
+        className={
+          'bg-talgach-green rounded text-xs font-medium cursor-pointer mt-8 w-fit'
+        }
       >
-        <span>Explore corporate solutions</span>
-        <ArrowRight
-          color="#ffffff"
-          strokeWidth={1.5}
-          size={15}
-          className="ml-1"
-        />
-      </button>
+        <span>Explore Corporate Solutions</span>
+        <ArrowRight color="#ffffff" strokeWidth={1.5} />
+      </Button>
     </section>
   );
 }

@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import Image, { type StaticImageData } from 'next/image';
+import { Button } from '@/components/ui/button';
 import person1 from '@/public/images/person1.png';
 import person2 from '@/public/images/person2.png';
 import person3 from '@/public/images/person3.png';
@@ -91,18 +92,14 @@ export function Testimonials() {
         ))}
       </div>
 
-      <button
-        type="button"
-        className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit"
+      <Button
+        className={
+          'bg-talgach-green rounded text-xs font-medium cursor-pointer mt-8 w-fit'
+        }
       >
-        <span>See more</span>
-        <ArrowRight
-          color="#ffffff"
-          strokeWidth={1.5}
-          size={15}
-          className="ml-1"
-        />
-      </button>
+        <span>See More</span>
+        <ArrowRight color="#ffffff" strokeWidth={1.5} />
+      </Button>
     </section>
   );
 }

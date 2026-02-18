@@ -1,3 +1,5 @@
+import { Button } from '@/components/ui/button';
+
 export function CTA() {
   return (
     <section className="mt-30 bg-talgach-green py-6 px-6 md:px-10">
@@ -13,12 +15,13 @@ export function CTA() {
             opportunities.
           </p>
 
-          <button
-            type="button"
-            className="bg-white py-1.5 px-3 rounded text-xs font-medium text-talgach-green hover:cursor-pointer select-none mt-3"
+          <Button
+            className={
+              'bg-white rounded text-xs font-medium text-talgach-green cursor-pointer mt-3'
+            }
           >
             Get Started
-          </button>
+          </Button>
         </div>
       </div>
     </section>

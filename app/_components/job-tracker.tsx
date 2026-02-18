@@ -3,6 +3,7 @@
 import { ArrowRight } from 'lucide-react';
 import type { StaticImageData } from 'next/image';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 import aws from '@/public/images/aws.jpeg';
 import binance from '@/public/images/binance.jpeg';
 import coinbase from '@/public/images/coinbase.png';
@@ -145,18 +146,14 @@ export function JobTracker() {
           progress and stay organized throughout your job search journey.
         </p>
 
-        <button
-          type="button"
-          className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none w-fit mt-6"
+        <Button
+          className={
+            'bg-talgach-green rounded text-xs font-medium cursor-pointer mt-6 w-fit'
+          }
         >
-          Get started
-          <ArrowRight
-            color="#ffffff"
-            strokeWidth={1.5}
-            size={15}
-            className="ml-1"
-          />
-        </button>
+          <span>Get Started</span>
+          <ArrowRight color="#ffffff" strokeWidth={1.5} />
+        </Button>
       </div>
 
       <JobsGrid />

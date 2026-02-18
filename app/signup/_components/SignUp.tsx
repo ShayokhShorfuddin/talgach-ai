@@ -92,8 +92,8 @@ export function SignUp() {
         lastName: value.last_name,
       });
 
-      // If no error, redirect to dashboard
-      redirect('/dashboard');
+      // Since it's a new sign up, we can assume that the user didn't pick a role yet. So we redirect them to /role
+      redirect('/role');
     },
   });
   return (

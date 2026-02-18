@@ -1,5 +1,6 @@
 import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
+import { Button } from '@/components/ui/button';
 import china from '@/public/svgs/flags/china.svg';
 import germany from '@/public/svgs/flags/germany.svg';
 import japan from '@/public/svgs/flags/japan.svg';
@@ -96,18 +97,14 @@ export function StudyAbroadPrograms() {
           and aspirations. Stay ahead in your career with our featured listings.
         </p>
 
-        <button
-          type="button"
-          className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-6 w-fit"
+        <Button
+          className={
+            'bg-talgach-green rounded text-xs font-medium cursor-pointer mt-8 w-fit'
+          }
         >
           <span>Check Eligibility with AI</span>
-          <ArrowRight
-            color="#ffffff"
-            strokeWidth={1.5}
-            size={15}
-            className="ml-1"
-          />
-        </button>
+          <ArrowRight color="#ffffff" strokeWidth={1.5} />
+        </Button>
       </div>
     </section>
   );

@@ -10,6 +10,8 @@ export default async function Page() {
   const userId = session?.user?.id as string;
   const userHasRole = await checkIfUserRoleAssigned({ userId });
 
+  // TODO: Let users choose one or more roles.
+
   if (userHasRole) {
     // If the user already has a role, redirect them to the dashboard.
     redirect('/dashboard');

@@ -1,13 +1,9 @@
 'use client';
 
-import Image, { type StaticImageData } from 'next/image';
+import { Book, Briefcase, Building2, User } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setUserRole } from '@/app/_actions/set-user-role';
-import book from '@/public/svgs/book.svg';
-import briefcase from '@/public/svgs/briefcase-black.svg';
-import building from '@/public/svgs/building-black.svg';
-import head from '@/public/svgs/head-black.svg';
 
 export function Choice({ userId }: { userId: string }) {
   const router = useRouter();
@@ -31,12 +27,24 @@ export function Choice({ userId }: { userId: string }) {
   const roles: {
     id: 'student' | 'job-seeker' | 'human-resource' | 'organization';
     label: string;
-    icon: StaticImageData;
+    icon: React.ReactNode;
   }[] = [
-    { id: 'student', label: 'Student', icon: book },
-    { id: 'job-seeker', label: 'Job Seeker', icon: briefcase },
-    { id: 'human-resource', label: 'Human Resource (HR)', icon: head },
-    { id: 'organization', label: 'Organization', icon: building },
+    { id: 'student', label: 'Student', icon: <Book size={18} /> },
+    {
+      id: 'job-seeker',
+      label: 'Job Seeker',
+      icon: <User size={18} />,
+    },
+    {
+      id: 'human-resource',
+      label: 'Human Resource',
+      icon: <Briefcase size={18} />,
+    },
+    {
+      id: 'organization',
+      label: 'Organization',
+      icon: <Building2 size={18} />,
+    },
   ];
 
   return (
@@ -56,17 +64,15 @@ export function Choice({ userId }: { userId: string }) {
               className="min-h-11 px-6 py-3 rounded border border-neutral-200 hover:border-talgach-green hover:bg-green-50 focus-visible:outline focus-visible:outline-offset-2 disabled:opacity-50 disabled:cursor-not-allowed touch-manipulation hover:cursor-pointer text-sm flex items-center justify-center gap-2"
               aria-pressed={selectedRole === role.id}
             >
-              <Image
-                src={role.icon.src}
-                alt=""
-                className="size-4"
-                width={4}
-                height={4}
-              />
+              {role.icon}
               {role.label}
             </button>
           ))}
         </div>
+
+        <button type="button" className="mt-10 cursor-pointer">
+          Continue
+        </button>
       </div>
     </div>
   );
