@@ -5,6 +5,8 @@ import { checkIfUserRoleAssigned } from '../_actions/check-if-user-role-assigned
 import { Choice } from './_components/Choice';
 
 export default async function Page() {
+  // TODO: A non-user might directly access "/role" page. Check if user exists/authenticated before calling server action.
+
   // First, check if the user already has a role or not
   const session = await auth.api.getSession({ headers: await headers() });
   const userId = session?.user?.id as string;
