@@ -2,7 +2,7 @@
 
 import { db } from '@/lib/db';
 
-export async function checkIfUserRoleAssigned({
+export async function checkIfUserHasRole({
   userId,
 }: {
   userId: string;
@@ -11,5 +11,9 @@ export async function checkIfUserRoleAssigned({
     where: (profile, { eq }) => eq(profile.id, userId),
   });
 
-  return !!user?.roles;
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  return user.roles.length > 0;
 }

@@ -4,14 +4,18 @@ import { eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { profile } from '@/schemas/profile-schema';
 
-export async function getRoleOfUser({
+export async function getRolesOfUser({
   id,
 }: {
   id: string;
-}): Promise<string | null | undefined> {
+}): Promise<string[]> {
   const user = await db.query.profile.findFirst({
     where: eq(profile.id, id),
   });
 
-  return user?.role;
+  if (!user) {
+    throw new Error('User not found');
+  }
+
+  return user.roles;
 }

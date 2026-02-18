@@ -1,7 +1,14 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
-import { getRoleOfUser } from '../_actions/get-role-of-user';
+import { getRolesOfUser } from '../_actions/get-roles-of-user';
+
+const dashboardRoutesForRoles: Record<string, string> = {
+  student: '/dashboard/student',
+  job_seeker: '/dashboard/job-seeker',
+  human_resource: '/dashboard/hr',
+  organization: '/dashboard/organization',
+};
 
 export default async function Page() {
   // First, check if user is authenticated or not
@@ -11,32 +18,17 @@ export default async function Page() {
     redirect('/signin');
   }
 
-  // Since user is authenticated, we can get their role now.
-  const userId = session?.user.id as string;
-  const userRole = await getRoleOfUser({ id: userId });
+  // Since user is authenticated, we can get their roles now.
+  const userId = session.user.id;
+  const userRoles = await getRolesOfUser({ id: userId });
 
-  // If its null or undefined, its a new user, so we can redirect them to role selection page.
-  if (!userRole) {
+  // If there roles array is empty, its a new user, so we can redirect them to role selection page.
+  if (userRoles.length === 0) {
     redirect('/role');
   }
 
-  // If userRole is defined, we can redirect them to their respective dashboards
+  // We will initially redirect a user to a dashboard corresponding to the first role in their roles array.
+  const firstUserRole = userRoles[0];
 
-  if (userRole === 'job-seeker') {
-    return redirect('/dashboard/job-seeker');
-  }
-
-  if (userRole === 'student') {
-    return redirect('/dashboard/student');
-  }
-
-  if (userRole === 'human-resource') {
-    return redirect('/dashboard/hr');
-  }
-
-  if (userRole === 'organization') {
-    return redirect('/dashboard/organization');
-  }
-
-  return <p className="text-red-500">Failed to get user role</p>;
+  redirect(dashboardRoutesForRoles[firstUserRole]);
 }

@@ -17,7 +17,7 @@ export async function createProfile({
     id: id,
     firstName: firstName,
     lastName: lastName,
-    role: null,
+    roles: [],
     gender: '',
     education: '',
     experience: '',

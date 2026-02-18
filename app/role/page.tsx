@@ -1,7 +1,7 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
 import { auth } from '@/lib/auth';
-import { checkIfUserRoleAssigned } from '../_actions/check-if-user-role-assigned';
+import { checkIfUserHasRole } from '../_actions/check-if-user-has-roles';
 import { Choice } from './_components/Choice';
 
 export default async function Page() {
@@ -14,10 +14,10 @@ export default async function Page() {
   }
 
   const userId = session.user.id;
-  const userHasRole = await checkIfUserRoleAssigned({ userId });
+  const userHasRoles = await checkIfUserHasRole({ userId });
 
-  if (userHasRole) {
-    // If the user already has a role, redirect them to the dashboard.
+  if (userHasRoles) {
+    // If the user already has roles, redirect them to the dashboard.
     redirect('/dashboard');
   } else {
     return <Choice userId={userId} />;

@@ -1,14 +1,15 @@
 'use client';
 
 import { Book, Briefcase, Building2, User } from 'lucide-react';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setUserRole } from '@/app/_actions/set-user-role';
 import { Button } from '@/components/ui/button';
 
 export function Choice({ userId }: { userId: string }) {
-  type role = 'student' | 'job_seeker' | 'human_resource' | 'organization';
+  const router = useRouter();
 
+  type role = 'student' | 'job_seeker' | 'human_resource' | 'organization';
   const [selectedRoles, setSelectedRoles] = useState(new Set<role>([]));
 
   const toggle = (option: role) => {
@@ -44,12 +45,13 @@ export function Choice({ userId }: { userId: string }) {
 
   async function handleRoleSelection() {
     try {
+      console.log('Selected roles:', Array.from(selectedRoles));
       await setUserRole({
         userId,
         roles: Array.from(selectedRoles),
       });
 
-      redirect('/dashboard');
+      router.push('/dashboard');
     } catch (error) {
       console.error('Error selecting role:', error);
     }
