@@ -1,9 +1,9 @@
+import { ArrowRight } from 'lucide-react';
 import Image, { type StaticImageData } from 'next/image';
 import person1 from '@/public/images/person1.png';
 import person2 from '@/public/images/person2.png';
 import person3 from '@/public/images/person3.png';
 import person4 from '@/public/images/person4.png';
-import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
 
 const testimonials: {
   id: number;
@@ -96,10 +96,11 @@ export function Testimonials() {
         className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit"
       >
         <span>See more</span>
-        <Image
-          src={arrow_right_white}
-          alt="Arrow right icon"
-          className="ml-2 size-2.5"
+        <ArrowRight
+          color="#ffffff"
+          strokeWidth={1.5}
+          size={15}
+          className="ml-1"
         />
       </button>
     </section>

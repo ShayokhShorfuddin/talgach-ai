@@ -1,55 +1,56 @@
-import Image from 'next/image';
-import ats from '@/public/svgs/ats.svg';
-import bot_green from '@/public/svgs/bot-green.svg';
-import brain from '@/public/svgs/brain.svg';
-import briefcase from '@/public/svgs/briefcase.svg';
-import building from '@/public/svgs/building.svg';
-import file from '@/public/svgs/file.svg';
+import {
+  Bot,
+  Brain,
+  Briefcase,
+  File,
+  FileSearchCorner,
+  GraduationCap,
+} from 'lucide-react';
 
 const features: {
   id: number;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }[] = [
   {
     id: 1,
-    icon: bot_green,
+    icon: <Bot color="#0a8a55" strokeWidth={1.5} />,
     title: 'AI Evaluation',
     description:
       'Get instant feedback on your resumes and cover letters using advanced AI technology.',
   },
   {
     id: 2,
-    icon: file,
+    icon: <File color="#0a8a55" strokeWidth={1.5} />,
     title: 'CV Builder',
     description:
       'Create professional CVs tailored to your experience and target roles.',
   },
   {
     id: 3,
-    icon: ats,
+    icon: <FileSearchCorner color="#0a8a55" strokeWidth={1.5} />,
     title: 'Robust ATS',
     description:
       'Track and manage your applications with our comprehensive applicant tracking system.',
   },
   {
     id: 4,
-    icon: briefcase,
+    icon: <Briefcase color="#0a8a55" strokeWidth={1.5} />,
     title: 'Job Matching',
     description:
       'Find the perfect opportunities that align with your skills and career aspirations.',
   },
   {
     id: 5,
-    icon: building,
+    icon: <GraduationCap color="#0a8a55" strokeWidth={1.5} />,
     title: 'Admission Eligibility',
     description:
       'Check your eligibility and get guidance for your desired academic programs.',
   },
   {
     id: 6,
-    icon: brain,
+    icon: <Brain color="#0a8a55" strokeWidth={1.5} />,
     title: 'Employer Insights',
     description:
       'Gain valuable insights into capable candidates and streamline your hiring process.',
@@ -77,14 +78,8 @@ export function Features() {
             key={feature.id}
             className="flex flex-col items-center max-w-xs text-center"
           >
-            <div className="bg-green-50 rounded-full p-1.5">
-              <div className="rounded-full bg-green-100">
-                <Image
-                  src={feature.icon}
-                  alt={`${feature.title} icon`}
-                  className="p-2 size-8"
-                />
-              </div>
+            <div className="bg-green-50 rounded-full p-2">
+              <div className="rounded-full bg-green-100">{feature.icon}</div>
             </div>
 
             <p className="mt-4 font-medium">{feature.title}</p>

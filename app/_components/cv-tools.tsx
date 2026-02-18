@@ -1,60 +1,61 @@
-import Image from 'next/image';
-import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
-import arrows_crossed from '@/public/svgs/arrows-crossed.svg';
-import beaker from '@/public/svgs/beaker.svg';
-import chart from '@/public/svgs/chart.svg';
-import code from '@/public/svgs/code.svg';
-import coins from '@/public/svgs/coins.svg';
-import delta from '@/public/svgs/delta.svg';
-import head from '@/public/svgs/head.svg';
-import trending from '@/public/svgs/trending.svg';
-import wrench from '@/public/svgs/wrench.svg';
+import {
+  ArrowRight,
+  ClipboardPen,
+  Code,
+  FlaskConical,
+  LucideChartNoAxesColumn,
+  Option,
+  TrendingUp,
+  Triangle,
+  User,
+  Wrench,
+} from 'lucide-react';
 
-const categories: { id: number; icon: string; name: string }[] = [
+const categories: { id: number; icon: React.ReactNode; name: string }[] = [
   {
     id: 1,
-    icon: delta,
+    icon: <Triangle color="#0a8a55" className="size-3" />,
     name: 'Templates',
   },
   {
     id: 2,
-    icon: code,
+    icon: <Code color="#0a8a55" className="size-3" />,
     name: 'Keyword Scanner',
   },
   {
     id: 3,
-    icon: wrench,
+    icon: <Wrench color="#0a8a55" className="size-3" />,
     name: 'CV Builder',
   },
   {
     id: 4,
-    icon: chart,
+    icon: <LucideChartNoAxesColumn color="#0a8a55" className="size-3" />,
     name: 'Word Analysis',
   },
   {
     id: 5,
-    icon: coins,
+    icon: <ClipboardPen color="#0a8a55" className="size-3" />,
     name: 'CV Scoring',
   },
   {
     id: 6,
-    icon: trending,
+    icon: <TrendingUp color="#0a8a55" className="size-3" />,
     name: 'ATS Optimizer',
   },
   {
     id: 7,
-    icon: head,
+    icon: <User color="#0a8a55" className="size-3" />,
     name: 'Simulationist',
   },
   {
     id: 8,
-    icon: beaker,
+    icon: <FlaskConical color="#0a8a55" className="size-3" />,
     name: 'CV Health',
   },
 
   {
     id: 9,
-    icon: arrows_crossed,
+    icon: <Option color="#0a8a55" className="size-3" />,
     name: 'A/B Testing',
   },
 ];
@@ -80,13 +81,9 @@ export function CVTools() {
         {categories.map((category) => (
           <div
             key={category.id}
-            className="flex justify-center gap-x-2 items-center border border-neutral-200 rounded py-2.5 px-2 hover:border-talgach-green hover:bg-green-50 cursor-pointer transition duration-300"
+            className="flex justify-center gap-x-2 items-center border border-neutral-200 rounded py-2 px-2 hover:border-talgach-green hover:bg-green-50 cursor-pointer transition duration-300"
           >
-            <Image
-              src={category.icon}
-              alt={`${category.name} icon`}
-              className="size-3"
-            />
+            {category.icon}
             <p className="text-xs font-mono">{category.name}</p>
           </div>
         ))}
@@ -97,10 +94,11 @@ export function CVTools() {
         className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit self-center"
       >
         <span>See all tools</span>
-        <Image
-          src={arrow_right_white}
-          alt="Arrow right icon"
-          className="ml-2 size-2.5"
+        <ArrowRight
+          color="#ffffff"
+          strokeWidth={1.5}
+          size={15}
+          className="ml-1"
         />
       </button>
     </section>

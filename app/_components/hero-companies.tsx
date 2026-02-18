@@ -9,7 +9,7 @@ export function HeroCompanies() {
   return (
     <section className="flex flex-col items-center mt-14">
       <p className="text-xs text-neutral-600">
-        Join 4,000+ companies already growing.
+        Join 100+ companies growing with us.
       </p>
 
       <div className="flex flex-wrap justify-center items-center gap-x-18 gap-y-6 mt-5 border-b border-neutral-200 pb-8">

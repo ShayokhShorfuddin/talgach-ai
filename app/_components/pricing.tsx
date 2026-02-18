@@ -1,5 +1,6 @@
 'use client';
 
+import { Check } from 'lucide-react';
 import { useState } from 'react';
 import type { Type_PricingInformation } from '@/types/pricing';
 
@@ -238,7 +239,7 @@ function FeaturesList({ features }: { features: string[] }) {
       {features.map((feature, index) => (
         // biome-ignore lint/suspicious/noArrayIndexKey: <We won't rearrange the features>
         <li key={index} className="flex items-center gap-x-2">
-          <span className="text-talgach-green">✔</span>
+          <Check className="h-4 w-4 text-talgach-green" size={20} />
           <span className="text-sm">{feature}</span>
         </li>
       ))}

@@ -1,6 +1,5 @@
+import { ArrowRight } from 'lucide-react';
 import Image from 'next/image';
-
-import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
 import china from '@/public/svgs/flags/china.svg';
 import germany from '@/public/svgs/flags/germany.svg';
 import japan from '@/public/svgs/flags/japan.svg';
@@ -102,10 +101,11 @@ export function StudyAbroadPrograms() {
           className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-6 w-fit"
         >
           <span>Check Eligibility with AI</span>
-          <Image
-            src={arrow_right_white}
-            alt="Arrow right icon"
-            className="ml-2 size-2.5"
+          <ArrowRight
+            color="#ffffff"
+            strokeWidth={1.5}
+            size={15}
+            className="ml-1"
           />
         </button>
       </div>

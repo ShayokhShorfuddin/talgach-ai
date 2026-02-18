@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
+import { ArrowRight } from 'lucide-react';
 
 const categories: { id: number; name: string; color: string }[] = [
   {
@@ -84,10 +83,11 @@ export function Tests() {
         className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit self-center"
       >
         <span>See all tests</span>
-        <Image
-          src={arrow_right_white}
-          alt="Arrow right icon"
-          className="ml-2 size-2.5"
+        <ArrowRight
+          color="#ffffff"
+          strokeWidth={1.5}
+          size={15}
+          className="ml-1"
         />
       </button>
     </section>

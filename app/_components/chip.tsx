@@ -1,5 +1,4 @@
-import Image from 'next/image';
-import arrow_right from '@/public/svgs/arrow-right-green.svg';
+import { ArrowRightIcon } from 'lucide-react';
 
 export function Chip() {
   return (
@@ -9,11 +8,8 @@ export function Chip() {
           New feature
         </p>
         <p>Launching state-of-the-art models.</p>
-        <Image
-          src={arrow_right}
-          alt="Arrow right icon"
-          className="h-2.5 mr-2"
-        />
+
+        <ArrowRightIcon strokeWidth={1} className="h-4 mr-2" />
       </div>
     </div>
   );

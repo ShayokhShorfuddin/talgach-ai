@@ -1,40 +1,41 @@
-import Image from 'next/image';
-import arrow_right_white from '@/public/svgs/arrow-right-white.svg';
-import briefcase from '@/public/svgs/briefcase.svg';
-import desktop from '@/public/svgs/desktop.svg';
-import head from '@/public/svgs/head.svg';
-import message from '@/public/svgs/message.svg';
+import {
+  ArrowRight,
+  Briefcase,
+  Laptop,
+  MessageSquareMore,
+  User2,
+} from 'lucide-react';
 
 const skills: {
   id: number;
-  icon: string;
+  icon: React.ReactNode;
   title: string;
   description: string;
 }[] = [
   {
     id: 1,
-    icon: head,
+    icon: <User2 strokeWidth={1.5} size={20} />,
     title: 'Leadership',
     description:
       'Develop leadership skills to effectively manage teams across multiple projects.',
   },
   {
     id: 2,
-    icon: message,
+    icon: <MessageSquareMore strokeWidth={1.5} size={20} />,
     title: 'Communication',
     description:
       'Enhance your communication skills to effectively convey ideas and collaborate with others.',
   },
   {
     id: 3,
-    icon: desktop,
+    icon: <Laptop strokeWidth={1.5} size={20} />,
     title: 'Digital skills',
     description:
       'Gain proficiency in digital tools and technologies to thrive in the modern workplace.',
   },
   {
     id: 4,
-    icon: briefcase,
+    icon: <Briefcase strokeWidth={1.5} size={20} />,
     title: 'Project management',
     description:
       'Learn project management methodologies to successfully plan, execute, and deliver projects on time.',
@@ -62,13 +63,9 @@ export function CorporateTraining() {
         {skills.map((skill) => (
           <div
             key={skill.id}
-            className="flex gap-x-2 border border-neutral-200 hover:border-talgach-green hover:bg-green-50 transition duration-300 rounded p-3 hover:cursor-pointer"
+            className="flex gap-x-3 border border-neutral-200 hover:border-talgach-green hover:bg-green-50 transition duration-300 rounded p-3 hover:cursor-pointer"
           >
-            <Image
-              src={skill.icon}
-              alt={`${skill.title} icon`}
-              className="p-2 size-8"
-            />
+            {skill.icon}
 
             <div className="text-start">
               <p className="font-medium text-sm">{skill.title}</p>
@@ -85,10 +82,11 @@ export function CorporateTraining() {
         className="flex items-center bg-talgach-green py-1.5 px-3 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-8 w-fit"
       >
         <span>Explore corporate solutions</span>
-        <Image
-          src={arrow_right_white}
-          alt="Arrow right icon"
-          className="ml-2 size-2.5"
+        <ArrowRight
+          color="#ffffff"
+          strokeWidth={1.5}
+          size={15}
+          className="ml-1"
         />
       </button>
     </section>
