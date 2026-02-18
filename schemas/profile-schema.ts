@@ -2,14 +2,14 @@ import { pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const userRoleEnum = pgEnum('user_role', [
   'student',
-  'job-seeker',
-  'human-resource',
+  'job_seeker',
+  'human_resource',
   'organization',
 ]);
 
 export const profile = pgTable('profile', {
   id: text('id').primaryKey(),
-  role: userRoleEnum('role'),
+  roles: userRoleEnum('roles').array().notNull(),
   firstName: text('first_name').notNull(),
   lastName: text('last_name').notNull(),
   gender: text('gender'),

@@ -27,7 +27,7 @@ const signInSchema = z.object({
     .nonempty({ message: 'Please enter a password.' }),
 });
 
-export default function SignIn() {
+export function SignIn() {
   const [authErrorMessage, setAuthErrorMessage] = useState<string>('');
 
   const form = useForm({

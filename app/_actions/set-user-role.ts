@@ -6,10 +6,10 @@ import { profile } from '@/schemas/profile-schema';
 
 export async function setUserRole({
   userId,
-  role,
+  roles,
 }: {
   userId: string;
-  role: 'student' | 'job-seeker' | 'human-resource' | 'organization' | null;
+  roles: ('student' | 'job_seeker' | 'human_resource' | 'organization')[];
 }) {
-  await db.update(profile).set({ role }).where(eq(profile.id, userId));
+  await db.update(profile).set({ roles }).where(eq(profile.id, userId));
 }

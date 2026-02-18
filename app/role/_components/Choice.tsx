@@ -1,12 +1,12 @@
 'use client';
 
 import { Book, Briefcase, Building2, User } from 'lucide-react';
-import { useRouter } from 'next/navigation';
+import { redirect } from 'next/navigation';
 import { useState } from 'react';
+import { setUserRole } from '@/app/_actions/set-user-role';
 import { Button } from '@/components/ui/button';
 
 export function Choice({ userId }: { userId: string }) {
-  const router = useRouter();
   type role = 'student' | 'job_seeker' | 'human_resource' | 'organization';
 
   const [selectedRoles, setSelectedRoles] = useState(new Set<role>([]));
@@ -24,48 +24,49 @@ export function Choice({ userId }: { userId: string }) {
     label: string;
     icon: React.ReactNode;
   }[] = [
-    { id: 'student', label: 'Student', icon: <Book size={18} /> },
+    { id: 'student', label: 'Student', icon: <Book /> },
     {
       id: 'job_seeker',
       label: 'Job Seeker',
-      icon: <User size={18} />,
+      icon: <User />,
     },
     {
       id: 'human_resource',
       label: 'Human Resource',
-      icon: <Briefcase size={18} />,
+      icon: <Briefcase />,
     },
     {
       id: 'organization',
       label: 'Organization',
-      icon: <Building2 size={18} />,
+      icon: <Building2 />,
     },
   ];
 
-  // TODO: Nice! We can now select multiple roles. Next, we can send the selected roles to the server and update the user's profile accordingly.
+  async function handleRoleSelection() {
+    try {
+      await setUserRole({
+        userId,
+        roles: Array.from(selectedRoles),
+      });
 
-  // async function handleRoleSelect(
-  //   role: 'student' | 'job_seeker' | 'human_resource' | 'organization',
-  // ) {
-  //   setSelectedRole(role);
-
-  //   try {
-  //     await setUserRole({ userId, role });
-  //     router.push('/dashboard');
-  //   } catch (error) {
-  //     console.error('Error selecting role:', error);
-  //   }
-  // }
+      redirect('/dashboard');
+    } catch (error) {
+      console.error('Error selecting role:', error);
+    }
+  }
 
   return (
-    <div className="flex justify-center mt-10">
+    <div className="flex justify-center mt-10 px-5">
       <div className="flex flex-col items-center w-full max-w-lg">
-        <p className="text-2xl text-talgach-green font-medium">
+        <p className="text-2xl text-talgach-green text-center font-medium">
           Welcome to Talgach AI.
         </p>
-        <p className="text-sm">Which of the following describes you best?</p>
 
-        <div className="grid grid-cols-2 gap-4 mt-10">
+        <p className="text-sm text-center mt-1">
+          Which of the following describes you best?
+        </p>
+
+        <div className="grid grid-cols-1 xs:grid-cols-2 gap-4 mt-10">
           {roles.map((role) => (
             <Button
               key={role.id}
@@ -88,6 +89,7 @@ export function Choice({ userId }: { userId: string }) {
         <Button
           disabled={selectedRoles.size === 0}
           className={'bg-talgach-green rounded mt-10 cursor-pointer text-sm'}
+          onClick={handleRoleSelection}
         >
           Continue
         </Button>

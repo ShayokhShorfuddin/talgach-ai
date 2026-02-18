@@ -11,5 +11,5 @@ export async function checkIfUserRoleAssigned({
     where: (profile, { eq }) => eq(profile.id, userId),
   });
 
-  return !!user?.role;
+  return !!user?.roles;
 }
