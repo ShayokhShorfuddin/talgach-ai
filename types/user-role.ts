@@ -1,5 +1,5 @@
 type Type_UserRole =
   | 'student'
-  | 'job-seeker'
-  | 'human-resource'
+  | 'job_seeker'
+  | 'human_resource'
   | 'organization';

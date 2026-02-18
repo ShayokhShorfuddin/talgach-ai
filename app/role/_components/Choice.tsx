@@ -9,10 +9,11 @@ import { Button } from '@/components/ui/button';
 export function Choice({ userId }: { userId: string }) {
   const router = useRouter();
 
-  type role = 'student' | 'job_seeker' | 'human_resource' | 'organization';
-  const [selectedRoles, setSelectedRoles] = useState(new Set<role>([]));
+  const [selectedRoles, setSelectedRoles] = useState(
+    new Set<Type_UserRole>([]),
+  );
 
-  const toggle = (option: role) => {
+  const toggle = (option: Type_UserRole) => {
     setSelectedRoles((previous) => {
       const next = new Set(previous);
       next.has(option) ? next.delete(option) : next.add(option);
@@ -45,7 +46,6 @@ export function Choice({ userId }: { userId: string }) {
 
   async function handleRoleSelection() {
     try {
-      console.log('Selected roles:', Array.from(selectedRoles));
       await setUserRole({
         userId,
         roles: Array.from(selectedRoles),

@@ -8,7 +8,7 @@ export async function getRolesOfUser({
   id,
 }: {
   id: string;
-}): Promise<string[]> {
+}): Promise<Type_UserRole[]> {
   const user = await db.query.profile.findFirst({
     where: eq(profile.id, id),
   });

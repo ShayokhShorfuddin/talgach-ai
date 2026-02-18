@@ -1,15 +1,6 @@
 import { File, Home, PenBoxIcon } from 'lucide-react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuTrigger,
-} from '@/components/ui/dropdown-menu';
 import {
   Sidebar,
   SidebarContent,
@@ -18,6 +9,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import { SidebarHeaderDropdown } from './sidebar-header-dropdown';
 
 const sidebarMenuItems = [
   {
@@ -72,25 +64,6 @@ export function DashboardSidebar() {
         </SidebarMenu>
       </SidebarContent>
     </Sidebar>
-  );
-}
-
-function SidebarHeaderDropdown() {
-  return (
-    <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>
-        Switch Dashboard
-      </DropdownMenuTrigger>
-
-      <DropdownMenuContent>
-        <DropdownMenuGroup>
-          <DropdownMenuLabel>Dashboards</DropdownMenuLabel>
-          {/* TODO: We need to display appropriate dashboard options based on the roles of the user. We need a global store to preserve roles locally rather than hitting out backend */}
-          <DropdownMenuItem>Profile</DropdownMenuItem>
-          <DropdownMenuItem>Billing</DropdownMenuItem>
-        </DropdownMenuGroup>
-      </DropdownMenuContent>
-    </DropdownMenu>
   );
 }
 

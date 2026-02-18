@@ -8,7 +8,6 @@ export function RichEditor() {
 
   function onChange(e: { target: { value: string } }) {
     setHtml(e.target.value);
-    console.log(e.target.value);
   }
 
   return (
