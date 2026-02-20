@@ -37,7 +37,9 @@ export function SidebarHeaderDropdown() {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger render={<Button variant="outline" />}>
+      <DropdownMenuTrigger
+        render={<Button variant="outline" className={'rounded'} />}
+      >
         Switch Dashboard
       </DropdownMenuTrigger>
 
