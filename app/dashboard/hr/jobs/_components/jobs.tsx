@@ -55,7 +55,7 @@ function NoJobs() {
 
   return (
     <>
-      <p className="mt-10">No jobs added yet.</p>
+      <p className="mt-10">No jobs or circular added yet.</p>
 
       <button
         type="button"
