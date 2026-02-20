@@ -1,0 +1,43 @@
+'use client';
+
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
+import {
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from '@/components/ui/sidebar';
+
+export function DashboardSidebarMenu({
+  sidebarMenuItems,
+}: {
+  sidebarMenuItems: {
+    key: string;
+    title: string;
+    href: string;
+    icon: React.ReactNode;
+  }[];
+}) {
+  const pathName = usePathname();
+
+  return (
+    <SidebarMenu>
+      {sidebarMenuItems.map((item) => (
+        <SidebarMenuItem key={item.key}>
+          <SidebarMenuButton
+            className="rounded-none hover:bg-talgach-green/5 transition-colors duration-150"
+            render={
+              <Link
+                href={item.href}
+                className={`py-5 ${pathName === item.href ? 'border border-talgach-green' : ''}`}
+              >
+                {item.icon}
+                <p className="font-medium">{item.title}</p>
+              </Link>
+            }
+          />
+        </SidebarMenuItem>
+      ))}
+    </SidebarMenu>
+  );
+}
