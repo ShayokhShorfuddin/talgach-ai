@@ -3,3 +3,5 @@ type Type_UserRole =
   | 'job_seeker'
   | 'human_resource'
   | 'organization';
+
+export type { Type_UserRole };

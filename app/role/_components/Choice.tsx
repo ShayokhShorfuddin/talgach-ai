@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { setUserRole } from '@/app/_actions/set-user-role';
 import { Button } from '@/components/ui/button';
+import type { Type_UserRole } from '@/types/user-role';
 
 export function Choice({ userId }: { userId: string }) {
   const router = useRouter();

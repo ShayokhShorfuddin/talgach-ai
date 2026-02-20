@@ -1,31 +1,43 @@
-'use client';
+import { Briefcase, Home, Users2Icon } from 'lucide-react';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { DashboardSidebar } from '@/shared/sidebar/dashboard-sidebar';
+import type { Type_SidebarMenuItems } from '@/types/sidebar-menu-items';
 
-import { createContext, useState } from 'react';
-import { HRSidebar } from './_components/sidebar';
+const sidebarMenuItems: Type_SidebarMenuItems = [
+  {
+    id: 1,
+    name: 'Home',
+    href: '/dashboard/hr',
+    icon: <Home />,
+  },
 
-export const SidebarContext = createContext<{
-  expanded: boolean;
-  toggle: () => void;
-}>({ expanded: true, toggle: () => {} });
+  {
+    id: 2,
+    name: 'Jobs',
+    href: '/dashboard/hr/jobs',
+    icon: <Briefcase />,
+  },
 
-export default function StudentLayout({
+  {
+    id: 3,
+    name: 'Candidates',
+    href: '/dashboard/hr/candidates',
+    icon: <Users2Icon />,
+  },
+];
+
+export default function HRLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [expanded, setExpanded] = useState(true);
-
   return (
-    <SidebarContext.Provider
-      value={{ expanded, toggle: () => setExpanded((s) => !s) }}
-    >
-      <div
-        className="grid grid-cols-[max-content_1fr] h-svh overflow-hidden"
-        suppressHydrationWarning
-      >
-        <HRSidebar />
-        <main className="overflow-y-scroll scroll">{children}</main>
-      </div>
-    </SidebarContext.Provider>
+    <SidebarProvider defaultOpen={true}>
+      <DashboardSidebar
+        sidebarMenuItems={sidebarMenuItems}
+        basePath="/dashboard/hr"
+      />
+      <SidebarInset>{<main>{children}</main>}</SidebarInset>
+    </SidebarProvider>
   );
 }

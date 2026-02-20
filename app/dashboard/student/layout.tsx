@@ -1,36 +1,41 @@
-'use client';
-
-import { createContext, useState } from 'react';
+import { File, Home, PenBoxIcon } from 'lucide-react';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
-import { DashboardSidebar } from './_components/dashboard-sidebar';
+import { DashboardSidebar } from '@/shared/sidebar/dashboard-sidebar';
+import type { Type_SidebarMenuItems } from '@/types/sidebar-menu-items';
 
-export const SidebarContext = createContext<{
-  expanded: boolean;
-  toggle: () => void;
-}>({ expanded: true, toggle: () => {} });
+const sidebarMenuItems: Type_SidebarMenuItems = [
+  {
+    id: 1,
+    name: 'Home',
+    href: '/dashboard/student',
+    icon: <Home />,
+  },
+  {
+    id: 2,
+    name: 'Programs',
+    href: '/dashboard/student/programs',
+    icon: <File />,
+  },
+  {
+    id: 3,
+    name: 'Writing Assistant',
+    href: '/dashboard/student/writing-assistant',
+    icon: <PenBoxIcon />,
+  },
+];
 
 export default function StudentLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [expanded, setExpanded] = useState(true);
-
   return (
     <SidebarProvider defaultOpen={true}>
-      <DashboardSidebar />
+      <DashboardSidebar
+        sidebarMenuItems={sidebarMenuItems}
+        basePath="/dashboard/student"
+      />
       <SidebarInset>{<main>{children}</main>}</SidebarInset>
     </SidebarProvider>
-    // <SidebarContext.Provider
-    //   value={{ expanded, toggle: () => setExpanded((s) => !s) }}
-    // >
-    //   <div
-    //     className="grid grid-cols-[max-content_1fr] h-svh overflow-hidden"
-    //     suppressHydrationWarning
-    //   >
-    //     <StudentSidebar />
-    //     <main className="overflow-y-scroll scroll">{children}</main>
-    //   </div>
-    // </SidebarContext.Provider>
   );
 }

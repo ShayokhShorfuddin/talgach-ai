@@ -2,7 +2,7 @@ import { headers } from 'next/headers';
 import { auth } from '@/lib/auth';
 
 export async function Heading() {
-  // TODO: We have think of caching the user information in context or tanstack query. Calling currentUser() or useUser() everywhere feels odd and potentially slow/risky
+  // TODO: We have think of caching the user information in zustand. Calling currentUser() or useUser() everywhere feels odd and potentially slow/risky
   const session = await auth.api.getSession({ headers: await headers() });
   const firstName = session?.user?.name?.split(' ')[0] || 'User';
 

@@ -7,23 +7,19 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
+import type { Type_SidebarMenuItems } from '@/types/sidebar-menu-items';
 
 export function DashboardSidebarMenu({
   sidebarMenuItems,
 }: {
-  sidebarMenuItems: {
-    key: string;
-    title: string;
-    href: string;
-    icon: React.ReactNode;
-  }[];
+  sidebarMenuItems: Type_SidebarMenuItems;
 }) {
   const pathName = usePathname();
 
   return (
     <SidebarMenu>
       {sidebarMenuItems.map((item) => (
-        <SidebarMenuItem key={item.key}>
+        <SidebarMenuItem key={item.id}>
           <SidebarMenuButton
             className="rounded-none hover:bg-talgach-green/5 transition-colors duration-150"
             render={
@@ -32,7 +28,7 @@ export function DashboardSidebarMenu({
                 className={`py-5 ${pathName === item.href ? 'border border-talgach-green' : ''}`}
               >
                 {item.icon}
-                <p className="font-medium">{item.title}</p>
+                <p className="font-medium">{item.name}</p>
               </Link>
             }
           />

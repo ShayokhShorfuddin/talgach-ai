@@ -1,31 +1,47 @@
-'use client';
+import { Briefcase, File, Home, User2 } from 'lucide-react';
+import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
+import { DashboardSidebar } from '@/shared/sidebar/dashboard-sidebar';
+import type { Type_SidebarMenuItems } from '@/types/sidebar-menu-items';
 
-import { createContext, useState } from 'react';
-import { JobSeekerSidebar } from './_components/sidebar';
+const sidebarMenuItems: Type_SidebarMenuItems = [
+  {
+    id: 1,
+    name: 'Home',
+    href: '/dashboard/job-seeker',
+    icon: <Home />,
+  },
+  {
+    id: 2,
+    name: 'Jobs',
+    href: '/dashboard/job-seeker/jobs',
+    icon: <Briefcase />,
+  },
+  {
+    id: 3,
+    name: 'Simulations',
+    href: '/dashboard/job-seeker/simulations',
+    icon: <User2 />,
+  },
+  {
+    id: 4,
+    name: 'CV Scanner',
+    href: '/dashboard/job-seeker/cv-scanner',
+    icon: <File />,
+  },
+];
 
-export const SidebarContext = createContext<{
-  expanded: boolean;
-  toggle: () => void;
-}>({ expanded: true, toggle: () => {} });
-
-export default function StudentLayout({
+export default function JobSeekerLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const [expanded, setExpanded] = useState(true);
-
   return (
-    <SidebarContext.Provider
-      value={{ expanded, toggle: () => setExpanded((s) => !s) }}
-    >
-      <div
-        className="grid grid-cols-[max-content_1fr] h-svh overflow-hidden"
-        suppressHydrationWarning
-      >
-        <JobSeekerSidebar />
-        <main className="overflow-y-scroll scroll">{children}</main>
-      </div>
-    </SidebarContext.Provider>
+    <SidebarProvider defaultOpen={true}>
+      <DashboardSidebar
+        sidebarMenuItems={sidebarMenuItems}
+        basePath="/dashboard/job-seeker"
+      />
+      <SidebarInset>{<main>{children}</main>}</SidebarInset>
+    </SidebarProvider>
   );
 }

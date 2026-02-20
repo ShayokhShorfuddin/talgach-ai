@@ -1,5 +1,6 @@
 import { create } from 'zustand';
 import { getRolesOfUser } from '@/app/_actions/get-roles-of-user';
+import type { Type_UserRole } from '@/types/user-role';
 
 interface UserRolesState {
   userRoles: Type_UserRole[];

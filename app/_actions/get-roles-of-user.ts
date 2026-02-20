@@ -3,6 +3,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '@/lib/db';
 import { profile } from '@/schemas/profile-schema';
+import type { Type_UserRole } from '@/types/user-role';
 
 export async function getRolesOfUser({
   id,

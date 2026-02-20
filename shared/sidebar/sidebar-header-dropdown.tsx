@@ -48,11 +48,17 @@ export function SidebarHeaderDropdown() {
           <DropdownMenuLabel>Dashboards</DropdownMenuLabel>
           {userRoles.map((role) => {
             return (
-              <DropdownMenuItem key={role}>
-                <Link href={dashboardRoutesForRoles[role]}>
-                  {roleNormalizer[role]}
-                </Link>
-              </DropdownMenuItem>
+              <DropdownMenuItem
+                key={role}
+                render={
+                  <Link
+                    href={dashboardRoutesForRoles[role]}
+                    className="cursor-pointer"
+                  >
+                    {roleNormalizer[role]}
+                  </Link>
+                }
+              />
             );
           })}
         </DropdownMenuGroup>
