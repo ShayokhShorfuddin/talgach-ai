@@ -39,6 +39,7 @@ export default function Jobs() {
         <p className="text-sm text-neutral-500">Find jobs by their position.</p>
         <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
+        {/* TODO: Need to add loading state while fetching jobs */}
         {jobsForJobSeekerList.length === 0 ? (
           <NoJobs />
         ) : (

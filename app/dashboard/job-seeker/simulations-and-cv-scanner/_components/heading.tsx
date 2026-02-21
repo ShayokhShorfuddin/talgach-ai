@@ -18,7 +18,7 @@ export function Heading() {
       isApproved: false,
     });
 
-    router.push(`/dashboard/job-seeker/simulations/${uniqueId}`);
+    router.push(`/dashboard/job-seeker/simulations-and-cv-scanner/${uniqueId}`);
   }
 
   return (

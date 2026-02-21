@@ -28,7 +28,7 @@ function LoadingText() {
     }, 3000);
 
     return () => clearInterval(intervalId);
-  }, []);
+  }, [texts.length]);
 
   return <p className="text-sm ml-2">{texts[index]}</p>;
 }
