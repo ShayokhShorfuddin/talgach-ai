@@ -19,11 +19,14 @@ export async function updateProfile({
     skills: string;
     passion: string;
   };
-}): Promise<boolean> {
+}): Promise<void> {
   try {
-    await db.update(profile).set(updatedData).where(eq(profile.id, id));
-    return true;
-  } catch {
-    return false;
+    await db
+      .update(profile)
+      .set({ ...updatedData, hasFilledUpProfile: true })
+      .where(eq(profile.id, id));
+  } catch (error) {
+    console.error('Error updating profile:', error);
+    throw error;
   }
 }

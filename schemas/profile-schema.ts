@@ -1,4 +1,4 @@
-import { pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
+import { boolean, pgEnum, pgTable, text, timestamp } from 'drizzle-orm/pg-core';
 
 export const userRoleEnum = pgEnum('user_role', [
   'student',
@@ -10,6 +10,7 @@ export const userRoleEnum = pgEnum('user_role', [
 export const profile = pgTable('profile', {
   id: text('id').primaryKey(),
   roles: userRoleEnum('roles').array().notNull(),
+  hasFilledUpProfile: boolean('has_filled_up_profile').notNull(),
   firstName: text('first_name').notNull(),
   lastName: text('last_name').notNull(),
   gender: text('gender'),

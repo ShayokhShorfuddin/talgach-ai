@@ -68,7 +68,6 @@ export function JobInformation({ jobId }: { jobId: string }) {
     },
     onSubmit: async ({ value }) => {
       await updateJobForHR(value, jobId);
-      alert('Job updated successfully!');
     },
   });
 

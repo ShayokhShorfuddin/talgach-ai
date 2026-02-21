@@ -1,6 +1,10 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
+import { Button } from '@/components/ui/button';
+
 export function CreateJobCard() {
+  const router = useRouter();
   return (
     <div className="border border-neutral-200 p-4 rounded hover:border-talgach-green hover:bg-green-50 transition duration-300">
       <p className="font-medium">Create Job</p>
@@ -9,12 +13,13 @@ export function CreateJobCard() {
         Track and manage your applications efficiently.
       </p>
 
-      <button
-        type="button"
-        className="bg-talgach-green py-1 rounded text-xs font-medium text-white hover:cursor-pointer select-none mt-4 w-full"
+      <Button
+        size={'sm'}
+        className="bg-talgach-green rounded text-xs font-medium mt-4 w-full"
+        onClick={() => router.push('/dashboard/job-seeker/jobs/add')}
       >
         Create Job
-      </button>
+      </Button>
     </div>
   );
 }

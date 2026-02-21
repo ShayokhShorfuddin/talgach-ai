@@ -15,9 +15,11 @@ export async function createProfile({
   const time = new Date();
   await db.insert(profile).values({
     id: id,
+    roles: [],
+    hasFilledUpProfile: false,
+
     firstName: firstName,
     lastName: lastName,
-    roles: [],
     gender: '',
     education: '',
     experience: '',

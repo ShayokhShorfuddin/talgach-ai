@@ -7,7 +7,7 @@ export function ProfileDropdownMenuTrigger() {
   const firstName = session?.user.name.split(' ')[0] || 'User';
 
   return (
-    <div className="flex items-center rounded outline outline-neutral-200 p-1.5 gap-2.5">
+    <div className="flex items-center rounded outline outline-neutral-200 hover:outline-talgach-green transition-colors duration-200 p-1.5 gap-2.5">
       <div className="size-7 bg-talgach-green rounded-full flex items-center justify-center">
         <p className="text-sm font-medium text-white">
           {firstName.charAt(0).toUpperCase()}
