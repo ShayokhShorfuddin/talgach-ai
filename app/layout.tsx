@@ -1,10 +1,10 @@
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import './globals.css';
 import { NavbarSidebar } from './_components/navbar-sidebar';
+import { Providers } from './providers';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -26,9 +26,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const queryClient = new QueryClient();
   return (
-    <QueryClientProvider client={queryClient}>
+    <Providers>
       <SidebarProvider defaultOpen={false}>
         <html lang="en" suppressHydrationWarning>
           <body
@@ -41,6 +40,6 @@ export default function RootLayout({
           </body>
         </html>
       </SidebarProvider>
-    </QueryClientProvider>
+    </Providers>
   );
 }
