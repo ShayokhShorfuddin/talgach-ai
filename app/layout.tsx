@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
@@ -25,18 +26,21 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const queryClient = new QueryClient();
   return (
-    <SidebarProvider defaultOpen={false}>
-      <html lang="en" suppressHydrationWarning>
-        <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
-        >
-          <TooltipProvider>
-            <SidebarInset>{children}</SidebarInset>
-            <NavbarSidebar />
-          </TooltipProvider>
-        </body>
-      </html>
-    </SidebarProvider>
+    <QueryClientProvider client={queryClient}>
+      <SidebarProvider defaultOpen={false}>
+        <html lang="en" suppressHydrationWarning>
+          <body
+            className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}
+          >
+            <TooltipProvider>
+              <SidebarInset>{children}</SidebarInset>
+              <NavbarSidebar />
+            </TooltipProvider>
+          </body>
+        </html>
+      </SidebarProvider>
+    </QueryClientProvider>
   );
 }
