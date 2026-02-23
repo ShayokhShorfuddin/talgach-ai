@@ -6,7 +6,7 @@ export async function GET(request: Request) {
   const userID = request.headers.get('user-id');
 
   if (!userID) {
-    return new Response('No user ID provided.');
+    return Response.json({ error: 'No user ID provided.' }, { status: 400 });
   }
 
   const user = await db.query.profile.findFirst({
@@ -14,7 +14,7 @@ export async function GET(request: Request) {
   });
 
   if (!user) {
-    return new Response('User not found');
+    return Response.json({ error: 'User not found' }, { status: 404 });
   }
 
   return Response.json(user.roles);

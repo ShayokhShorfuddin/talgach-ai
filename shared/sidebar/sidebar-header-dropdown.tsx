@@ -12,8 +12,6 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { authClient } from '@/lib/auth-client';
-// import { authClient } from '@/lib/auth-client';
-// import { useUserRolesStore } from '@/lib/stores/user-roles-store';
 import { dashboardRoutesForRoles } from '@/shared/dashboard-routes';
 import type { Type_UserRole } from '@/types/user-role';
 
