@@ -67,7 +67,7 @@ export function SimulationHistory() {
               className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
               onClick={() => {
                 router.push(
-                  `/dashboard/job-seeker/simulations/${simulation.id}`,
+                  `/dashboard/job-seeker/simulations-and-cv-scanner/${simulation.id}`,
                 );
               }}
             >
