@@ -22,7 +22,7 @@ const fetchUserRoles = async ({
 }: {
   id: string;
 }): Promise<Type_UserRole[]> => {
-  const response = await fetch('/api/user-roles', {
+  const response = await fetch('/api/get-user-roles', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

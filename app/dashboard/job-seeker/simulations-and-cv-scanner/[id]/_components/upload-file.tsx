@@ -1,9 +1,8 @@
 'use client';
 
-import { readStreamableValue } from '@ai-sdk/rsc';
+// import { readStreamableValue } from '@ai-sdk/rsc';
 import { useRef, useState } from 'react';
 import { simulateHR } from '@/app/_actions/simulate-hr';
-import { setProfile } from '@/app/_actions/update-simulation';
 import { FileToBytesArray } from '@/utils/file-to-bytes-array';
 
 export function UploadCVButton({
@@ -35,31 +34,31 @@ export function UploadCVButton({
 
   async function handleSubmit() {
     setIsReviewing(true);
-    let finalResult: { response: string; isApproved: boolean } | null = null;
+    const finalResult: { response: string; isApproved: boolean } | null = null;
     try {
       const bytes = await FileToBytesArray(
         fileInputRef.current?.files?.[0] as File,
       );
       const { object } = await simulateHR({ bytes });
 
-      for await (const partialObject of readStreamableValue(object)) {
-        if (partialObject) {
-          finalResult = partialObject as {
-            response: string;
-            isApproved: boolean;
-          };
-          setReviewResult(finalResult);
-        }
-      }
+      // for await (const partialObject of readStreamableValue(object)) {
+      //   if (partialObject) {
+      //     finalResult = partialObject as {
+      //       response: string;
+      //       isApproved: boolean;
+      //     };
+      //     setReviewResult(finalResult);
+      //   }
+      // }
 
       // Save the final result after streaming completes
-      if (finalResult) {
-        await setProfile({
-          id: simulationId,
-          thought: finalResult.response,
-          isApproved: finalResult.isApproved,
-        });
-      }
+      // if (finalResult) {
+      //   await setProfile({
+      //     id: simulationId,
+      //     thought: finalResult.response,
+      //     isApproved: finalResult.isApproved,
+      //   });
+      // }
     } finally {
       setIsReviewing(false);
     }

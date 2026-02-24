@@ -67,7 +67,7 @@ export function UploadCVButton({
         <button
           type="button"
           onClick={handleButtonClick}
-          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed"
+          className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed"
           //TODO: disabled={isReviewing}
         >
           Upload CV

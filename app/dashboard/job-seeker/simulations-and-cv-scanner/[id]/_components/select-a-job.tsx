@@ -24,7 +24,7 @@ const fetchLightDetailsOfJobsCreatedByUser = async ({
 }: {
   jobSeekerId: string;
 }): Promise<Type_LightDetailsOfJobsCreatedByJobSeeker> => {
-  const response = await fetch('/api/jobs-created-by-job-seeker', {
+  const response = await fetch('/api/get-jobs-created-by-job-seeker', {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',

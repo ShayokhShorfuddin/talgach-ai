@@ -19,7 +19,7 @@ export const jobSeekerJob = pgTable('job_seeker_job', {
 
   proficiency: text('proficiency').notNull(),
   employmentStatus: text('employment_status').notNull(),
-  otherKnowledge: text('other_knowledge'),
+  otherKnowledge: text('other_knowledge').notNull(),
   responsibilities: text('responsibilities').notNull(),
   salaryAndBenefits: text('salary_and_benefits').notNull(),
 
