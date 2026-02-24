@@ -3,13 +3,25 @@
 import { useCompletion } from '@ai-sdk/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
-// import { FileToBytesArray } from '@/utils/file-to-bytes-array';
+import Markdown from 'react-markdown';
+import { Loading } from './_components/loading';
 import { SelectAJob } from './_components/select-a-job';
 import { UploadCVButton } from './_components/upload-cv';
 
+function fileToBase64(file: File): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      const dataUrl = reader.result as string;
+      resolve(dataUrl.split(',')[1]);
+    };
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
 export default function Page() {
   const [chosenJobId, setChosenJobId] = useState<string | null>(null);
-  const [simulationStarted, setSimulationStarted] = useState(false);
   const CVInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
@@ -20,24 +32,36 @@ export default function Page() {
     api: '/api/simulationist',
   });
 
-  const {
-    data: jobDetails,
-    isLoading,
-    error,
-  } = useQuery<Type_JobDetails>({
-    queryKey: ['job-details', chosenJobId],
-    queryFn: () => fetchJobDetailsUsingID({ jobID: chosenJobId! }),
-    enabled: !!chosenJobId && simulationStarted,
-    staleTime: 30 * 60 * 1000,
-  });
+  const { data: jobDetails, isLoading: isJobDetailsLoading } =
+    useQuery<Type_JobDetails>({
+      queryKey: ['job-details', chosenJobId],
+      queryFn: () => fetchJobDetailsUsingID({ jobID: chosenJobId! }),
+      enabled: !!chosenJobId,
+      staleTime: 30 * 60 * 1000,
+    });
 
   async function handleBeginSimulation() {
-    setSimulationStarted(true);
+    const file = CVInputRef.current?.files?.[0];
+    if (!file) {
+      alert('Please upload your CV first.');
+      return;
+    }
+    if (!jobDetails) {
+      alert('Job details are still loading. Please wait.');
+      return;
+    }
 
-    // Get the bytes of the uploaded CV file
-    // const CVBytes = await FileToBytesArray(
-    //   CVInputRef.current?.files?.[0] as File,
-    // );
+    const cvBase64 = await fileToBase64(file);
+
+    complete(
+      'Review the CV and check if the candidate is suitable for the job role. Decide if the candidate should be approved or rejected.',
+      {
+        body: {
+          jobDetails,
+          cvBase64,
+        },
+      },
+    );
   }
 
   return (
@@ -48,16 +72,21 @@ export default function Page() {
 
         <button
           type="button"
-          onClick={() => complete('Are you an LLM? How can you be sure?')}
+          onClick={handleBeginSimulation}
           className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={isCompletionLoading || !chosenJobId}
+          disabled={!chosenJobId || isCompletionLoading || isJobDetailsLoading}
         >
           {isCompletionLoading ? 'Generating…' : 'Begin Simulation'}
         </button>
 
-        {/* TODO: Send data to backend AI, process, store and stream back the response */}
+        {isCompletionLoading && <Loading />}
 
-        <p className="mt-10">{completion}</p>
+        {completion && (
+          <div className="mt-10 p-8 rounded prose w-full max-w-4xl">
+            <h3 className="text-lg font-semibold mb-2">HR's Thoughts</h3>
+            <Markdown>{completion}</Markdown>
+          </div>
+        )}
       </div>
     </main>
   );
