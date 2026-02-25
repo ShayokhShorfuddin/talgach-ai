@@ -1,30 +1,19 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useRef, useState } from 'react';
-import {
-  SelectAJob,
-  type Type_LightDetailsOfJobsCreatedByJobSeeker,
-} from '../../simulations-and-cv-scanner/[id]/_components/select-a-job';
+import { SelectAJob } from '../../simulations-and-cv-scanner/[id]/_components/select-a-job';
 import { UploadCVButton } from '../../simulations-and-cv-scanner/[id]/_components/upload-cv';
 
 export function CreateNewInterview() {
   const [chosenJobId, setChosenJobId] = useState<string | null>(null);
   const CVInputRef = useRef<HTMLInputElement | null>(null);
-  // const router = useRouter();
-  // const jobSeekerId = authClient.useSession().data?.user.id;
+  const router = useRouter();
 
-  // const {
-  //   data: lightDetailsOfJobsCreatedByJobSeeker,
-  //   isLoading,
-  //   error,
-  // } = useQuery<Type_LightDetailsOfJobsCreatedByJobSeeker>({
-  //   queryKey: ['light-details-of-jobs-created-by-job-seeker', jobSeekerId],
-  //   queryFn: () =>
-  //     fetchLightDetailsOfJobsCreatedByUser({ jobSeekerId: jobSeekerId! }),
-  //   enabled: !!jobSeekerId, // Only run the query if jobSeekerId is available
-  //   staleTime: 60 * 60 * 1000, // Cache the data for 1 hour
-  // });
-  // async function handleBeginNewInterview() {
+  async function handleBeginNewInterview() {
+    // TODO: We are simply redirecting now. We will need object storage to proceed
+    router.push('/dashboard/job-seeker/ai-interview/123');
+  }
   //   const uniqueId = generateUniqueId();
 
   //   // await createSimulation({
@@ -59,7 +48,7 @@ export function CreateNewInterview() {
         <button
           type="button"
           className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white hover:cursor-pointer select-none"
-          // onClick={handleBeginNewInterview}
+          onClick={handleBeginNewInterview}
         >
           Begin New Interview
         </button>
@@ -67,23 +56,3 @@ export function CreateNewInterview() {
     </div>
   );
 }
-
-const fetchLightDetailsOfJobsCreatedByUser = async ({
-  jobSeekerId,
-}: {
-  jobSeekerId: string;
-}): Promise<Type_LightDetailsOfJobsCreatedByJobSeeker> => {
-  const response = await fetch('/api/get-jobs-created-by-job-seeker', {
-    method: 'GET',
-    headers: {
-      'Content-Type': 'application/json',
-      'job-seeker-id': jobSeekerId,
-    },
-  });
-
-  if (!response.ok) {
-    throw new Error('Failed to fetch jobs created by user');
-  }
-
-  return response.json() as Promise<Type_LightDetailsOfJobsCreatedByJobSeeker>;
-};
