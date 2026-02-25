@@ -1,6 +1,7 @@
 import { google } from '@ai-sdk/google';
-import { streamText } from 'ai';
+import { Output, streamText } from 'ai';
 import type { Type_JobDetails } from '@/app/dashboard/job-seeker/simulations-and-cv-scanner/[id]/page';
+import { simulationSchema } from './schema';
 
 export async function POST(request: Request) {
   try {
@@ -10,6 +11,7 @@ export async function POST(request: Request) {
 
     const result = streamText({
       model: google('gemini-2.5-flash'),
+      output: Output.object({ schema: simulationSchema }),
       system: systemPrompt({ jobDetails }),
       messages: [
         {
@@ -28,7 +30,7 @@ export async function POST(request: Request) {
         },
       ],
     });
-    return result.toUIMessageStreamResponse();
+    return result.toTextStreamResponse();
   } catch (error) {
     console.error('Failed to stream response:', error);
     return new Response('Failed to stream response', { status: 500 });
@@ -54,6 +56,8 @@ You are given a CV and you need to quickly go through it and decide if the candi
 
 Response Style:
 Your response style must resemble a monologue where you think out loud about the candidate's cv and your decision-making process. For example, you might say, "Ohh another cv with gaps in employment history. This makes me question the candidate's reliability. However, their skills in X and Y are impressive. Overall, I think I will have to reject this application."
+
+Additionally, you must also rate the CV on a scale of 0 to 10 (can be a fraction as well) based on how well-written, formatted, and clearly defined the CV is. This is a separate assessment from the job suitability review. Consider factors like: clarity of sections, consistent formatting, proper grammar, effective use of action verbs, quantifiable achievements, and overall readability.
 `;
 
   return systemInstruction;

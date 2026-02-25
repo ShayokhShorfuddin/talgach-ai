@@ -1,9 +1,10 @@
 'use client';
 
-import { useCompletion } from '@ai-sdk/react';
+import { experimental_useObject as useObject } from '@ai-sdk/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRef, useState } from 'react';
 import Markdown from 'react-markdown';
+import { simulationSchema } from '@/app/api/simulationist/schema';
 import { Loading } from './_components/loading';
 import { SelectAJob } from './_components/select-a-job';
 import { UploadCVButton } from './_components/upload-cv';
@@ -20,16 +21,19 @@ function fileToBase64(file: File): Promise<string> {
   });
 }
 
+// TODO: Markdown sucks
+
 export default function Page() {
   const [chosenJobId, setChosenJobId] = useState<string | null>(null);
   const CVInputRef = useRef<HTMLInputElement | null>(null);
 
   const {
-    complete,
-    completion,
-    isLoading: isCompletionLoading,
-  } = useCompletion({
+    object,
+    submit,
+    isLoading: isObjectLoading,
+  } = useObject({
     api: '/api/simulationist',
+    schema: simulationSchema,
   });
 
   const { data: jobDetails, isLoading: isJobDetailsLoading } =
@@ -53,15 +57,12 @@ export default function Page() {
 
     const cvBase64 = await fileToBase64(file);
 
-    complete(
-      'Review the CV and check if the candidate is suitable for the job role. Decide if the candidate should be approved or rejected.',
-      {
-        body: {
-          jobDetails,
-          cvBase64,
-        },
-      },
-    );
+    submit({
+      prompt:
+        'Review the CV and check if the candidate is suitable for the job role. Decide if the candidate should be approved or rejected.',
+      jobDetails,
+      cvBase64,
+    });
   }
 
   return (
@@ -74,17 +75,38 @@ export default function Page() {
           type="button"
           onClick={handleBeginSimulation}
           className="bg-talgach-green py-1 px-2.5 rounded text-xs font-medium text-white cursor-pointer select-none disabled:opacity-50 disabled:cursor-not-allowed"
-          disabled={!chosenJobId || isCompletionLoading || isJobDetailsLoading}
+          disabled={!chosenJobId || isObjectLoading || isJobDetailsLoading}
         >
-          {isCompletionLoading ? 'Generating…' : 'Begin Simulation'}
+          {isObjectLoading ? 'Generating…' : 'Begin Simulation'}
         </button>
 
-        {isCompletionLoading && <Loading />}
+        {isObjectLoading && <Loading />}
 
-        {completion && (
+        {object?.response && (
           <div className="mt-10 p-8 rounded prose w-full max-w-4xl">
-            <h3 className="text-lg font-semibold mb-2">HR's Thoughts</h3>
-            <Markdown>{completion}</Markdown>
+            <div className="flex items-center justify-between mb-2">
+              <h3 className="text-lg font-semibold mb-0">HR's Thoughts</h3>
+              {object.cvScore && (
+                <span className="text-sm font-medium tabular-nums rounded-full bg-gray-100 px-3 py-1">
+                  CV Score: {object.cvScore}/10
+                </span>
+              )}
+            </div>
+
+            <Markdown>{object.response}</Markdown>
+
+            {object.verdict && (
+              <p className="text-sm font-medium rounded-full bg-neutral-100 px-3 py-1 mt-5 w-fit">
+                Verdict:{' '}
+                <span>
+                  {object.verdict === 'Approved' ? (
+                    <span className="text-green-600">{object.verdict}</span>
+                  ) : (
+                    <span className="text-red-600">{object.verdict}</span>
+                  )}
+                </span>
+              </p>
+            )}
           </div>
         )}
       </div>

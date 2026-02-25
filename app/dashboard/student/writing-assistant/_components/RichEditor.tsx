@@ -10,6 +10,8 @@ export function RichEditor() {
     setHtml(e.target.value);
   }
 
+  // TODO: Delete this entire Rich text thing. We will use just a plain Textarea.
+
   return (
     <div className="mx-10 my-10">
       <Editor value={html} onChange={onChange} />
