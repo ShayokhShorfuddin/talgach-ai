@@ -86,26 +86,35 @@ export default function Page() {
           <div className="mt-10 p-8 rounded prose w-full max-w-4xl">
             <div className="flex items-center justify-between mb-2">
               <h3 className="text-lg font-semibold mb-0">HR's Thoughts</h3>
-              {object.cvScore && (
-                <span className="text-sm font-medium tabular-nums rounded-full bg-gray-100 px-3 py-1">
-                  CV Score: {object.cvScore}/10
-                </span>
+
+              {object.verdict && (
+                <p className="text-sm font-medium rounded-full bg-gray-100 px-3 py-1">
+                  Verdict:{' '}
+                  <span>
+                    {object.verdict === 'Approved' ? (
+                      <span className="text-green-600">{object.verdict}</span>
+                    ) : (
+                      <span className="text-red-600">{object.verdict}</span>
+                    )}
+                  </span>
+                </p>
               )}
             </div>
 
             <Markdown>{object.response}</Markdown>
 
-            {object.verdict && (
-              <p className="text-sm font-medium rounded-full bg-neutral-100 px-3 py-1 mt-5 w-fit">
-                Verdict:{' '}
-                <span>
-                  {object.verdict === 'Approved' ? (
-                    <span className="text-green-600">{object.verdict}</span>
-                  ) : (
-                    <span className="text-red-600">{object.verdict}</span>
-                  )}
-                </span>
-              </p>
+            {object.cvScore && (
+              <div className="flex items-center justify-between mt-10">
+                <div>
+                  <h3 className="text-lg font-semibold">CV Score</h3>
+                  <p className="text-sm mt-1 max-w-sm">
+                    The scoring is based on the formatting, content relevance,
+                    and overall presentation.
+                  </p>
+                </div>
+
+                <p className="text-xl font-mono">{object.cvScore}/10</p>
+              </div>
             )}
           </div>
         )}
