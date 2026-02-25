@@ -1,7 +1,7 @@
 import { Heading } from './heading';
 import { SimulationHistory } from './simulation-history';
 
-export function Simulations() {
+export function SimulationsAndCVScanner() {
   return (
     <main className="px-5">
       <Heading />

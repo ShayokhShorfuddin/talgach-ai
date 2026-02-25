@@ -1,4 +1,4 @@
-import { Briefcase, Home, User2 } from 'lucide-react';
+import { BotIcon, Briefcase, Home, User2 } from 'lucide-react';
 import { SidebarInset, SidebarProvider } from '@/components/ui/sidebar';
 import { DashboardSidebar } from '@/shared/sidebar/dashboard-sidebar';
 import type { Type_SidebarMenuItems } from '@/types/sidebar-menu-items';
@@ -19,9 +19,14 @@ const sidebarMenuItems: Type_SidebarMenuItems = [
   {
     id: 3,
     name: 'Simulations And CV Scanner',
-    // TODO: Need to merge Simulations and CV Scanner functionalities
     href: '/dashboard/job-seeker/simulations-and-cv-scanner',
     icon: <User2 />,
+  },
+  {
+    id: 4,
+    name: 'AI Interview',
+    href: '/dashboard/job-seeker/ai-interview',
+    icon: <BotIcon />,
   },
 ];
 

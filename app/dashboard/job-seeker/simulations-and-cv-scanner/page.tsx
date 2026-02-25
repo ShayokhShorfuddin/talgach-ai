@@ -1,5 +1,5 @@
-import { Simulations } from './_components/simulations';
+import { SimulationsAndCVScanner } from './_components/simulations';
 
 export default function Page() {
-  return <Simulations />;
+  return <SimulationsAndCVScanner />;
 }
