@@ -12,7 +12,7 @@ import {
 } from '@/components/ui/select';
 import { authClient } from '@/lib/auth-client';
 
-type Type_LightDetailsOfJobsCreatedByJobSeeker = {
+export type Type_LightDetailsOfJobsCreatedByJobSeeker = {
   id: string;
   position: string;
   companyName: string;
@@ -40,9 +40,11 @@ const fetchLightDetailsOfJobsCreatedByUser = async ({
 };
 
 export function SelectAJob({
+  leadingText,
   chosenJobId,
   setChosenJobId,
 }: {
+  leadingText: string;
   chosenJobId: string | null;
   setChosenJobId: React.Dispatch<React.SetStateAction<string | null>>;
 }) {
@@ -77,7 +79,7 @@ export function SelectAJob({
 
   return (
     <div className="flex items-center gap-2">
-      <p>Select a job you created:</p>
+      <p>{leadingText}</p>
       <Select onValueChange={(value: string | null) => setChosenJobId(value)}>
         <SelectTrigger>
           <SelectValue placeholder="Select a job">

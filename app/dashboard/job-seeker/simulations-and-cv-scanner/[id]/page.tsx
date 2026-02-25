@@ -21,7 +21,7 @@ function fileToBase64(file: File): Promise<string> {
   });
 }
 
-// TODO: Markdown sucks
+// TODO: Current markdown handling sucks. Look into the https://github.com/remarkjs/react-markdown docs to make it pretty
 
 export default function Page() {
   const [chosenJobId, setChosenJobId] = useState<string | null>(null);
@@ -68,7 +68,11 @@ export default function Page() {
   return (
     <main>
       <div className="flex flex-col items-center mt-10 gap-2">
-        <SelectAJob chosenJobId={chosenJobId} setChosenJobId={setChosenJobId} />
+        <SelectAJob
+          leadingText="Select a job you created:"
+          chosenJobId={chosenJobId}
+          setChosenJobId={setChosenJobId}
+        />
         <UploadCVButton CVInputRef={CVInputRef} />
 
         <button

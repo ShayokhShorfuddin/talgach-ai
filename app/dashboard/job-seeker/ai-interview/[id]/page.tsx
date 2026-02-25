@@ -8,7 +8,6 @@ export default function Page() {
         <Conversation />
       </div>
 
-      {/* Input area — sticks to the bottom naturally */}
       <TextArea />
     </div>
   );
