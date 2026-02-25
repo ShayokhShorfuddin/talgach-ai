@@ -42,7 +42,7 @@ function systemPrompt({ jobDetails }: { jobDetails: Type_JobDetails }) {
 
 Position: ${jobDetails.position}
 Deadline: ${jobDetails.deadline}
-Age Limit: ${jobDetails.ageLimit}
+Maximum Age Limit: ${jobDetails.maximumAgeLimit}
 Experience Requirement: ${jobDetails.experienceRequirement}
 Skills Required: ${jobDetails.skills.map((skill) => skill.name).join(', ')}
 Proficiency Level Required: ${jobDetails.proficiency}

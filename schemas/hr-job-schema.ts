@@ -5,7 +5,7 @@ export const hrJob = pgTable('hr_job', {
   hrId: text('hr_id').notNull(),
   position: text('position').notNull(),
   deadline: timestamp('deadline').notNull(),
-  ageLimit: integer('age_limit').notNull(),
+  maximumAgeLimit: integer('maximum_age_limit').notNull(),
   experienceRequirement: text('experience_requirement').notNull(),
 
   skills: jsonb('skills')

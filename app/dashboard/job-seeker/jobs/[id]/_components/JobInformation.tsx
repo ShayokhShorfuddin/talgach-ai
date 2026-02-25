@@ -14,7 +14,7 @@ const jobSchema = z.object({
   companyName: z.string().min(1, 'Company name is required'),
   position: z.string().min(1, 'Position is required'),
   deadline: z.string().min(1, 'Deadline is required'),
-  ageLimit: z.number().min(1, 'Age limit is required'),
+  maximumAgeLimit: z.number().min(1, 'Maximum age limit is required'),
   experienceRequirement: z
     .string()
     .min(1, 'Experience requirement is required'),
@@ -38,7 +38,7 @@ export function JobInformation({ jobId }: { jobId: string }) {
       companyName: '',
       position: '',
       deadline: '',
-      ageLimit: 18,
+      maximumAgeLimit: 18,
       experienceRequirement: '',
       skills: [] as { name: string }[],
       proficiency: '',
@@ -65,7 +65,7 @@ export function JobInformation({ jobId }: { jobId: string }) {
           'deadline',
           data.deadline.toISOString().split('T')[0],
         );
-        form.setFieldValue('ageLimit', data.ageLimit);
+        form.setFieldValue('maximumAgeLimit', data.maximumAgeLimit);
         form.setFieldValue('experienceRequirement', data.experienceRequirement);
         form.setFieldValue('skills', data.skills || []);
         form.setFieldValue('proficiency', data.proficiency);
@@ -156,13 +156,13 @@ export function JobInformation({ jobId }: { jobId: string }) {
             )}
           />
 
-          {/* Age Limit */}
+          {/* Maximum Age Limit */}
           <form.Field
-            name="ageLimit"
+            name="maximumAgeLimit"
             children={(field) => (
               <div className="flex flex-col gap-1">
                 <label className="font-medium text-neutral-700">
-                  Age Limit
+                  Maximum Age Limit
                 </label>
                 <input
                   type="number"

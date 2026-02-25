@@ -6,7 +6,7 @@ export const jobSeekerJob = pgTable('job_seeker_job', {
   companyName: text('company_name').notNull(),
   position: text('position').notNull(),
   deadline: timestamp('deadline').notNull(),
-  ageLimit: integer('age_limit').notNull(),
+  maximumAgeLimit: integer('maximum_age_limit').notNull(),
   experienceRequirement: text('experience_requirement').notNull(),
 
   skills: jsonb('skills')

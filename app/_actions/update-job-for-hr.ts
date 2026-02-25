@@ -8,7 +8,7 @@ export async function updateJobForHR(
   jobData: {
     position: string;
     deadline: string;
-    ageLimit: number;
+    maximumAgeLimit: number;
     experienceRequirement: string;
     skills: { name: string }[];
     proficiency: string;
@@ -24,7 +24,7 @@ export async function updateJobForHR(
     .set({
       position: jobData.position,
       deadline: new Date(jobData.deadline),
-      ageLimit: jobData.ageLimit,
+      maximumAgeLimit: jobData.maximumAgeLimit,
       experienceRequirement: jobData.experienceRequirement,
       skills: jobData.skills,
       proficiency: jobData.proficiency,

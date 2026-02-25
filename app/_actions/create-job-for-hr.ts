@@ -7,7 +7,7 @@ import { generateUniqueId } from '@/utils/generate-unique-id';
 type Type_CreateJobForHRData = {
   position: string;
   deadline: string;
-  ageLimit: number;
+  maximumAgeLimit: number;
   experienceRequirement: string;
   skills: { name: string }[];
   proficiency: string;
@@ -32,7 +32,7 @@ export async function createJobForHR({
     hrId,
     position: jobData.position,
     deadline: new Date(jobData.deadline),
-    ageLimit: jobData.ageLimit,
+    maximumAgeLimit: jobData.maximumAgeLimit,
     experienceRequirement: jobData.experienceRequirement,
     skills: jobData.skills,
     proficiency: jobData.proficiency,

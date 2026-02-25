@@ -9,7 +9,7 @@ export async function updateJobForJobSeeker(
     companyName: string;
     position: string;
     deadline: string;
-    ageLimit: number;
+    maximumAgeLimit: number;
     experienceRequirement: string;
     skills: { name: string }[];
     proficiency: string;
@@ -25,7 +25,7 @@ export async function updateJobForJobSeeker(
     .set({
       position: jobData.position,
       deadline: new Date(jobData.deadline),
-      ageLimit: jobData.ageLimit,
+      maximumAgeLimit: jobData.maximumAgeLimit,
       experienceRequirement: jobData.experienceRequirement,
       skills: jobData.skills,
       proficiency: jobData.proficiency,

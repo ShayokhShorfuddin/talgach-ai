@@ -1,3 +1,5 @@
+export async function GET(request: Request) {}
+
 // export async function GET(request: Request) {
 //   const { userMessage, jobDetails, cvBase64 } = await request.json();
 // TODO: We will need the following

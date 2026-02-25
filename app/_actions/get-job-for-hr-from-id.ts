@@ -9,7 +9,7 @@ export async function getJobForHRFromId({ id }: { id: string }) {
       id: true,
       position: true,
       deadline: true,
-      ageLimit: true,
+      maximumAgeLimit: true,
       experienceRequirement: true,
       skills: true,
       proficiency: true,

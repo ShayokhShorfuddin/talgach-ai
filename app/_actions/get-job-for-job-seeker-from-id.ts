@@ -10,7 +10,7 @@ export async function getJobForJobSeekerFromId({ id }: { id: string }) {
       companyName: true,
       position: true,
       deadline: true,
-      ageLimit: true,
+      maximumAgeLimit: true,
       experienceRequirement: true,
       skills: true,
       proficiency: true,

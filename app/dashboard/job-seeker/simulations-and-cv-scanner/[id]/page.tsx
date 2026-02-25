@@ -131,7 +131,7 @@ export type Type_JobDetails = {
   companyName: string;
   position: string;
   deadline: string;
-  ageLimit: number;
+  maximumAgeLimit: number;
   experienceRequirement: string;
   skills: {
     name: string;
