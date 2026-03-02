@@ -5,9 +5,8 @@
 'use client';
 
 import { type AnyFieldApi, useForm } from '@tanstack/react-form';
-import { redirect } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { z } from 'zod';
-import { createJobForJobSeeker } from '@/app/_actions/create-job-for-job-seeker';
 import { authClient } from '@/lib/auth-client';
 
 const jobSchema = z.object({
@@ -34,6 +33,7 @@ const jobSchema = z.object({
 });
 
 export default function Add() {
+  const router = useRouter();
   const jobSeekerId = authClient.useSession().data?.user.id as string;
 
   const form = useForm({
@@ -54,8 +54,29 @@ export default function Add() {
       onChange: jobSchema,
     },
     onSubmit: async ({ value }) => {
-      await createJobForJobSeeker({ jobSeekerId, jobData: value });
-      redirect('/dashboard/job-seeker/jobs');
+      const response = await fetch('/api/create-job-for-job-seeker', {
+        method: 'POST',
+        headers: {
+          'job-seeker-id': jobSeekerId,
+          'company-name': value.companyName,
+          position: value.position,
+          deadline: value.deadline,
+          'maximum-age-limit': String(value.maximumAgeLimit),
+          'experience-requirement': value.experienceRequirement,
+          skills: JSON.stringify(value.skills),
+          proficiency: value.proficiency,
+          'employment-status': value.employmentStatus,
+          'other-knowledge': value.otherKnowledge,
+          responsibilities: value.responsibilities,
+          'salary-and-benefits': value.salaryAndBenefits,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to create job.');
+      }
+
+      router.push('/dashboard/job-seeker/jobs');
     },
   });
 

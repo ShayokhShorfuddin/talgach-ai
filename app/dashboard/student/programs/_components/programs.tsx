@@ -2,11 +2,13 @@
 
 import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
-import { getListOfPrograms } from '@/app/_actions/get-list-of-programs';
+import { getListOfProgramsForStudent } from '@/app/_actions/get-list-of-programs-for-student';
+import { authClient } from '@/lib/auth-client';
 import { SearchBar } from './search-bar';
 
 export default function Programs() {
   const [searchQuery, setSearchQuery] = useState('');
+  const studentId = authClient.useSession().data?.user.id as string;
   const [programsList, setProgramsList] = useState<
     {
       id: string;
@@ -22,11 +24,13 @@ export default function Programs() {
 
   useEffect(() => {
     async function getProgramsList() {
-      const programsList = await getListOfPrograms();
+      const programsList = await getListOfProgramsForStudent({
+        studentId,
+      });
       setProgramsList(programsList);
     }
     getProgramsList();
-  }, []);
+  }, [studentId]);
 
   return (
     <section>

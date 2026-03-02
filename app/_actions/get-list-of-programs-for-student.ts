@@ -2,8 +2,13 @@
 
 import { db } from '@/lib/db';
 
-export async function getListOfPrograms() {
+export async function getListOfProgramsForStudent({
+  studentId,
+}: {
+  studentId: string;
+}) {
   const programData = await db.query.program.findMany({
+    where: (program, { eq }) => eq(program.studentId, studentId),
     columns: {
       id: true,
       programName: true,
